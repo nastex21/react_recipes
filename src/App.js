@@ -7,13 +7,13 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      recipe: [{
+      recipes: [{
         id: 0,
-        recipe: "Corn"
+        ingredients: "Corn"
       }, 
     {
       id: 1,
-      recipe: "Milk"
+        ingredients: "Milk"
     }]
     }
     this.eachRecipe = this.eachRecipe.bind(this);
@@ -30,48 +30,68 @@ class App extends Component {
   add(text){
     console.log("add() line 31: ")
     this.setState(prevState => ({
-      recipe: [
-        ...prevState.recipe,
+      recipes: [
+        ...prevState.recipes,
         {
           id: this.nextid(),
-          note: text
+          ingredients: text
         }
       ]
     }))
   }
 
   nextid(){
-    this.uniqueId = this.uniqueId || 0;
-    console.log(this.uniqueId);
-    return this.uniquidId++;
+    const idList = this.state.recipes.map(i => i.id);
+    var num = 0;
+
+    var returnID = function(){
+      var check = idList.indexOf(num);
+      console.log(check);
+
+      if (check === -1){
+        return num;
+      } else {
+        num++;
+        console.log(num);
+        returnID();
+      }
+      return num;
+    }
+    
+    return returnID();
+  
   }
 
   update(newRecipe, i){
     console.log("updating item at index", i, newRecipe);
-    this.setState(prevState => ({
-      recipe: prevState.recipe.map(
-        recipe => (recipe.id !== i) ? recipe: {...recipe, recipe: newRecipe}
+    this.setState(prevState => ( {
+      recipes: prevState.recipes.map(
+        recipe => (recipe.id !== i) ? console.log(recipe) : console.log(recipe)
+        //recipe: {...recipe, recipe: newRecipe}
       )
-    }))
+    } 
+    ))
   }
 
   remove(id){
     this.setState(prevState => ({
-      recipe: prevState.recipe.filter(recipe => recipe.id !== id)
+      recipes: prevState.recipes.filter(recipe => recipe.id !== id)
     }))
   }
 
   eachRecipe(item, i){
     console.log(item);
+/*     console.log(item.id)
+    console.log(i) */
     return (
-      <Editbtn key={item.id} index={item.id} onChange={this.update} onRemove={this.remove}>{item.recipe}</Editbtn>
+      <Editbtn key={item.id} index={item.id} onChange={this.update} onRemove={this.remove}>{item.ingredients}</Editbtn>
     )
   }
 
   render() {
     return [
           <div className="recipes">
-            {this.state.recipe.map(this.eachRecipe)}
+            {this.state.recipes.map(this.eachRecipe)}
             <button onClick={this.add.bind(null, "Next Note")} id="add">Add</button>
           </div>
     ]

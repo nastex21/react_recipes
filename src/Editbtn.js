@@ -31,6 +31,12 @@ class Editbtn extends Component {
         }
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+        return (
+            this.props.children !== nextProps.children || this.state !== nextState
+        )
+    }
+
     save(e){
         console.log("save is running")
         console.log("e: " + e)
