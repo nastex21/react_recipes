@@ -7,6 +7,7 @@ class Editbtn extends Component {
             edit: false
         }
         this.edit = this.edit.bind(this);
+        this.remove = this.remove.bind(this);
         this.renderForm = this.renderForm.bind(this);
         this.renderDisplay = this.renderDisplay.bind(this);
         this.save = this.save.bind(this);
@@ -19,6 +20,7 @@ class Editbtn extends Component {
     }
 
     remove(){
+        console.log("Editbtn remove is running")
         this.props.onRemove(this.props.index)
     }
 
@@ -38,12 +40,7 @@ class Editbtn extends Component {
     }
 
     save(e){
-        console.log("save is running")
-        console.log("e: " + e)
-        console.log("this.props: " + this.props.index)
         e.preventDefault();
-        console.log(this._newText.value);
-        console.log(this.props.index);
         this.props.onChange(this._newText.value, this.props.index)
         this.setState({
             edit: false

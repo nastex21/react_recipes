@@ -73,6 +73,8 @@ class App extends Component {
   }
 
   remove(id){
+    console.log("remove is running")
+    console.log(id);
     this.setState(prevState => ({
       recipes: prevState.recipes.filter(recipe => recipe.id !== id)
     }))
@@ -86,9 +88,9 @@ class App extends Component {
 
   render() {
     return [
-          <div className="recipes">
+          <div key={guidGenerator()} className="recipes">
             {this.state.recipes.map(this.eachRecipe)}
-            <button onClick={this.add.bind(null, "Next Note")} id="add">Add</button>
+            <button key={guidGenerator()} onClick={this.add.bind(null, "Next Note")} id="add">Add</button>
           </div>
     ]
   }
