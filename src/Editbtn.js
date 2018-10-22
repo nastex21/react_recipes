@@ -4,7 +4,7 @@ class Editbtn extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            edit:false
+            edit: false
         }
         this.edit = this.edit.bind(this);
         this.renderForm = this.renderForm.bind(this);
@@ -46,7 +46,7 @@ class Editbtn extends Component {
         console.log(this.props.index);
         this.props.onChange(this._newText.value, this.props.index)
         this.setState({
-            editing: false
+            edit: false
         }) 
     }
 

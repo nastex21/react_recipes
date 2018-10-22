@@ -66,8 +66,7 @@ class App extends Component {
     console.log("updating item at index", i, newRecipe);
     this.setState(prevState => ( {
       recipes: prevState.recipes.map(
-        recipe => (recipe.id !== i) ? console.log(recipe) : console.log(recipe)
-        //recipe: {...recipe, recipe: newRecipe}
+        recipe => (recipe.id !== i) ?recipe: {...recipe, ingredients: newRecipe}
       )
     } 
     ))
@@ -80,9 +79,6 @@ class App extends Component {
   }
 
   eachRecipe(item, i){
-    console.log(item);
-/*     console.log(item.id)
-    console.log(i) */
     return (
       <Editbtn key={item.id} index={item.id} onChange={this.update} onRemove={this.remove}>{item.ingredients}</Editbtn>
     )
