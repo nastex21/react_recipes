@@ -7,28 +7,48 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      recipes: [{
-        id: 0,
-        ingredients: "Corn"
-      }, 
-    {
-      id: 1,
-        ingredients: "Milk"
-    }]
+      recipes: []
     }
     this.eachRecipe = this.eachRecipe.bind(this);
     this.update = this.update.bind(this);
     this.remove = this.remove.bind(this);
     this.add = this.add.bind(this);
     this.nextid = this.nextid.bind(this);
+    this.localSetState = this.localSetState.bind(this);
   }
 
-  componentWillUpdate(){
-    //localStorage.setItem(this.state.recipe, data)
+  componentWillMount(){
+    //localStorage.clear();
+    let getData = localStorage.getItem('getRecipes');
+    console.log("before: " + getData);
+    console.log(this.state.recipes);
+    let initialArr = [{
+      id: 0,
+      ingredients: "Corn"
+    }, 
+  {
+    id: 1,
+      ingredients: "Milk"
+  }]
+    getData === null ? this.setState({recipes: [...this.state.recipes, ...initialArr]}) : this.localSetState();
+    console.log(this.state.recipes);
   }
+
+  componentDidUpdate(){
+    localStorage.setItem('getRecipes', JSON.stringify(this.state.recipes));
+  }
+
+  localSetState(){
+    let getData = JSON.parse(localStorage.getItem('getRecipes'));
+    this.setState({
+      recipes: [...this.state.recipes, ...getData]
+    })
+  }
+
 
   add(text){
-    console.log("add() line 31: ")
+    console.log("add() line 31: ");
+
     this.setState(prevState => ({
       recipes: [
         ...prevState.recipes,
@@ -59,7 +79,7 @@ class App extends Component {
     }
     
     return returnID();
-  
+    
   }
 
   update(newRecipe, i){
