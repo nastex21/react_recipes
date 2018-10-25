@@ -19,8 +19,7 @@ class Editbtn extends Component {
 /*         this.handleInputChange = this.handleInputChange.bind(this);
  */    }
 
-      edit = e => {
-        console.log(this.reply_click(e.target.id));
+    edit(){
         this.setState({
             edit:true
         })
@@ -90,24 +89,18 @@ class Editbtn extends Component {
     }
 
     renderDisplay(){
-        console.log(this.props.values)
+        var self = this;
         return (
             <div className="note">
-                {Object.entries(this.props.values).map((ele) => (
-                   console.log(ele)
-          
-                /* [<p>{ele}</p>, 
-                <button id={index} onClick={() => this.edit(ele.id)}  className="edit">Edit</button>]
+                {this.props.children.map(function (ele, index){
+                return [<p>{ele}</p>, 
+                <button id={index} onClick={self.edit}  className="edit">Edit</button>]
                 })
                 }
                 <span>
                     <button onClick={this.remove} id="remove">Remove</button>
                 </span>
-                */
-               
-                ))}
-            </div> 
-            
+            </div>
         )
     }
 
