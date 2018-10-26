@@ -89,26 +89,25 @@ class Editbtn extends Component {
         )
     }
 
+
     renderDisplay(){
         console.log(this.props.values)
-        return (
-            <div className="note">
-                {Object.entries(this.props.values).map((ele) => (
-                   console.log(ele)
-          
-                /* [<p>{ele}</p>, 
-                <button id={index} onClick={() => this.edit(ele.id)}  className="edit">Edit</button>]
-                })
-                }
-                <span>
-                    <button onClick={this.remove} id="remove">Remove</button>
-                </span>
-                */
-               
-                ))}
-            </div> 
-            
-        )
+        var elements = [];
+        var items = this.props.values;
+        Object.entries(items).forEach((item, index) => {
+            let key = item[0];
+            let value = item[1];
+            if (key !== "id"){
+                const capitalize = (s) => {
+                    if (typeof s !== 'string') return ''
+                    return s.charAt(0).toUpperCase() + s.slice(1)
+                  }
+                elements.push(<div>
+                    {key == "dish" ? <div id={index}><h2>{value}</h2></div> : key == "cooking_time" ? <div id ={index}><p>Cooking Time: {value}</p><span><button onClick={this.edit} id="edit">Edit</button><button onClick={this.remove} id="remove">Remove</button> </span></div> : <div id={index}><p>{capitalize(key)}: {value}</p><span><button onClick={this.edit} id="edit">Edit</button><button onClick={this.remove} id="remove">Remove</button> </span> </div>}</div>
+                )
+            }
+        })
+        return <div className="recipe-box">{elements}</div>;
     }
 
     render() {
