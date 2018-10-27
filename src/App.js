@@ -55,14 +55,16 @@ class App extends Component {
 
 
   add(text){
-    console.log("add() line 31: ");
-
     this.setState(prevState => ({
       recipes: [
         ...prevState.recipes,
         {
           id: this.nextid(),
-          ingredients: text
+          dish: "New Recipe",
+          servings: "",
+          cooking_time: "",
+          ingredients: "",
+          directions: ""
         }
       ]
     }))
@@ -90,15 +92,14 @@ class App extends Component {
     
   }
 
-  update(newRecipe, i, dish){
-    console.log("updating item at index", i, newRecipe, dish);
-    /* this.setState(prevState => ( {
+  update(newRecipe, i){
+    console.log(newRecipe);
+    this.setState(prevState => ( {
       recipes: prevState.recipes.map(
-        recipe => (recipe.id !== i) ?recipe: {...recipe, ingredients: newRecipe}
+        recipe => (recipe.id !== i) ? recipe : {...recipe, ...newRecipe}
       )
     } 
-    )) */
-
+    )) 
   }
 
   remove(id){

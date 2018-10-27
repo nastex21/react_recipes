@@ -22,10 +22,6 @@ class Editbtn extends Component {
 
 
       edit(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        console.log(name);
         this.setState({
             edit:true
         })
@@ -71,13 +67,25 @@ class Editbtn extends Component {
     save(e){
         e.preventDefault();
         console.log(this.state.servings)
-        console.log("save triggered: " + this._newText.value);
         console.log("this.props: " + this.props);
-        this.props.onChange(this._newText.value, this.props.index, this.state.dish);
-        console.log(this._newText.value, this.state.id);
+        let newRecipe = {
+            id: this.state.id,
+            dish: this.state.dish,
+            servings: this.state.servings,
+            cooking_time: this.state.cooking_time,
+            ingredients: this.state.ingredients,
+            directions: this.state.directions
+        }
         console.log(this.state.id, this.state.dish, this.state.servings, this.state.cooking_time, this.state.ingredients, this.state.directions)
+        this.props.onChange(newRecipe, this.state.id);
         this.setState({
-            edit: false
+            edit: false,
+            id: "",
+            dish: "",
+            servings: "",
+            cooking_time: "",
+            ingredients: "",
+            directions: ""
         }) 
     }
 
@@ -96,19 +104,10 @@ class Editbtn extends Component {
       } 
 
     renderForm(){
-     /*    console.log("this.props " + this) */
         //<input ref={input => this._newText = input} defaultValue={this.props.children[0]} />
         /*<input type="text" ref={input => this._newText = input} onChange={this.handleInputChange} />
                      <button id="save">SAVE</button>*/
         console.log(this.state);
-/* 
-        <div className="note">
-                <form onSubmit={this.save}>
-                Object.entries(items).forEach((item, index) => {
-
-                }
-                 </form>
-            </div> */
 
             var elements = [];
             var items = this.props.values;
@@ -121,7 +120,7 @@ class Editbtn extends Component {
                         return s.charAt(0).toUpperCase() + s.slice(1)
                 }
                 elements.push(<>
-                        {key !== "dish" & key !== "id" ? key == "cooking_time" ? <>Cooking Time: <input type="text" ref={input => this._newText = input} defaultValue={value} /><br /></> : <>{capitalize(key)}: <input type="text" ref={input => this._newText = input}defaultValue={value} /><br /></>: null}
+                        {key !== "dish" & key !== "id" ? key == "cooking_time" ? <>Cooking Time: <input type="text" name="cooking_time" onChange={this.handleInputChange} defaultValue={value} /><br /></> : <>{capitalize(key)}: <input type="text" name={key} onChange={this.handleInputChange} defaultValue={value} /><br /></>: null}
                 </>
                 )
             });
@@ -142,7 +141,7 @@ class Editbtn extends Component {
                     return s.charAt(0).toUpperCase() + s.slice(1)
                   }
                 elements.push(<div>
-                    {key === "dish" ? <div id={index}><h2>{value}</h2></div> : key === "cooking_time" ? <div id ={index}><p>Cooking Time: {value}</p></div> : <div id={index}><p>{capitalize(key)}: {value}</p></div>}</div> 
+                    {key === "dish" && value === "New Recipe" ? console.log("yep") : key === "dish" ? <div id={index}><h2>{value}</h2></div> : key === "cooking_time" ? <div id ={index}><p>Cooking Time: {value}</p></div> : <div id={index}><p>{capitalize(key)}: {value}</p></div>}</div> 
                 )
             }
         })
