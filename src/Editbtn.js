@@ -87,6 +87,8 @@ class Editbtn extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
+
+        console.log(value);
     
         this.setState({
           [name]: value
@@ -116,9 +118,9 @@ class Editbtn extends Component {
               if(key !== "id"){
                 if (key == "cooking_time"){
                     elements.push(<div key={key + keyId + index}><span>Cooking Time: </span> <input type="text" name="cooking_time" onChange={this.handleInputChange} defaultValue={value} /><br /></div>)
-                } else if (key == "directions"){
-                    elements.push(<div key={key + keyId + index}><span>Directions: </span> <textarea name="directions" rows="4" cols="50" onChange={this.handleChange} defaultValue={value} /></div>)
-                } else {
+                } else if (key == "directions" || key == "ingredients"){
+                    elements.push(<div key={key + keyId + index}><span>{capitalize(key)}: </span> <textarea name={key} rows="4" cols="50" onChange={this.handleInputChange} defaultValue={value} /></div>)
+                }  else {
                     elements.push(<div key={key + keyId + index}><span>{capitalize(key)}: </span> <input type="text" name={key} onChange={this.handleInputChange} defaultValue={value} /><br /></div>)
                 }
             }      
