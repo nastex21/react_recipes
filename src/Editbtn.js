@@ -104,11 +104,6 @@ class Editbtn extends Component {
       } 
 
     renderForm(){
-        //<input ref={input => this._newText = input} defaultValue={this.props.children[0]} />
-        /*<input type="text" ref={input => this._newText = input} onChange={this.handleInputChange} />
-                     <button id="save">SAVE</button>*/
-        console.log(this.state);
-
             var elements = [];
             var items = this.props.values;
             Object.entries(items).forEach((item, index) => {
@@ -119,11 +114,16 @@ class Editbtn extends Component {
                         if (typeof s !== 'string') return ''
                         return s.charAt(0).toUpperCase() + s.slice(1)
                 }
-                elements.push(<>
-                        {key !== "dish" & key !== "id" ? key == "cooking_time" ? <>Cooking Time: <input type="text" name="cooking_time" onChange={this.handleInputChange} defaultValue={value} /><br /></> : <>{capitalize(key)}: <input type="text" name={key} onChange={this.handleInputChange} defaultValue={value} /><br /></>: null}
-                </>
-                )
-            });
+              if(key !== "id"){
+                if (key == "cooking_time"){
+                    elements.push(<>Cooking Time: <input type="text" name="cooking_time" onChange={this.handleInputChange} defaultValue={value} /><br /></>)
+                } else if (key == "directions"){
+                    elements.push(<>Directions: <textarea name="directions"  rows="4" cols="50" onChange={this.handleChange} defaultValue={value} /></>)
+                } else {
+                    elements.push(<>{capitalize(key)} : <input type="text" name={key} onChange={this.handleInputChange} defaultValue={value} /><br /></>)
+                }
+            }       
+            })
             return <div className="note"><h2>{this.state.dish}</h2><form onSubmit={this.save}>{elements}
             <button id="save">SAVE</button></form></div>;
             }
