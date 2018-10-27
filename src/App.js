@@ -18,10 +18,7 @@ class App extends Component {
   }
 
   componentWillMount(){
-    //localStorage.clear();
     let getData = localStorage.getItem('getRecipes');
-    console.log("before: " + getData);
-    console.log(this.state.recipes);
     let initialArr = [{
       id: 0,
       dish: "Hamburger",
@@ -39,7 +36,6 @@ class App extends Component {
     }
   ]
     getData === null ? this.setState({recipes: [...this.state.recipes, ...initialArr]}) : this.localSetState();
-    console.log(this.state.recipes);
   }
 
   componentDidUpdate(){
@@ -76,13 +72,11 @@ class App extends Component {
 
     var returnID = function(){
       var check = idList.indexOf(num);
-      console.log(check);
 
       if (check === -1){
         return num;
       } else {
         num++;
-        console.log(num);
         returnID();
       }
       return num;
@@ -93,7 +87,6 @@ class App extends Component {
   }
 
   update(newRecipe, i){
-    console.log(newRecipe);
     this.setState(prevState => ( {
       recipes: prevState.recipes.map(
         recipe => (recipe.id !== i) ? recipe : {...recipe, ...newRecipe}
@@ -103,15 +96,12 @@ class App extends Component {
   }
 
   remove(id){
-    console.log("remove is running")
-    console.log(id);
     this.setState(prevState => ({
       recipes: prevState.recipes.filter(recipe => recipe.id !== id)
     }))
   }
 
   eachRecipe(item, i){
-    console.log(item);
     return (
       <Editbtn key={item.id} index={item.id} values={item} onChange={this.update} onRemove={this.remove}>{item.id}{item.dish}{item.servings}{item.cooking_time}{item.ingredients}{item.directions}</Editbtn>
     )
@@ -121,7 +111,7 @@ class App extends Component {
     return [
           <div key={guidGenerator()} className="recipes">
             {this.state.recipes.map(this.eachRecipe)}
-            <button key={guidGenerator()} onClick={this.add.bind(null, "Next Note")} id="add">Add</button>
+            <button onClick={this.add.bind(null, "Next Note")} id="add">Add</button>
           </div>
     ]
   }

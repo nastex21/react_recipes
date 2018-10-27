@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { guidGenerator } from "./generateuniqkey";
 
 class Editbtn extends Component {
     constructor(props) {
@@ -28,7 +29,6 @@ class Editbtn extends Component {
     }
     
     remove(){
-        console.log("Editbtn remove is running")
         this.props.onRemove(this.props.index)
     }
 
@@ -39,10 +39,8 @@ class Editbtn extends Component {
             textArea.focus();
             textArea.select();
         }
-        console.log(prevProps);
-        console.log(prevState);
+
        if(!prevState.edit){
-        console.log("running")
         this.setState({
              id: prevProps.children[0],
              dish: prevProps.children[1],
@@ -52,12 +50,10 @@ class Editbtn extends Component {
              directions: prevProps.children[5]
         }) 
     }
-    console.log(this.state.cooking_time);
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        console.log(nextProps);
-        console.log(nextState);
+
         return (
             this.props.children !== nextProps.children || this.state !== nextState
         )
@@ -66,8 +62,7 @@ class Editbtn extends Component {
 
     save(e){
         e.preventDefault();
-        console.log(this.state.servings)
-        console.log("this.props: " + this.props);
+
         let newRecipe = {
             id: this.state.id,
             dish: this.state.dish,
@@ -76,7 +71,6 @@ class Editbtn extends Component {
             ingredients: this.state.ingredients,
             directions: this.state.directions
         }
-        console.log(this.state.id, this.state.dish, this.state.servings, this.state.cooking_time, this.state.ingredients, this.state.directions)
         this.props.onChange(newRecipe, this.state.id);
         this.setState({
             edit: false,
@@ -93,9 +87,6 @@ class Editbtn extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        console.log("target: " + target);
-        console.log("value: " + value);
-        console.log("name: " + name);
     
         this.setState({
           [name]: value
@@ -106,23 +97,31 @@ class Editbtn extends Component {
     renderForm(){
             var elements = [];
             var items = this.props.values;
+            var keyId = "";
+
             Object.entries(items).forEach((item, index) => {
                 let key = item[0];
-                let value = item[1];
-                console.log(key);
+                let value = item[1];            
+
+                if (keyId == ""){
+                    if(key == "id"){
+                        keyId = value;
+                    }
+                }
+                
                 const capitalize = (s) => {
                         if (typeof s !== 'string') return ''
                         return s.charAt(0).toUpperCase() + s.slice(1)
                 }
               if(key !== "id"){
                 if (key == "cooking_time"){
-                    elements.push(<>Cooking Time: <input type="text" name="cooking_time" onChange={this.handleInputChange} defaultValue={value} /><br /></>)
+                    elements.push(<div key={key + keyId + index}><span>Cooking Time: </span> <input type="text" name="cooking_time" onChange={this.handleInputChange} defaultValue={value} /><br /></div>)
                 } else if (key == "directions"){
-                    elements.push(<>Directions: <textarea name="directions"  rows="4" cols="50" onChange={this.handleChange} defaultValue={value} /></>)
+                    elements.push(<div key={key + keyId + index}><span>Directions: </span> <textarea name="directions" rows="4" cols="50" onChange={this.handleChange} defaultValue={value} /></div>)
                 } else {
-                    elements.push(<>{capitalize(key)} : <input type="text" name={key} onChange={this.handleInputChange} defaultValue={value} /><br /></>)
+                    elements.push(<div key={key + keyId + index}><span>{capitalize(key)}: </span> <input type="text" name={key} onChange={this.handleInputChange} defaultValue={value} /><br /></div>)
                 }
-            }       
+            }      
             })
             return <div className="note"><h2>{this.state.dish}</h2><form onSubmit={this.save}>{elements}
             <button id="save">SAVE</button></form></div>;
@@ -140,12 +139,12 @@ class Editbtn extends Component {
                     if (typeof s !== 'string') return ''
                     return s.charAt(0).toUpperCase() + s.slice(1)
                   }
-                elements.push(<div>
-                    {key === "dish" && value === "New Recipe" ? console.log("yep") : key === "dish" ? <div id={index}><h2>{value}</h2></div> : key === "cooking_time" ? <div id ={index}><p>Cooking Time: {value}</p></div> : <div id={index}><p>{capitalize(key)}: {value}</p></div>}</div> 
+                elements.push(<div key={guidGenerator()} >
+                    {key === "dish" && value === "New Recipe" ? console.log("yep") : key === "dish" ? <div id={index} ><h2>{value}</h2></div> : key === "cooking_time" ? <div id ={index} ><p>Cooking Time: {value}</p></div> : <div id={index} ><p>{capitalize(key)}: {value}</p></div>}</div> 
                 )
             }
         })
-        return <div className="recipe-box">{elements}<button onClick={this.edit} id="edit">Edit</button><button onClick={this.remove} id="remove">Remove</button></div>;
+        return <div className="recipe-box" >{elements}<button onClick={this.edit} id="edit">Edit</button><button onClick={this.remove} id="remove">Remove</button></div>;
     }
 
     render() {
