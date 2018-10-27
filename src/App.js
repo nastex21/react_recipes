@@ -112,7 +112,7 @@ class App extends Component {
   eachRecipe(item, i){
     console.log(item);
     return (
-      <Editbtn key={item.id} index={item.id} values={item} onChange={this.update} onRemove={this.remove}>{item.dish}{item.servings}{item.cooking_time}{item.ingredients}{item.directions}</Editbtn>
+      <Editbtn key={item.id} index={item.id} values={item} onChange={this.update} onRemove={this.remove}>{item.id}{item.dish}{item.servings}{item.cooking_time}{item.ingredients}{item.directions}</Editbtn>
     )
   }
 
