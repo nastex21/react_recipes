@@ -7,7 +7,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      recipes: []
+      recipes: [],
+      search: ""
     }
     this.eachRecipe = this.eachRecipe.bind(this);
     this.update = this.update.bind(this);
@@ -15,6 +16,9 @@ class App extends Component {
     this.add = this.add.bind(this);
     this.nextid = this.nextid.bind(this);
     this.localSetState = this.localSetState.bind(this);
+    this.leftPane = this.leftPane.bind(this);
+    this.leftResults = this.leftResults.bind(this);
+    this.search = this.search.bind(this);
   }
 
   componentWillMount(){
@@ -107,12 +111,38 @@ class App extends Component {
     )
   }
 
+  search(event){
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      search: value
+    })
+  }
+
+  leftPane(){
+    
+  }
+
+  leftResults(){
+    return(
+      <p>{this.state.search}</p>
+    )
+  }
+
   render() {
     return [
-          <div key={guidGenerator()} className="recipes">
-            {this.state.recipes.map(this.eachRecipe)}
-            <button onClick={this.add.bind(null, "Next Note")} id="add">Add</button>
-          </div>
+      <div id="left-pane">
+        <div id="search">
+           <input onChange={this.search} />
+        </div>
+        <div id="results">
+        {this.state.search == "" ? this.leftPane() : this.leftResults() }
+        </div>
+      </div>,
+      <div id="recipes-body">
+      </div> 
     ]
   }
 }

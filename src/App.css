@@ -1,0 +1,21 @@
+#recipes-body {
+    background-color: blue;
+}
+
+#left-pane {
+    float: left;
+    background-color: red;
+    display: grid;
+    grid-template-rows: .2fr .8fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "search"
+    "results";
+}
+
+#search{
+    grid-area: search;
+}
+
+#results{
+    grid-area: results;
+}
