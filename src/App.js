@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Editbtn from './Editbtn';
+import InitialRecipes from "./initialRecipes";
+import SearchResults from "./searchResults";
 import { guidGenerator } from "./generateuniqkey";
 
 class App extends Component {
@@ -16,8 +18,6 @@ class App extends Component {
     this.add = this.add.bind(this);
     this.nextid = this.nextid.bind(this);
     this.localSetState = this.localSetState.bind(this);
-    this.leftPane = this.leftPane.bind(this);
-    this.leftResults = this.leftResults.bind(this);
     this.search = this.search.bind(this);
   }
 
@@ -121,15 +121,7 @@ class App extends Component {
     })
   }
 
-  leftPane(){
-    
-  }
 
-  leftResults(){
-    return(
-      <p>{this.state.search}</p>
-    )
-  }
 
   render() {
     return [
@@ -138,7 +130,7 @@ class App extends Component {
            <input onChange={this.search} />
         </div>
         <div id="results">
-        {this.state.search == "" ? this.leftPane() : this.leftResults() }
+        {this.state.search == "" ? <InitialRecipes values={this.state.recipes} /> : <SearchResults /> }
         </div>
       </div>,
       <div id="recipes-body">
