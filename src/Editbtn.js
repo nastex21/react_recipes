@@ -19,6 +19,7 @@ class Editbtn extends Component {
         this.renderDisplay = this.renderDisplay.bind(this);
         this.save = this.save.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        console.log("running editbtn!!!!!!!!")
   }
 
 
@@ -131,6 +132,7 @@ class Editbtn extends Component {
 
 
     renderDisplay(){
+        console.log("renderDisplay running")
         var elements = [];
         var items = this.props.values;
         Object.entries(items).forEach((item, index) => {
@@ -150,6 +152,7 @@ class Editbtn extends Component {
     }
 
     render() {
+        console.log("edit btn initiated")
         return this.state.edit ? this.renderForm() : this.renderDisplay();
     }
 }

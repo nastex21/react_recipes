@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Editbtn from './Editbtn';
-import InitialRecipes from "./initialRecipes";
+import LeftPaneButtons from "./leftpaneButtons";
 import SearchResults from "./searchResults";
 import { guidGenerator } from "./generateuniqkey";
 
@@ -10,18 +10,21 @@ class App extends Component {
     super(props);
     this.state = {
       recipes: [],
-      search: ""
+      search: "",
+      buttonRender: false
     }
-    this.eachRecipe = this.eachRecipe.bind(this);
     this.update = this.update.bind(this);
     this.remove = this.remove.bind(this);
     this.add = this.add.bind(this);
     this.nextid = this.nextid.bind(this);
     this.localSetState = this.localSetState.bind(this);
     this.search = this.search.bind(this);
+    this.renderRecipes = this.renderRecipes.bind(this);
+    this.changeFalse = this.changeFalse.bind(this);
   }
 
   componentWillMount(){
+    //localStorage.clear();
     let getData = localStorage.getItem('getRecipes');
     let initialArr = [{
       id: 0,
@@ -105,11 +108,11 @@ class App extends Component {
     }))
   }
 
-  eachRecipe(item, i){
+ /*  eachRecipe(item, i){
     return (
       <Editbtn key={item.id} index={item.id} values={item} onChange={this.update} onRemove={this.remove}>{item.id}{item.dish}{item.servings}{item.cooking_time}{item.ingredients}{item.directions}</Editbtn>
     )
-  }
+  } */
 
   search(event){
     const target = event.target;
@@ -117,10 +120,38 @@ class App extends Component {
     const name = target.name;
 
     this.setState({
+      buttonRender: false,
       search: value
     })
   }
 
+  changeFalse(event){
+    if (this.state.buttonRender == false){
+      this.setState({
+        buttonRender: true
+      })
+    }
+
+    this.renderRecipes(event);
+  }
+
+  renderRecipes(event){
+
+    
+    var recipes  = this.state.recipes.filter(item => item.dish == event.target.value);
+    console.log(recipes);
+  
+    return (
+
+      <Editbtn key={recipes.id} index={recipes.id} values={recipes} onChange={this.update} onRemove={this.remove}>{recipes.id}{recipes.dish}{recipes.servings}{recipes.cooking_time}{recipes.ingredients}{recipes.directions}</Editbtn>
+    )
+  }
+
+  initialBody(){
+    return (
+      <div><p>This is a placeholder.</p></div>
+    )
+  }
 
 
   render() {
@@ -130,10 +161,11 @@ class App extends Component {
            <input onChange={this.search} />
         </div>
         <div id="results">
-        {this.state.search == "" ? <InitialRecipes values={this.state.recipes} /> : <SearchResults /> }
+        {this.state.search == "" ? <LeftPaneButtons values={this.state.recipes} changeButtons={this.changeFalse} /> : <SearchResults /> }
         </div>
       </div>,
       <div id="recipes-body">
+        {this.state.buttonRender == false ? this.initialBody() : this.renderRecipes}
       </div> 
     ]
   }
