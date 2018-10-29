@@ -3,6 +3,7 @@ import './App.css';
 import Editbtn from './Editbtn';
 import LeftPaneButtons from "./leftpaneButtons";
 import SearchResults from "./searchResults";
+import RenderBody from "./RenderBody";
 import { guidGenerator } from "./generateuniqkey";
 
 class App extends Component {
@@ -11,16 +12,11 @@ class App extends Component {
     this.state = {
       recipes: [],
       search: "",
-      buttonRender: false
+      buttonRender: false,
+      buttonValue: ""
     }
-    this.update = this.update.bind(this);
-    this.remove = this.remove.bind(this);
-    this.add = this.add.bind(this);
-    this.nextid = this.nextid.bind(this);
     this.localSetState = this.localSetState.bind(this);
-    this.search = this.search.bind(this);
-    this.renderRecipes = this.renderRecipes.bind(this);
-    this.changeFalse = this.changeFalse.bind(this);
+    this.changeButtonState = this.changeButtonState.bind(this);
   }
 
   componentWillMount(){
@@ -45,9 +41,21 @@ class App extends Component {
     getData === null ? this.setState({recipes: [...this.state.recipes, ...initialArr]}) : this.localSetState();
   }
 
-  componentDidUpdate(){
+  componentDidUpdate(prevProps, prevState){
     localStorage.setItem('getRecipes', JSON.stringify(this.state.recipes));
+    console.log(this.state.buttonValue)
+    console.log(prevProps);
+    console.log(prevState);
   }
+
+/*   shouldComponentUpdate(nextProps, nextState){
+    console.log(this.state.buttonValue)
+    console.log(nextProps);
+    console.log(nextState);
+    /* return (
+        this.props.children !== nextProps.children || this.state !== nextState
+    ) }*/
+
 
   localSetState(){
     let getData = JSON.parse(localStorage.getItem('getRecipes'));
@@ -56,116 +64,35 @@ class App extends Component {
     })
   }
 
-
-  add(text){
-    this.setState(prevState => ({
-      recipes: [
-        ...prevState.recipes,
-        {
-          id: this.nextid(),
-          dish: "New Recipe",
-          servings: "",
-          cooking_time: "",
-          ingredients: "",
-          directions: ""
-        }
-      ]
-    }))
-  }
-
-  nextid(){
-    const idList = this.state.recipes.map(i => i.id);
-    var num = 0;
-
-    var returnID = function(){
-      var check = idList.indexOf(num);
-
-      if (check === -1){
-        return num;
-      } else {
-        num++;
-        returnID();
-      }
-      return num;
-    }
-    
-    return returnID();
-    
-  }
-
-  update(newRecipe, i){
-    this.setState(prevState => ( {
-      recipes: prevState.recipes.map(
-        recipe => (recipe.id !== i) ? recipe : {...recipe, ...newRecipe}
-      )
-    } 
-    )) 
-  }
-
-  remove(id){
-    this.setState(prevState => ({
-      recipes: prevState.recipes.filter(recipe => recipe.id !== id)
-    }))
-  }
-
- /*  eachRecipe(item, i){
-    return (
-      <Editbtn key={item.id} index={item.id} values={item} onChange={this.update} onRemove={this.remove}>{item.id}{item.dish}{item.servings}{item.cooking_time}{item.ingredients}{item.directions}</Editbtn>
-    )
-  } */
-
-  search(event){
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      buttonRender: false,
-      search: value
-    })
-  }
-
-  changeFalse(event){
+  changeButtonState(event){
+    console.log(event.target.value);
     if (this.state.buttonRender == false){
       this.setState({
         buttonRender: true
       })
     }
 
-    this.renderRecipes(event);
+    this.setState({
+      buttonValue: event.target.value
+    })
+
+    console.log(this.state.buttonValue)
+
   }
-
-  renderRecipes(event){
-
-    
-    var recipes  = this.state.recipes.filter(item => item.dish == event.target.value);
-    console.log(recipes);
-  
-    return (
-
-      <Editbtn key={recipes.id} index={recipes.id} values={recipes} onChange={this.update} onRemove={this.remove}>{recipes.id}{recipes.dish}{recipes.servings}{recipes.cooking_time}{recipes.ingredients}{recipes.directions}</Editbtn>
-    )
-  }
-
-  initialBody(){
-    return (
-      <div><p>This is a placeholder.</p></div>
-    )
-  }
-
 
   render() {
+    console.log(this.state.eventTargetValue)
     return [
       <div id="left-pane">
         <div id="search">
            <input onChange={this.search} />
         </div>
         <div id="results">
-        {this.state.search == "" ? <LeftPaneButtons values={this.state.recipes} changeButtons={this.changeFalse} /> : <SearchResults /> }
+        {this.state.search == "" ? <LeftPaneButtons values={this.state.recipes} changeButtons={this.changeButtonState} /> : <SearchResults /> }
         </div>
       </div>,
       <div id="recipes-body">
-        {this.state.buttonRender == false ? this.initialBody() : this.renderRecipes}
+          <Editbtn value={this.state.buttonValue}/>
       </div> 
     ]
   }

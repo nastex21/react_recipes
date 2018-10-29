@@ -15,10 +15,11 @@ class Editbtn extends Component {
         }
         this.edit = this.edit.bind(this);
         this.remove = this.remove.bind(this);
-        this.renderForm = this.renderForm.bind(this);
-        this.renderDisplay = this.renderDisplay.bind(this);
+/*         this.renderForm = this.renderForm.bind(this);
+ */        this.renderDisplay = this.renderDisplay.bind(this);
         this.save = this.save.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.initialRender = this.initialRender.bind(this);
         console.log("running editbtn!!!!!!!!")
   }
 
@@ -33,7 +34,7 @@ class Editbtn extends Component {
         this.props.onRemove(this.props.index)
     }
 
-    componentDidUpdate(prevProps, prevState){
+    /* componentDidUpdate(prevProps, prevState){
         var textArea;
         if(this.state.editing){
             textArea = this._newText;
@@ -51,15 +52,15 @@ class Editbtn extends Component {
              directions: prevProps.children[5]
         }) 
     }
-    }
+    } */
 
-    shouldComponentUpdate(nextProps, nextState){
+/*     shouldComponentUpdate(nextProps, nextState){
 
         return (
             this.props.children !== nextProps.children || this.state !== nextState
         )
 
-    }
+    } */
 
     save(e){
         e.preventDefault();
@@ -96,7 +97,7 @@ class Editbtn extends Component {
         });
 
       } 
-
+/* 
     renderForm(){
             var elements = [];
             var items = this.props.values;
@@ -128,32 +129,34 @@ class Editbtn extends Component {
             })
             return <div className="note"><h2>{this.state.dish}</h2><form onSubmit={this.save}>{elements}
             <button id="save">SAVE</button></form></div>;
-            }
+            } */
 
+    initialRender(){
+        console.log("placeholder")
+        return [
+            <>
+                <p>This is a placeholder.</p>
+            </>
+        ]
+    }
 
     renderDisplay(){
-        console.log("renderDisplay running")
-        var elements = [];
-        var items = this.props.values;
-        Object.entries(items).forEach((item, index) => {
-            let key = item[0];
-            let value = item[1];
-            if (key !== "id"){
-                const capitalize = (s) => {
-                    if (typeof s !== 'string') return ''
-                    return s.charAt(0).toUpperCase() + s.slice(1)
-                  }
-                elements.push(<div key={guidGenerator()} >
-                    {key === "dish" && value === "New Recipe" ? console.log("yep") : key === "dish" ? <div id={index} ><h2>{value}</h2></div> : key === "cooking_time" ? <div id ={index} ><p>Cooking Time: {value}</p></div> : <div id={index} ><p>{capitalize(key)}: {value}</p></div>}</div> 
-                )
-            }
-        })
-        return <div className="recipe-box" >{elements}<button onClick={this.edit} id="edit">Edit</button><button onClick={this.remove} id="remove">Remove</button></div>;
+        console.log(this.props.value);
+        console.log(this.state.value);
+        return [
+            <>
+                <p>{this.props.value}</p>
+            </>
+        ]
     }
 
     render() {
         console.log("edit btn initiated")
-        return this.state.edit ? this.renderForm() : this.renderDisplay();
+        return( 
+        <>
+        {this.props.value == "" ? this.initialRender() : this.renderDisplay()}
+        </>
+        )
     }
 }
 
