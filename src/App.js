@@ -13,7 +13,7 @@ class App extends Component {
       recipes: [],
       search: "",
       buttonRender: false,
-      buttonValue: ""
+      buttonValue: []
     }
     this.localSetState = this.localSetState.bind(this);
     this.changeButtonState = this.changeButtonState.bind(this);
@@ -72,16 +72,17 @@ class App extends Component {
       })
     }
 
-    this.setState({
-      buttonValue: event.target.value
-    })
+    var value = this.state.recipes.filter(item => item.dish == event.target.value);
 
-    console.log(this.state.buttonValue)
+    this.setState({
+        buttonValue: [...value]
+      })
+
+   console.log(this.state.buttonValue)
 
   }
 
   render() {
-    console.log(this.state.eventTargetValue)
     return [
       <div id="left-pane">
         <div id="search">

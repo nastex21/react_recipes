@@ -97,39 +97,38 @@ class Editbtn extends Component {
         });
 
       } 
-/* 
+
     renderForm(){
-            var elements = [];
-            var items = this.props.values;
-            var keyId = "";
+        var item = this.props.value[0];
 
-            Object.entries(items).forEach((item, index) => {
-                let key = item[0];
-                let value = item[1];            
-
-                if (keyId == ""){
-                    if(key == "id"){
-                        keyId = value;
-                    }
-                }
-                
-                const capitalize = (s) => {
-                        if (typeof s !== 'string') return ''
-                        return s.charAt(0).toUpperCase() + s.slice(1)
-                }
-              if(key !== "id"){
-                if (key == "cooking_time"){
-                    elements.push(<div key={key + keyId + index}><span>Cooking Time: </span> <input type="text" name="cooking_time" onChange={this.handleInputChange} defaultValue={value} /><br /></div>)
-                } else if (key == "directions" || key == "ingredients"){
-                    elements.push(<div key={key + keyId + index}><span>{capitalize(key)}: </span> <textarea name={key} rows="4" cols="50" onChange={this.handleInputChange} defaultValue={value} /></div>)
-                }  else {
-                    elements.push(<div key={key + keyId + index}><span>{capitalize(key)}: </span> <input type="text" name={key} onChange={this.handleInputChange} defaultValue={value} /><br /></div>)
-                }
-            }      
-            })
-            return <div className="note"><h2>{this.state.dish}</h2><form onSubmit={this.save}>{elements}
-            <button id="save">SAVE</button></form></div>;
-            } */
+            return[
+                <div id="header" className="formOutput">
+                    <h2>{item.dish}</h2>
+                </div>,
+                <div id="form" onSubmit={this.save}>
+                    <form>
+                        <div id="formHeading" className="recipeOutput">
+                             <span>Name: </span><input type="text" name="servings" onChange={this.handleInputChange} defaultValue={item.dish} /><br />
+                        </div>
+                        <div id="formServings" className="recipeOutput">
+                             <span>Servings: </span><input type="text" name="servings" onChange={this.handleInputChange} defaultValue={item.servings} /><br />
+                        </div>
+                        <div id="formCooking_time" className="recipeOutput">
+                            <span>Cooking Time: </span><input type="text" name="cooking_time" onChange={this.handleInputChange} defaultValue={item.cooking_time} /><br />
+                        </div> 
+                        <div id="formIngredients" className="recipeOutput">
+                            <span>Ingredients: </span><textarea rows="4" cols="50" name="ingredients" onChange={this.handleInputChange} defaultValue={item.ingredients} /><br />
+                        </div>
+                        <div id="formDirections" className="recipeOutput">
+                            <span>Directions: </span><textarea rows="4" cols="50" name="directions" onChange={this.handleInputChange} defaultValue={item.directions} /><br />
+                        </div>
+                        <div id="buttons" className="recipeOutput">
+                            <button id="save">SAVE</button>
+                        </div> 
+                    </form>
+                </div>
+            ]
+            } 
 
     initialRender(){
         console.log("placeholder")
@@ -141,12 +140,26 @@ class Editbtn extends Component {
     }
 
     renderDisplay(){
-        console.log(this.props.value);
-        console.log(this.state.value);
+        var item = this.props.value[0];
         return [
-            <>
-                <p>{this.props.value}</p>
-            </>
+                <div id="dish" className="recipeOutput">
+                    <h2>{item.dish}</h2>
+                </div>,
+                <div id="servings" className="recipeOutput">
+                    <p>Servings: {item.servings}</p>
+                </div>,
+                <div id="cooking_time" className="recipeOutput">
+                    <p>Cooking Time: {item.cooking_time}</p>
+                </div>, 
+                <div id="ingredients" className="recipeOutput">
+                    <p>Ingredients: {item.ingredients}</p>
+                </div>,
+                <div id="directions" className="recipeOutput">
+                    <p>Directions: {item.directions}</p>
+                </div>,
+                <div id="buttons" className="recipeOutput">
+                    <button onClick={this.edit} id="edit">Edit</button><button onClick={this.remove} id="remove">Remove</button>
+                </div>
         ]
     }
 
@@ -154,7 +167,7 @@ class Editbtn extends Component {
         console.log("edit btn initiated")
         return( 
         <>
-        {this.props.value == "" ? this.initialRender() : this.renderDisplay()}
+        {this.props.value == "" && this.state.edit == false ? this.initialRender() : this.props.value !== "" && this.state.edit == false ? this.renderDisplay() : this.state.edit == true ? this.renderForm() : null}
         </>
         )
     }
