@@ -20,6 +20,8 @@ class App extends Component {
     this.changeButtonState = this.changeButtonState.bind(this);
     this.update = this.update.bind(this);
     this.remove = this.remove.bind(this);
+    this.add = this.add.bind(this);
+    this.nextid = this.nextid.bind(this);
   }
 
   componentWillMount(){
@@ -76,6 +78,41 @@ class App extends Component {
 
   }
 
+  add(text){
+    console.log("add() line 31: ");
+
+    this.setState(prevState => ({
+      recipes: [
+        ...prevState.recipes,
+        {
+          id: this.nextid(),
+          dish: text
+        }
+      ]
+    }))
+  }
+
+  nextid(){
+    const idList = this.state.recipes.map(i => i.id);
+    var num = 0;
+
+    var returnID = function(){
+      var check = idList.indexOf(num);
+      console.log(check);
+
+      if (check === -1){
+        return num;
+      } else {
+        num++;
+        console.log(num);
+        returnID();
+      }
+      return num;
+    }
+    
+    return returnID();
+    
+  }
 
   update(newRecipe, i){
     console.log(newRecipe);
@@ -102,7 +139,7 @@ class App extends Component {
         <div id="search">
             <h2>Dishes</h2>
             <input onChange={this.search} />
-            <button onClick={this.add}>Add</button>
+            <button onClick={this.add.bind(null, "Next Note")}>Add</button>
         </div>
         <div id="results">
         {this.state.search == "" ? <LeftPaneButtons values={this.state.recipes} changeButtons={this.changeButtonState} /> : <SearchResults /> }

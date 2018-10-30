@@ -42,17 +42,20 @@ class Editbtn extends Component {
             textArea.select();
         } */
 
+      console.log(prevState.dish);
+      console.log(item);
+      console.log(item.servings)
       var item = this.props.value[0];
         if(prevState.dish == undefined){
             return null;
-        } else if(prevState.dish !== item.dish){
+        } else if (prevState.dish == undefined && prevState.dish !== item.dish){
         this.setState({
              id: item.id,
              dish: item.dish,
-             servings: item.servings,
-             cooking_time: item.cooking_time,
-             ingredients: item.ingredients,
-             directions: item.directions
+             servings: item.servings == undefined ? "" : item.servings ,
+             cooking_time: item.cooking_time == undefined ? "" : item.cooking_time,
+             ingredients: item.ingredients == undefined ? "" : item.ingredients,
+             directions: item.directions == undefined ? "" : item.directions
         })
     console.log(this.state.dish) 
     } 
