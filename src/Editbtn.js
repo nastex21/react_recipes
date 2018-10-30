@@ -6,7 +6,6 @@ class Editbtn extends Component {
         super(props);
         this.state = {
             edit: false,
-            counter: 0,
             id: "",
             dish: "",
             servings: "",
@@ -36,24 +35,27 @@ class Editbtn extends Component {
     }
 
     componentDidUpdate(prevProps, prevState){
-        var textArea;
+       /*  var textArea;
         if(this.state.editing){
             textArea = this._newText;
             textArea.focus();
             textArea.select();
-        }
+        } */
 
       var item = this.props.value[0];
-      if(this.state.edit == false && this.state.counter == 0){
+      console.log("item is: " + item)
+      console.log(prevProps);
+      console.log(prevState)
+      if(prevState.dish !== item.dish){
         this.setState({
-             counter: 1,
              id: item.id,
              dish: item.dish,
              servings: item.servings,
              cooking_time: item.cooking_time,
              ingredients: item.ingredients,
              directions: item.directions
-        }) 
+        })
+    console.log(this.state.dish) 
     } 
     } 
 
@@ -176,6 +178,7 @@ class Editbtn extends Component {
     }
 
     render() {
+        console.log("edit is running")
         return( 
         <>
             {this.conditionalRender()}
