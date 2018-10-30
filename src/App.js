@@ -13,11 +13,13 @@ class App extends Component {
       recipes: [],
       search: "",
       buttonRender: false,
-      buttonValue: []
+      buttonValue: [],
+      initialRender: true
     }
     this.localSetState = this.localSetState.bind(this);
     this.changeButtonState = this.changeButtonState.bind(this);
     this.update = this.update.bind(this);
+    this.remove = this.remove.bind(this);
   }
 
   componentWillMount(){
@@ -49,15 +51,6 @@ class App extends Component {
     console.log(prevState);
   }
 
-/*   shouldComponentUpdate(nextProps, nextState){
-    console.log(this.state.buttonValue)
-    console.log(nextProps);
-    console.log(nextState);
-    /* return (
-        this.props.children !== nextProps.children || this.state !== nextState
-    ) }*/
-
-
   localSetState(){
     let getData = JSON.parse(localStorage.getItem('getRecipes'));
     this.setState({
@@ -76,12 +69,13 @@ class App extends Component {
     var value = this.state.recipes.filter(item => item.dish == event.target.value);
 
     this.setState({
-        buttonValue: [...value]
+        buttonValue: [...value],
+        initialRender: false
       })
 
-   console.log(this.state.buttonValue)
 
   }
+
 
   update(newRecipe, i){
     console.log(newRecipe);
@@ -93,18 +87,29 @@ class App extends Component {
     ))  
   }
 
+  remove(id){
+    console.log("remove is running")
+    console.log(id);
+    this.setState(prevState => ({
+      recipes: prevState.recipes.filter(recipe => recipe.id !== id),
+      initialRender: true
+    }))
+  }
+
   render() {
     return [
       <div id="left-pane">
         <div id="search">
-           <input onChange={this.search} />
+            <h2>Dishes</h2>
+            <input onChange={this.search} />
+            <button onClick={this.add}>Add</button>
         </div>
         <div id="results">
         {this.state.search == "" ? <LeftPaneButtons values={this.state.recipes} changeButtons={this.changeButtonState} /> : <SearchResults /> }
         </div>
       </div>,
       <div id="recipes-body">
-          <Editbtn value={this.state.buttonValue} onChange={this.update}/>
+          <Editbtn value={this.state.buttonValue} onChange={this.update} onRemove={this.remove} initialRender={this.state.initialRender}/>
       </div> 
     ]
   }

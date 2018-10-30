@@ -31,7 +31,7 @@ class Editbtn extends Component {
     }
     
     remove(){
-        this.props.onRemove(this.props.index)
+        this.props.onRemove(this.state.id)
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -43,10 +43,9 @@ class Editbtn extends Component {
         } */
 
       var item = this.props.value[0];
-      console.log("item is: " + item)
-      console.log(prevProps);
-      console.log(prevState)
-      if(prevState.dish !== item.dish){
+        if(prevState.dish == undefined){
+            return null;
+        } else if(prevState.dish !== item.dish){
         this.setState({
              id: item.id,
              dish: item.dish,
@@ -59,13 +58,6 @@ class Editbtn extends Component {
     } 
     } 
 
-/*   shouldComponentUpdate(nextProps, nextState){
-
-        return (
-            this.props.children !== nextProps.children || this.state !== nextState
-        )
-
-    }  */ 
 
     save(e){
         e.preventDefault();
@@ -163,7 +155,11 @@ class Editbtn extends Component {
     }
 
     conditionalRender(){
-       if (this.props.value == "" && this.state.edit == false){
+        console.log(this.props.value);
+        console.log(this.state.edit)
+        console.log(this.props.initialRender);
+        console.log(this.props)
+       if (this.props.value == "" && this.state.edit == false && this.props.initialRender == true){
             console.log("initialRender");
             return this.initialRender() 
        } else if (this.props.value !== "" && this.state.edit == false){
@@ -173,7 +169,7 @@ class Editbtn extends Component {
             console.log("renderForm");
             return this.renderForm();
        } else {
-           return null;
+           return this.initialRender();
        }
     }
 
