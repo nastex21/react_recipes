@@ -17,6 +17,7 @@ class App extends Component {
     }
     this.localSetState = this.localSetState.bind(this);
     this.changeButtonState = this.changeButtonState.bind(this);
+    this.update = this.update.bind(this);
   }
 
   componentWillMount(){
@@ -82,6 +83,16 @@ class App extends Component {
 
   }
 
+  update(newRecipe, i){
+    console.log(newRecipe);
+    this.setState(prevState => ( {
+      recipes: prevState.recipes.map(
+        recipe => (recipe.id !== i) ? recipe : {...recipe, ...newRecipe}
+      )
+    } 
+    ))  
+  }
+
   render() {
     return [
       <div id="left-pane">
@@ -93,7 +104,7 @@ class App extends Component {
         </div>
       </div>,
       <div id="recipes-body">
-          <Editbtn value={this.state.buttonValue}/>
+          <Editbtn value={this.state.buttonValue} onChange={this.update}/>
       </div> 
     ]
   }

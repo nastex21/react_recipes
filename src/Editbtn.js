@@ -6,6 +6,7 @@ class Editbtn extends Component {
         super(props);
         this.state = {
             edit: false,
+            counter: 0,
             id: "",
             dish: "",
             servings: "",
@@ -15,12 +16,12 @@ class Editbtn extends Component {
         }
         this.edit = this.edit.bind(this);
         this.remove = this.remove.bind(this);
-/*         this.renderForm = this.renderForm.bind(this);
- */        this.renderDisplay = this.renderDisplay.bind(this);
+        this.renderForm = this.renderForm.bind(this);
+        this.renderDisplay = this.renderDisplay.bind(this);
         this.save = this.save.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.initialRender = this.initialRender.bind(this);
-        console.log("running editbtn!!!!!!!!")
+        this.conditionalRender = this.conditionalRender.bind(this);
   }
 
 
@@ -34,7 +35,7 @@ class Editbtn extends Component {
         this.props.onRemove(this.props.index)
     }
 
-    /* componentDidUpdate(prevProps, prevState){
+    componentDidUpdate(prevProps, prevState){
         var textArea;
         if(this.state.editing){
             textArea = this._newText;
@@ -42,25 +43,27 @@ class Editbtn extends Component {
             textArea.select();
         }
 
-       if(!prevState.edit){
+      var item = this.props.value[0];
+      if(this.state.edit == false && this.state.counter == 0){
         this.setState({
-             id: prevProps.children[0],
-             dish: prevProps.children[1],
-             servings: prevProps.children[2],
-             cooking_time: prevProps.children[3],
-             ingredients: prevProps.children[4],
-             directions: prevProps.children[5]
+             counter: 1,
+             id: item.id,
+             dish: item.dish,
+             servings: item.servings,
+             cooking_time: item.cooking_time,
+             ingredients: item.ingredients,
+             directions: item.directions
         }) 
-    }
-    } */
+    } 
+    } 
 
-/*     shouldComponentUpdate(nextProps, nextState){
+/*   shouldComponentUpdate(nextProps, nextState){
 
         return (
             this.props.children !== nextProps.children || this.state !== nextState
         )
 
-    } */
+    }  */ 
 
     save(e){
         e.preventDefault();
@@ -74,14 +77,9 @@ class Editbtn extends Component {
             directions: this.state.directions
         }
         this.props.onChange(newRecipe, this.state.id);
+        console.log(newRecipe)
         this.setState({
-            edit: false,
-            id: "",
-            dish: "",
-            servings: "",
-            cooking_time: "",
-            ingredients: "",
-            directions: ""
+            edit: false
         }) 
     }
 
@@ -90,6 +88,7 @@ class Editbtn extends Component {
         const value = target.value;
         const name = target.name;
 
+        console.log(name);
         console.log(value);
     
         this.setState({
@@ -99,28 +98,26 @@ class Editbtn extends Component {
       } 
 
     renderForm(){
-        var item = this.props.value[0];
-
             return[
                 <div id="header" className="formOutput">
-                    <h2>{item.dish}</h2>
+                    <h2>{this.state.dish}</h2>
                 </div>,
                 <div id="form" onSubmit={this.save}>
                     <form>
                         <div id="formHeading" className="recipeOutput">
-                             <span>Name: </span><input type="text" name="servings" onChange={this.handleInputChange} defaultValue={item.dish} /><br />
+                             <span>Name: </span><input type="text" name="dish" onChange={this.handleInputChange} defaultValue={this.state.dish} /><br />
                         </div>
                         <div id="formServings" className="recipeOutput">
-                             <span>Servings: </span><input type="text" name="servings" onChange={this.handleInputChange} defaultValue={item.servings} /><br />
+                             <span>Servings: </span><input type="text" name="servings" onChange={this.handleInputChange} defaultValue={this.state.servings} /><br />
                         </div>
                         <div id="formCooking_time" className="recipeOutput">
-                            <span>Cooking Time: </span><input type="text" name="cooking_time" onChange={this.handleInputChange} defaultValue={item.cooking_time} /><br />
+                            <span>Cooking Time: </span><input type="text" name="cooking_time" onChange={this.handleInputChange} defaultValue={this.state.cooking_time} /><br />
                         </div> 
                         <div id="formIngredients" className="recipeOutput">
-                            <span>Ingredients: </span><textarea rows="4" cols="50" name="ingredients" onChange={this.handleInputChange} defaultValue={item.ingredients} /><br />
+                            <span>Ingredients: </span><textarea rows="4" cols="50" name="ingredients" onChange={this.handleInputChange} defaultValue={this.state.ingredients} /><br />
                         </div>
                         <div id="formDirections" className="recipeOutput">
-                            <span>Directions: </span><textarea rows="4" cols="50" name="directions" onChange={this.handleInputChange} defaultValue={item.directions} /><br />
+                            <span>Directions: </span><textarea rows="4" cols="50" name="directions" onChange={this.handleInputChange} defaultValue={this.state.directions} /><br />
                         </div>
                         <div id="buttons" className="recipeOutput">
                             <button id="save">SAVE</button>
@@ -143,19 +140,19 @@ class Editbtn extends Component {
         var item = this.props.value[0];
         return [
                 <div id="dish" className="recipeOutput">
-                    <h2>{item.dish}</h2>
+                    <h2>{this.state.dish}</h2>
                 </div>,
                 <div id="servings" className="recipeOutput">
-                    <p>Servings: {item.servings}</p>
+                    <p>Servings: {this.state.servings}</p>
                 </div>,
                 <div id="cooking_time" className="recipeOutput">
-                    <p>Cooking Time: {item.cooking_time}</p>
+                    <p>Cooking Time: {this.state.cooking_time}</p>
                 </div>, 
                 <div id="ingredients" className="recipeOutput">
-                    <p>Ingredients: {item.ingredients}</p>
+                    <p>Ingredients: {this.state.ingredients}</p>
                 </div>,
                 <div id="directions" className="recipeOutput">
-                    <p>Directions: {item.directions}</p>
+                    <p>Directions: {this.state.directions}</p>
                 </div>,
                 <div id="buttons" className="recipeOutput">
                     <button onClick={this.edit} id="edit">Edit</button><button onClick={this.remove} id="remove">Remove</button>
@@ -163,11 +160,25 @@ class Editbtn extends Component {
         ]
     }
 
+    conditionalRender(){
+       if (this.props.value == "" && this.state.edit == false){
+            console.log("initialRender");
+            return this.initialRender() 
+       } else if (this.props.value !== "" && this.state.edit == false){
+           console.log("renderDisplay");
+            return this.renderDisplay()
+       } else if (this.state.edit == true){
+            console.log("renderForm");
+            return this.renderForm();
+       } else {
+           return null;
+       }
+    }
+
     render() {
-        console.log("edit btn initiated")
         return( 
         <>
-        {this.props.value == "" && this.state.edit == false ? this.initialRender() : this.props.value !== "" && this.state.edit == false ? this.renderDisplay() : this.state.edit == true ? this.renderForm() : null}
+            {this.conditionalRender()}
         </>
         )
     }
