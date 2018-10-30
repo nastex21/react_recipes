@@ -42,13 +42,10 @@ class Editbtn extends Component {
             textArea.select();
         } */
 
-      console.log(prevState.dish);
-      console.log(item);
-      console.log(item.servings)
       var item = this.props.value[0];
-        if(prevState.dish == undefined){
+        if(item.dish == ""){
             return null;
-        } else if (prevState.dish == undefined && prevState.dish !== item.dish){
+        } else if (prevState.dish !== item.dish){
         this.setState({
              id: item.id,
              dish: item.dish,
@@ -57,7 +54,6 @@ class Editbtn extends Component {
              ingredients: item.ingredients == undefined ? "" : item.ingredients,
              directions: item.directions == undefined ? "" : item.directions
         })
-    console.log(this.state.dish) 
     } 
     } 
 
@@ -162,12 +158,15 @@ class Editbtn extends Component {
         console.log(this.state.edit)
         console.log(this.props.initialRender);
         console.log(this.props)
-       if (this.props.value == "" && this.state.edit == false && this.props.initialRender == true){
+       if (this.props.value == "" && this.state.edit == false){
             console.log("initialRender");
             return this.initialRender() 
        } else if (this.props.value !== "" && this.state.edit == false){
-           console.log("renderDisplay");
+           if(this.props.initialRender == true){
+            return this.initialRender();
+           }else{
             return this.renderDisplay()
+           }
        } else if (this.state.edit == true){
             console.log("renderForm");
             return this.renderForm();
