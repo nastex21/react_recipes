@@ -21,10 +21,11 @@ class Editbtn extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.initialRender = this.initialRender.bind(this);
         this.conditionalRender = this.conditionalRender.bind(this);
+        this.addRender = this.addRender.bind(this);
    }
 
 
-      edit(event) {
+    edit(event) {
         var item = this.props.value[0];
         this.setState({
             edit:true,
@@ -156,34 +157,46 @@ class Editbtn extends Component {
         ]
     }
 
+    addRender(){
+        var item = this.props.value[0];
+        console.log(item);
+        return [
+            <div id="dish" className="recipeOutput">
+                <h2>{item.dish}</h2>
+            </div>,
+            <div id="servings" className="recipeOutput">
+                <p>Servings: {item.servings}</p>
+            </div>,
+            <div id="cooking_time" className="recipeOutput">
+                <p>Cooking Time: {item.cooking_time}</p>
+            </div>, 
+            <div id="ingredients" className="recipeOutput">
+                <p>Ingredients: {item.ingredients}</p>
+            </div>,
+            <div id="directions" className="recipeOutput">
+                <p>Directions: {item.directions}</p>
+            </div>,
+            <div id="buttons" className="recipeOutput">
+                <button onClick={this.edit} id="edit">Edit</button><button onClick={this.remove} id="remove">Remove</button>
+            </div>
+    ]
+    }
+
     conditionalRender(){
         console.log(this.props.value);
         console.log(this.state.edit)
         console.log(this.props.initialRender);
         console.log(this.props)
-
-       /* if (this.props.value == "" && this.state.edit == false){
-            console.log("initialRender");
-            return this.initialRender() 
-       } else if (this.props.value !== "" && this.state.edit == false){
-           if(this.props.initialRender == true){
-            return this.initialRender();
-           }else{
-            return this.renderDisplay()
-           }
-       } else if (this.state.edit == true){
-            console.log("renderForm");
-            return this.renderForm();
-       } else {
-           return this.initialRender();
-       } */
     
        if (this.state.edit){
            console.log("this.state.edit")
             return this.renderForm();
-       } else if (this.props.add || this.props.clicked){
-        console.log("this.state.add or clicked")
+       } else if (this.props.clicked){
+        console.log("this.state.clicked")
           return this.renderDisplay();
+       } else if (this.props.add) {
+        console.log("this.state.add")
+        return this.addRender();
        } else if(this.props.initialRender) {
         console.log("this.state.initialRender")
            return this.initialRender()

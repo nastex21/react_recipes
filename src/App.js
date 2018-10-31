@@ -159,7 +159,11 @@ class App extends Component {
     console.log(id);
     this.setState(prevState => ({
       recipes: prevState.recipes.filter(recipe => recipe.id !== id),
-      initialRender: true
+      initialRender: true,
+      buttonRender: false, 
+      recipeBtnClick: false,
+      add: false
+
     }))
   }
 
