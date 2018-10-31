@@ -25,6 +25,7 @@ class App extends Component {
     this.add = this.add.bind(this);
     this.nextid = this.nextid.bind(this);
     this.updateButtonValue = this.updateButtonValue.bind(this);
+    this.resetStates = this.resetStates.bind(this);
   }
 
   componentWillMount(){
@@ -53,11 +54,11 @@ class App extends Component {
     localStorage.setItem('getRecipes', JSON.stringify(this.state.recipes));
     console.log(this.state.buttonValue)
     
-    if(this.state.add){
+ /*    if(this.state.add){
       this.updateButtonValue();
     } else {
       console.log(this.state.buttonValue)
-    }
+    } */
     }
 
   updateButtonValue(){
@@ -95,8 +96,13 @@ class App extends Component {
       })
   }
 
-  resetStates(){
-
+  resetStates(add){
+    console.log("RESETSTATES:" + add)
+    if (add == 1){
+      this.setState({
+        add: false
+      })
+    }
   }
 
   add(text){
@@ -177,7 +183,7 @@ class App extends Component {
         </div>
       </div>,
       <div id="recipes-body">
-          <Editbtn value={this.state.buttonValue} onChange={this.update} onRemove={this.remove} clicked={this.state.recipeBtnClick} initialRender={this.state.initialRender} add={this.state.add} lastItem={data}/>
+          <Editbtn value={this.state.buttonValue} onChange={this.update} onRemove={this.remove} clicked={this.state.recipeBtnClick} initialRender={this.state.initialRender} add={this.state.add} lastItem={data} resetState={this.resetStates}/>
       </div> 
     ]
   }

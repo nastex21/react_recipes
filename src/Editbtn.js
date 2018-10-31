@@ -21,6 +21,7 @@ class Editbtn extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.initialRender = this.initialRender.bind(this);
         this.conditionalRender = this.conditionalRender.bind(this);
+        this.stopLooping = this.stopLooping.bind(this);
   }
 
 
@@ -42,14 +43,22 @@ class Editbtn extends Component {
             textArea.select();
         } */
 
+      
+    } 
+
+    stopLooping(prevProps, prevState){
       var item = this.props.value[0];
-      console.log(this.props);
+      console.log(prevProps);
+      console.log(prevState);
+      console.log(this.props.add)
       if (this.props.add){
            this.setState({
                id: this.props.lastItem.id,
                dish: this.props.lastItem.dish
            })
-        } else if (prevState.dish !== item.dish){
+        }
+        this.props.resetState(1);
+        /* else if (prevState.dish !== item.dish){
         this.setState({
              id: item.id,
              dish: item.dish,
@@ -57,8 +66,7 @@ class Editbtn extends Component {
              cooking_time: item.cooking_time == undefined ? "" : item.cooking_time,
              ingredients: item.ingredients == undefined ? "" : item.ingredients,
              directions: item.directions == undefined ? "" : item.directions
-        })
-    } 
+        }) */
     } 
 
 
@@ -134,7 +142,6 @@ class Editbtn extends Component {
     }
 
     renderDisplay(){
-        var item = this.props.value[0];
         return [
                 <div id="dish" className="recipeOutput">
                     <h2>{this.state.dish}</h2>
@@ -190,9 +197,11 @@ class Editbtn extends Component {
     }
 
     render() {
+        
         console.log("edit is running")
         return( 
         <>
+            {this.stopLooping}
             {this.conditionalRender()}
         </>
         )
