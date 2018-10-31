@@ -80,19 +80,20 @@ class App extends Component {
   }
 
   changeButtonState(event){
+        /* buttonRender: false, 
+      initialRender: true, 
+      recipeBtnClick: false,
+      add: false */
     console.log(event.target.value);
-    if (this.state.buttonRender == false){
-      this.setState({
-        buttonRender: true
-      })
-    }
 
     var value = this.state.recipes.filter(item => item.dish == event.target.value);
 
     this.setState({
-        buttonValue: [...this.state.buttonValue, ...value],
+        buttonValue: [...value],
         initialRender: false,
-        recipeBtnClick: true
+        recipeBtnClick: true,
+        add: false,
+        buttonRender: false
       })
   }
 
@@ -171,6 +172,10 @@ class App extends Component {
   render() {
     var lastValue = this.state.recipes;
     var data = lastValue[lastValue.length -1];
+    /* buttonRender: false, 
+      initialRender: true, 
+      recipeBtnClick: false,
+      add: false */
     return [
       <div id="left-pane">
         <div id="search">

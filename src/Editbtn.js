@@ -57,7 +57,7 @@ class Editbtn extends Component {
                dish: this.props.lastItem.dish
            })
         }
-        this.props.resetState(1);
+        //this.props.resetState(1);
         /* else if (prevState.dish !== item.dish){
         this.setState({
              id: item.id,
@@ -72,7 +72,7 @@ class Editbtn extends Component {
 
     save(e){
         e.preventDefault();
-
+        console.log(this.props.value)
         let newRecipe = {
             id: this.state.id,
             dish: this.state.dish,
@@ -142,21 +142,23 @@ class Editbtn extends Component {
     }
 
     renderDisplay(){
+        console.log(this.props.value[0].dish)
+        var item = this.props.value[0]
         return [
                 <div id="dish" className="recipeOutput">
-                    <h2>{this.state.dish}</h2>
+                    <h2>{item.dish}</h2>
                 </div>,
                 <div id="servings" className="recipeOutput">
-                    <p>Servings: {this.state.servings}</p>
+                    <p>Servings: {item.servings}</p>
                 </div>,
                 <div id="cooking_time" className="recipeOutput">
-                    <p>Cooking Time: {this.state.cooking_time}</p>
+                    <p>Cooking Time: {item.cooking_time}</p>
                 </div>, 
                 <div id="ingredients" className="recipeOutput">
-                    <p>Ingredients: {this.state.ingredients}</p>
+                    <p>Ingredients: {item.ingredients}</p>
                 </div>,
                 <div id="directions" className="recipeOutput">
-                    <p>Directions: {this.state.directions}</p>
+                    <p>Directions: {item.directions}</p>
                 </div>,
                 <div id="buttons" className="recipeOutput">
                     <button onClick={this.edit} id="edit">Edit</button><button onClick={this.remove} id="remove">Remove</button>
@@ -169,6 +171,7 @@ class Editbtn extends Component {
         console.log(this.state.edit)
         console.log(this.props.initialRender);
         console.log(this.props)
+
        /* if (this.props.value == "" && this.state.edit == false){
             console.log("initialRender");
             return this.initialRender() 
@@ -186,14 +189,15 @@ class Editbtn extends Component {
        } */
     
        if (this.state.edit){
+           console.log("this.state.edit")
             return this.renderForm();
-       } else if (this.props.add){
+       } else if (this.props.add || this.props.clicked){
+        console.log("this.state.add or clicked")
           return this.renderDisplay();
        } else if(this.props.initialRender) {
+        console.log("this.state.initialRender")
            return this.initialRender()
-       } else if (this.props.clicked){
-            return this.renderDisplay();
-       }
+       } 
     }
 
     render() {
