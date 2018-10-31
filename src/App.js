@@ -12,9 +12,11 @@ class App extends Component {
     this.state = {
       recipes: [],
       search: "",
-      buttonRender: false,
       buttonValue: [],
-      initialRender: true
+      buttonRender: false, 
+      initialRender: true, 
+      recipeBtnClick: false,
+      add: false
     }
     this.localSetState = this.localSetState.bind(this);
     this.changeButtonState = this.changeButtonState.bind(this);
@@ -22,6 +24,7 @@ class App extends Component {
     this.remove = this.remove.bind(this);
     this.add = this.add.bind(this);
     this.nextid = this.nextid.bind(this);
+    this.updateButtonValue = this.updateButtonValue.bind(this);
   }
 
   componentWillMount(){
@@ -49,9 +52,24 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState){
     localStorage.setItem('getRecipes', JSON.stringify(this.state.recipes));
     console.log(this.state.buttonValue)
-    console.log(prevProps);
-    console.log(prevState);
-  }
+    
+    if(this.state.add){
+      this.updateButtonValue();
+    } else {
+      console.log(this.state.buttonValue)
+    }
+    }
+
+  updateButtonValue(){
+    var value = this.state.recipes;
+    var data = value[value.length -1];
+    console.log(this.state.recipes);
+    console.log(data);
+    this.setState({
+        buttonValue: [{...data}]
+  })
+    console.log(this.state.buttonValue);
+}
 
   localSetState(){
     let getData = JSON.parse(localStorage.getItem('getRecipes'));
@@ -71,15 +89,20 @@ class App extends Component {
     var value = this.state.recipes.filter(item => item.dish == event.target.value);
 
     this.setState({
-        buttonValue: [...value],
-        initialRender: false
+        buttonValue: [...this.state.buttonValue, ...value],
+        initialRender: false,
+        recipeBtnClick: true
       })
+  }
 
+  resetStates(){
 
   }
 
   add(text){
     console.log("add() line 31: ");
+    console.log(text);
+    var value = this.state.recipes;
 
     this.setState(prevState => ({
       recipes: [
@@ -88,8 +111,14 @@ class App extends Component {
           id: this.nextid(),
           dish: text
         }
-      ]
+      ],
+      buttonRender: false, 
+      initialRender: false, 
+      recipeBtnClick: false,
+      add: true
     }))
+    console.log(this.state.recipes);
+    console.log(value[value.length - 1])
   }
 
   nextid(){
@@ -134,6 +163,8 @@ class App extends Component {
   }
 
   render() {
+    var lastValue = this.state.recipes;
+    var data = lastValue[lastValue.length -1];
     return [
       <div id="left-pane">
         <div id="search">
@@ -146,7 +177,7 @@ class App extends Component {
         </div>
       </div>,
       <div id="recipes-body">
-          <Editbtn value={this.state.buttonValue} onChange={this.update} onRemove={this.remove} initialRender={this.state.initialRender}/>
+          <Editbtn value={this.state.buttonValue} onChange={this.update} onRemove={this.remove} clicked={this.state.recipeBtnClick} initialRender={this.state.initialRender} add={this.state.add} lastItem={data}/>
       </div> 
     ]
   }

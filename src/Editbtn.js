@@ -43,8 +43,12 @@ class Editbtn extends Component {
         } */
 
       var item = this.props.value[0];
-        if(item.dish == ""){
-            return null;
+      console.log(this.props);
+      if (this.props.add){
+           this.setState({
+               id: this.props.lastItem.id,
+               dish: this.props.lastItem.dish
+           })
         } else if (prevState.dish !== item.dish){
         this.setState({
              id: item.id,
@@ -158,7 +162,7 @@ class Editbtn extends Component {
         console.log(this.state.edit)
         console.log(this.props.initialRender);
         console.log(this.props)
-       if (this.props.value == "" && this.state.edit == false){
+       /* if (this.props.value == "" && this.state.edit == false){
             console.log("initialRender");
             return this.initialRender() 
        } else if (this.props.value !== "" && this.state.edit == false){
@@ -172,6 +176,16 @@ class Editbtn extends Component {
             return this.renderForm();
        } else {
            return this.initialRender();
+       } */
+    
+       if (this.state.edit){
+            return this.renderForm();
+       } else if (this.props.add){
+          return this.renderDisplay();
+       } else if(this.props.initialRender) {
+           return this.initialRender()
+       } else if (this.props.clicked){
+            return this.renderDisplay();
        }
     }
 
