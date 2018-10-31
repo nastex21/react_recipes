@@ -11,7 +11,7 @@ class Editbtn extends Component {
             servings: "",
             cooking_time: "",
             ingredients: "",
-            directions: ""
+            directions: "",
         }
         this.edit = this.edit.bind(this);
         this.remove = this.remove.bind(this);
@@ -21,7 +21,6 @@ class Editbtn extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.initialRender = this.initialRender.bind(this);
         this.conditionalRender = this.conditionalRender.bind(this);
-        this.stopLooping = this.stopLooping.bind(this);
    }
 
 
@@ -43,49 +42,22 @@ class Editbtn extends Component {
     }
 
     componentDidUpdate(prevProps, prevState){
-       /*  var textArea;
-        if(this.state.editing){
-            textArea = this._newText;
-            textArea.focus();
-            textArea.select();
-        } */
 
         var item = this.props.value[0];
 
-        if(this.state.id == ""){
-            return{
-            id: item.id,
-            dish: item.dish,
-            servings: item.servings,
-            cooking_time: item.cooking_time,
-            ingredients: item.ingredients,
-            directions: item.directions
-        }
-    }
+        if(this.state.id !== item.id){
+             this.setState({
+                id: item.id,
+                dish: item.dish,
+                servings: item.servings,
+                cooking_time: item.cooking_time,
+                ingredients: item.ingredients,
+                directions: item.directions
+                })
+        } else {
+            return null;
+        } 
     } 
-
-     stopLooping(prevProps, prevState){
-      var item = this.props.value[0];
-      console.log(prevProps);
-      console.log(prevState);
-      console.log(this.props.add)
-      if (this.props.add){
-           this.setState({
-               id: this.props.lastItem.id,
-               dish: this.props.lastItem.dish
-           })
-        }
-        //this.props.resetState(1);
-        /* else if (prevState.dish !== item.dish){
-        this.setState({
-             id: item.id,
-             dish: item.dish,
-             servings: item.servings == undefined ? "" : item.servings ,
-             cooking_time: item.cooking_time == undefined ? "" : item.cooking_time,
-             ingredients: item.ingredients == undefined ? "" : item.ingredients,
-             directions: item.directions == undefined ? "" : item.directions
-        }) */
-    }  
 
 
     save(e){
@@ -161,7 +133,7 @@ class Editbtn extends Component {
     }
 
     renderDisplay(){
-        console.log(this.props.value[0].id)
+        console.log(this.props.value[0].dish)
         return [
                 <div id="dish" className="recipeOutput">
                     <h2>{this.state.dish}</h2>

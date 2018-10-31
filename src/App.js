@@ -54,11 +54,6 @@ class App extends Component {
     localStorage.setItem('getRecipes', JSON.stringify(this.state.recipes));
     console.log(this.state.buttonValue)
     
- /*    if(this.state.add){
-      this.updateButtonValue();
-    } else {
-      console.log(this.state.buttonValue)
-    } */
     }
 
   updateButtonValue(){
@@ -67,8 +62,7 @@ class App extends Component {
     console.log(this.state.recipes);
     console.log(data);
     this.setState({
-        buttonValue: [{...data}],
-
+        buttonValue: [{...data}]
   })
     console.log(this.state.buttonValue);
 }
@@ -81,24 +75,29 @@ class App extends Component {
   }
 
   changeButtonState(event){
-        /* buttonRender: false, 
-      initialRender: true, 
-      recipeBtnClick: false,
-      add: false */
+    console.log(event.target.value);
+    if (this.state.buttonRender == false){
+      this.setState({
+        buttonRender: true
+      })
+    }
 
     var value = this.state.recipes.filter(item => item.dish == event.target.value);
 
     this.setState({
         buttonValue: [...value],
         initialRender: false,
-        recipeBtnClick: true,
-        add: false,
-        buttonRender: false
+        recipeBtnClick: true
       })
   }
 
-  resetStates(edit, add){
-    console.log(edit);
+  resetStates(add){
+    console.log("RESETSTATES:" + add)
+    if (add == 1){
+      this.setState({
+        add: false
+      })
+    }
   }
 
   add(text){
@@ -150,11 +149,7 @@ class App extends Component {
     this.setState(prevState => ( {
       recipes: prevState.recipes.map(
         recipe => (recipe.id !== i) ? recipe : {...recipe, ...newRecipe}
-      ),
-      buttonRender: false, 
-      initialRender: false, 
-      recipeBtnClick: true,
-      add: false
+      )
     } 
     ))  
   }
@@ -171,10 +166,6 @@ class App extends Component {
   render() {
     var lastValue = this.state.recipes;
     var data = lastValue[lastValue.length -1];
-    /* buttonRender: false, 
-      initialRender: true, 
-      recipeBtnClick: false,
-      add: false */
     return [
       <div id="left-pane">
         <div id="search">
