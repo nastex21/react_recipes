@@ -67,7 +67,8 @@ class App extends Component {
     console.log(this.state.recipes);
     console.log(data);
     this.setState({
-        buttonValue: [{...data}]
+        buttonValue: [{...data}],
+
   })
     console.log(this.state.buttonValue);
 }
@@ -84,7 +85,6 @@ class App extends Component {
       initialRender: true, 
       recipeBtnClick: false,
       add: false */
-    console.log(event.target.value);
 
     var value = this.state.recipes.filter(item => item.dish == event.target.value);
 
@@ -97,13 +97,8 @@ class App extends Component {
       })
   }
 
-  resetStates(add){
-    console.log("RESETSTATES:" + add)
-    if (add == 1){
-      this.setState({
-        add: false
-      })
-    }
+  resetStates(edit, add){
+    console.log(edit);
   }
 
   add(text){
@@ -155,7 +150,11 @@ class App extends Component {
     this.setState(prevState => ( {
       recipes: prevState.recipes.map(
         recipe => (recipe.id !== i) ? recipe : {...recipe, ...newRecipe}
-      )
+      ),
+      buttonRender: false, 
+      initialRender: false, 
+      recipeBtnClick: true,
+      add: false
     } 
     ))  
   }

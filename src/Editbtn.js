@@ -22,12 +22,19 @@ class Editbtn extends Component {
         this.initialRender = this.initialRender.bind(this);
         this.conditionalRender = this.conditionalRender.bind(this);
         this.stopLooping = this.stopLooping.bind(this);
-  }
+   }
 
 
       edit(event) {
+        var item = this.props.value[0];
         this.setState({
-            edit:true
+            edit:true,
+            id: item.id,
+            dish: item.dish,
+            servings: item.servings,
+            cooking_time: item.cooking_time,
+            ingredients: item.ingredients,
+            directions: item.directions
         })
     }
     
@@ -43,10 +50,21 @@ class Editbtn extends Component {
             textArea.select();
         } */
 
-      
+        var item = this.props.value[0];
+
+        if(this.state.id == ""){
+            return{
+            id: item.id,
+            dish: item.dish,
+            servings: item.servings,
+            cooking_time: item.cooking_time,
+            ingredients: item.ingredients,
+            directions: item.directions
+        }
+    }
     } 
 
-    stopLooping(prevProps, prevState){
+     stopLooping(prevProps, prevState){
       var item = this.props.value[0];
       console.log(prevProps);
       console.log(prevState);
@@ -67,7 +85,7 @@ class Editbtn extends Component {
              ingredients: item.ingredients == undefined ? "" : item.ingredients,
              directions: item.directions == undefined ? "" : item.directions
         }) */
-    } 
+    }  
 
 
     save(e){
@@ -81,11 +99,11 @@ class Editbtn extends Component {
             ingredients: this.state.ingredients,
             directions: this.state.directions
         }
-        this.props.onChange(newRecipe, this.state.id);
-        console.log(newRecipe)
         this.setState({
             edit: false
         }) 
+        this.props.onChange(newRecipe, this.state.id);
+        console.log(newRecipe)
     }
 
     handleInputChange(event) {
@@ -103,6 +121,7 @@ class Editbtn extends Component {
       } 
 
     renderForm(){
+        console.log("render form is running")
             return[
                 <div id="header" className="formOutput">
                     <h2>{this.state.dish}</h2>
@@ -142,23 +161,22 @@ class Editbtn extends Component {
     }
 
     renderDisplay(){
-        console.log(this.props.value[0].dish)
-        var item = this.props.value[0]
+        console.log(this.props.value[0].id)
         return [
                 <div id="dish" className="recipeOutput">
-                    <h2>{item.dish}</h2>
+                    <h2>{this.state.dish}</h2>
                 </div>,
                 <div id="servings" className="recipeOutput">
-                    <p>Servings: {item.servings}</p>
+                    <p>Servings: {this.state.servings}</p>
                 </div>,
                 <div id="cooking_time" className="recipeOutput">
-                    <p>Cooking Time: {item.cooking_time}</p>
+                    <p>Cooking Time: {this.state.cooking_time}</p>
                 </div>, 
                 <div id="ingredients" className="recipeOutput">
-                    <p>Ingredients: {item.ingredients}</p>
+                    <p>Ingredients: {this.state.ingredients}</p>
                 </div>,
                 <div id="directions" className="recipeOutput">
-                    <p>Directions: {item.directions}</p>
+                    <p>Directions: {this.state.directions}</p>
                 </div>,
                 <div id="buttons" className="recipeOutput">
                     <button onClick={this.edit} id="edit">Edit</button><button onClick={this.remove} id="remove">Remove</button>
@@ -201,11 +219,13 @@ class Editbtn extends Component {
     }
 
     render() {
-        
+        console.log("add: " + this.props.add)
+        console.log("edit: " + this.state.edit)
+        console.log("initialRender: " + this.props.initialRender)
+        console.log("button clicked: " + this.props.clicked)
         console.log("edit is running")
         return( 
         <>
-            {this.stopLooping}
             {this.conditionalRender()}
         </>
         )
