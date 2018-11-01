@@ -65,9 +65,6 @@ class App extends Component {
     //set the local recipes that are stored
     localStorage.setItem('getRecipes', JSON.stringify(this.state.recipes));
 
-    if(this.state.editForm == true){
-      return this.editFunction();
-    }
     }
 
   //localSetState is ran when getData has actual data and used to populate the recipes array
@@ -105,18 +102,17 @@ class App extends Component {
       recipes: [
         ...this.state.recipes,
         {
-          id: this.nextid(), //create new ID by running this function
           dish: text,
           servings: "",
           cooking_time: "",
           ingredients: "",
-          directions: ""
+          directions: "",
+          id: this.nextid() //create new ID by running this function
         }
       ],
       initialRender: false,
-      recipeRender: false, 
       editForm: false,
-      addRecipe: true
+      recipeRender: true
     })
   }
 
@@ -146,9 +142,9 @@ class App extends Component {
   resetAll(){
     this.setState({
       initialRender: false,
-      recipeRender: false, 
       addRecipe: false,
-      editForm: false
+      editForm: false,
+      recipeRender: false
     })
   }
 
@@ -221,6 +217,7 @@ remove(id){
       </div>,
       <div id="recipes-body">
         <RenderRight initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} editForm={this.state.editForm} addRecipe={this.state.addRecipe} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} resetStates={this.resetAll} editThis={this.editFunction} remove={this.remove} />
+        {this.state.editForm ? this.editFunction() : null}
       </div> 
     ]
   }
