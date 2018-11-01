@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
 import './App.css';
 import Editbtn from './Editbtn';
+import LeftPaneButtons from "./leftpaneButtons";
+import SearchResults from "./searchResults";
+import RenderBody from "./RenderBody";
 import { guidGenerator } from "./generateuniqkey";
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      recipes: []
+      recipes: [],
+      search: "",
+      buttonValue: [],
+      buttonRender: false, 
+      initialRender: true, 
+      recipeBtnClick: false,
+      add: false,
+      counter: 0
     }
-    this.eachRecipe = this.eachRecipe.bind(this);
+    this.localSetState = this.localSetState.bind(this);
+    this.changeButtonState = this.changeButtonState.bind(this);
     this.update = this.update.bind(this);
     this.remove = this.remove.bind(this);
     this.add = this.add.bind(this);
     this.nextid = this.nextid.bind(this);
-    this.localSetState = this.localSetState.bind(this);
+    this.updateButtonValue = this.updateButtonValue.bind(this);
+    this.resetStates = this.resetStates.bind(this);
   }
 
   componentWillMount(){
     //localStorage.clear();
     let getData = localStorage.getItem('getRecipes');
-    console.log("before: " + getData);
-    console.log(this.state.recipes);
     let initialArr = [{
       id: 0,
       dish: "Hamburger",
@@ -39,12 +49,24 @@ class App extends Component {
     }
   ]
     getData === null ? this.setState({recipes: [...this.state.recipes, ...initialArr]}) : this.localSetState();
-    console.log(this.state.recipes);
   }
 
-  componentDidUpdate(){
+  componentDidUpdate(prevProps, prevState){
     localStorage.setItem('getRecipes', JSON.stringify(this.state.recipes));
-  }
+    console.log(this.state.buttonValue)
+    
+    }
+
+  updateButtonValue(){
+    var value = this.state.recipes;
+    var data = value[value.length -1];
+    console.log(this.state.recipes);
+    console.log(data);
+    this.setState({
+        buttonValue: [{...data}]
+  })
+    console.log(this.state.buttonValue);
+}
 
   localSetState(){
     let getData = JSON.parse(localStorage.getItem('getRecipes'));
@@ -53,19 +75,53 @@ class App extends Component {
     })
   }
 
+  changeButtonState(event){
+    console.log(event.target.value);
+    if (this.state.buttonRender == false){
+      this.setState({
+        buttonRender: true
+      })
+    }
+
+    var value = this.state.recipes.filter(item => item.dish == event.target.value);
+
+    this.setState({
+        buttonValue: [...value],
+        initialRender: false,
+        recipeBtnClick: true
+      })
+  }
+
+  resetStates(add){
+    console.log("RESETSTATES:" + add)
+    if (add == 1){
+      this.setState({
+        add: false
+      })
+    }
+  }
 
   add(text){
     console.log("add() line 31: ");
+    console.log(text);
+    var value = this.state.recipes;
 
     this.setState(prevState => ({
       recipes: [
         ...prevState.recipes,
         {
           id: this.nextid(),
-          ingredients: text
+          dish: text
         }
-      ]
+      ],
+      buttonRender: false, 
+      initialRender: false, 
+      recipeBtnClick: false,
+      add: true, 
+      counter: 0
     }))
+    console.log(this.state.recipes);
+    console.log(value[value.length - 1])
   }
 
   nextid(){
@@ -90,38 +146,51 @@ class App extends Component {
     
   }
 
-  update(newRecipe, i, dish){
-    console.log("updating item at index", i, newRecipe, dish);
-    /* this.setState(prevState => ( {
+  update(newRecipe, i){
+    console.log(newRecipe);
+    this.setState(prevState => ( {
       recipes: prevState.recipes.map(
-        recipe => (recipe.id !== i) ?recipe: {...recipe, ingredients: newRecipe}
-      )
+        recipe => (recipe.id !== i) ? recipe : {...recipe, ...newRecipe}
+      ), 
+      initialRender: false,
+      buttonRender: false, 
+      recipeBtnClick: true,
+      add: false,
+      counter: 0
     } 
-    )) */
-
+    ))  
   }
 
   remove(id){
     console.log("remove is running")
     console.log(id);
     this.setState(prevState => ({
-      recipes: prevState.recipes.filter(recipe => recipe.id !== id)
+      recipes: prevState.recipes.filter(recipe => recipe.id !== id),
+      initialRender: true,
+      buttonRender: false, 
+      recipeBtnClick: false,
+      add: false,
+      counter: 0
     }))
   }
 
-  eachRecipe(item, i){
-    console.log(item);
-    return (
-      <Editbtn key={item.id} index={item.id} values={this.state.recipes} onChange={this.update} onRemove={this.remove}>{item.dish}{item.servings}{item.cooking_time}{item.ingredients}{item.directions}</Editbtn>
-    )
-  }
-
   render() {
+    var lastValue = this.state.recipes;
+    var data = lastValue[lastValue.length -1];
     return [
-          <div key={guidGenerator()} className="recipes">
-            {this.state.recipes.map(this.eachRecipe)}
-            <button key={guidGenerator()} onClick={this.add.bind(null, "Next Note")} id="add">Add</button>
-          </div>
+      <div id="left-pane">
+        <div id="search">
+            <h2>Dishes</h2>
+            <input onChange={this.search} />
+            <button onClick={this.add.bind(null, "Next Note")}>Add</button>
+        </div>
+        <div id="results">
+        {this.state.search == "" ? <LeftPaneButtons values={this.state.recipes} changeButtons={this.changeButtonState} /> : <SearchResults /> }
+        </div>
+      </div>,
+      <div id="recipes-body">
+          <Editbtn value={this.state.buttonValue} onChange={this.update} onRemove={this.remove} clicked={this.state.recipeBtnClick} initialRender={this.state.initialRender} add={this.state.add} lastItem={data} resetState={this.resetStates} counter={this.state.counter}/>
+      </div> 
     ]
   }
 }
