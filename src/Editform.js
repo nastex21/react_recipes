@@ -6,8 +6,6 @@ constructor(props){
 }
 
 render(){
-    console.log("works!");
-
     return[
         <div id="header" className="formOutput">
                     <h2>{this.props.dish}</h2>

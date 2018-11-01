@@ -37,7 +37,7 @@ renderRecipe(){
                     <p>Directions: {this.props.directions}</p>
                 </div>,
                 <div id="buttons" className="recipeOutput">
-                    <button onClick={this.edit} id="edit">Edit</button><button onClick={this.remove} id="remove">Remove</button>
+                    <button onClick={this.edit} id="edit">Edit</button><button onClick={this.props.remove} id="remove">Remove</button>
                 </div>
     ]
 }
@@ -60,7 +60,7 @@ return [
                     <p>Directions: </p>
                 </div>,
                 <div id="buttons" className="recipeOutput">
-                    <button onClick={this.edit} id="edit">Edit</button><button onClick={this.remove} id="remove">Remove</button>
+                    <button onClick={this.edit} id="edit">Edit</button><button onClick={this.props.remove} id="remove">Remove</button>
                 </div>
 ]
 }
@@ -74,9 +74,6 @@ edit(){
 }
 
 render(){
-    console.log(this.props.initialRender);
-    console.log(this.props.recipeRender);
-    console.log(this.props.addRecipe);
     return (
         <>
         {this.props.initialRender == true ? this.initialRender() : this.props.recipeRender == true ? this.renderRecipe() : this.props.addRecipe == true ? this.renderAddedRecipe() : this.state.edit == true ? this.props.editThis():  null}

@@ -31,6 +31,7 @@ class App extends Component {
     this.editFunction = this.editFunction.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.save = this.save.bind(this);
+    this.remove = this.remove.bind(this);
     //onChange={this.search} goes in input
   }
 
@@ -57,11 +58,16 @@ class App extends Component {
   ]
     //if getData is empty then run the initialArr variable to fill it or run the fuction localState if it's not null
     getData === null ? this.setState({recipes: [...this.state.recipes, ...initialArr]}) : this.localSetState();
+
   }
 
   componentDidUpdate(prevProps, prevState){
     //set the local recipes that are stored
     localStorage.setItem('getRecipes', JSON.stringify(this.state.recipes));
+
+    if(this.state.editForm == true){
+      return this.editFunction();
+    }
     }
 
   //localSetState is ran when getData has actual data and used to populate the recipes array
@@ -83,32 +89,35 @@ class App extends Component {
           cooking_time: value[0].cooking_time,
           directions: value[0].directions,
           ingredients: value[0].ingredients,
+          addRecipe: false,
+          editForm: false,
           initialRender: false,
-          recipeRender: true,
-          editForm: false
+          recipeRender: true
         })
   }
 
   //function to add blank recipe card when button is clicked
   add(text){
     console.log(text);
-    var value = this.state.recipes;
 
     //add recipe to recipes array
-    this.setState(prevState => ({
+    this.setState({
       recipes: [
-        ...prevState.recipes,
+        ...this.state.recipes,
         {
           id: this.nextid(), //create new ID by running this function
-          dish: text
+          dish: text,
+          servings: "",
+          cooking_time: "",
+          ingredients: "",
+          directions: ""
         }
       ],
-  
       initialRender: false,
       recipeRender: false, 
-      addRecipe: true, 
-      editForm: false  
-    }))
+      editForm: false,
+      addRecipe: true
+    })
   }
 
   //used to create new IDs for recipes
@@ -147,7 +156,7 @@ class App extends Component {
   editFunction(){
     return[
       <>
-      <EditForm id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} handleInputChange={this.handleInputChange} save={this.save}/>
+      <EditForm id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} handleInputChange={this.handleInputChange} save={this.save} />
       </>
     ]
   }
@@ -166,9 +175,6 @@ class App extends Component {
   //save the editForm input values when "Save" button is clicked
   save(e){
     e.preventDefault();
-    console.log("SAVE!")
-    console.log(this.state.recipeHolder);
-    //...recipe, ...this.state.recipeHolder}
     let newRecipe = {
       id: this.state.id,
       dish: this.state.dish,
@@ -190,23 +196,31 @@ class App extends Component {
 
 }
 
+//remove recipe 
+remove(id){
+  this.setState(prevState => ({
+    recipes: prevState.recipes.filter(recipe => recipe.id !== this.state.id),
+      recipeRender: false, 
+      addRecipe: false, 
+      editForm: false,
+      initialRender: true
+  }))
+}
+
   render(){
-    console.log("YES")
-    console.log(this.state.recipes)
-    console.log(this.state.recipeHolder)
    return [
       <div id="left-pane">
         <div id="search">
             <h2>Dishes</h2>
             <input  />
-            <button onClick={this.add.bind(null, "Next Note")}>Add</button>
+            <button onClick={this.add.bind(null, "Add Your Dish")}>Add</button>
         </div>
         <div id="results">
         {this.state.search == "" ? <LeftPaneButtons values={this.state.recipes} recipeBtns={this.recipeBtn} /> : <SearchResults /> }
         </div>
       </div>,
       <div id="recipes-body">
-        <RenderRight initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} editForm={this.state.editForm} addRecipe={this.state.addRecipe} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} resetStates={this.resetAll} editThis={this.editFunction} />
+        <RenderRight initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} editForm={this.state.editForm} addRecipe={this.state.addRecipe} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} resetStates={this.resetAll} editThis={this.editFunction} remove={this.remove} />
       </div> 
     ]
   }
