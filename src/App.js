@@ -3,6 +3,7 @@ import './App.css';
 import LeftPaneButtons from "./leftpaneButtons"; 
 import SearchResults from "./searchResults"; 
 import RenderRight from "./RenderBody"; 
+import EditForm from "./Editform";
 import { guidGenerator } from "./generateuniqkey";
 
 class App extends Component {
@@ -131,9 +132,12 @@ class App extends Component {
     })
   }
 
+  //run the EditForm componet when triggered
   editFunction(){
     return[
-      <p>WORKS!</p>
+      <>
+      <EditForm value={this.state.recipeHolder} />
+      </>
     ]
   }
 
