@@ -156,7 +156,6 @@ class App extends Component {
       buttonRender: false, 
       recipeBtnClick: true,
       add: false,
-      counter: 0
     } 
     ))  
   }
