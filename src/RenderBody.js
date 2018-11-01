@@ -20,23 +20,21 @@ initialRender(){
 }
 
 renderRecipe(){
-var item = this.props.value[0];
-console.log(this.props)
     return[
                 <div id="dish" className="recipeOutput">
-                    <h2>{item.dish}</h2>
+                    <h2>{this.props.dish}</h2>
                 </div>,
                 <div id="servings" className="recipeOutput">
-                    <p>Servings: {item.servings}</p>
+                    <p>Servings: {this.props.servings}</p>
                 </div>,
                 <div id="cooking_time" className="recipeOutput">
-                    <p>Cooking Time: {item.cooking_time}</p>
+                    <p>Cooking Time: {this.props.cooking_time}</p>
                 </div>, 
                 <div id="ingredients" className="recipeOutput">
-                    <p>Ingredients: {item.ingredients}</p>
+                    <p>Ingredients: {this.props.ingredients}</p>
                 </div>,
                 <div id="directions" className="recipeOutput">
-                    <p>Directions: {item.directions}</p>
+                    <p>Directions: {this.props.directions}</p>
                 </div>,
                 <div id="buttons" className="recipeOutput">
                     <button onClick={this.edit} id="edit">Edit</button><button onClick={this.remove} id="remove">Remove</button>
@@ -79,7 +77,6 @@ render(){
     console.log(this.props.initialRender);
     console.log(this.props.recipeRender);
     console.log(this.props.addRecipe);
-    console.log(this.renderAddedRecipe)
     return (
         <>
         {this.props.initialRender == true ? this.initialRender() : this.props.recipeRender == true ? this.renderRecipe() : this.props.addRecipe == true ? this.renderAddedRecipe() : this.state.edit == true ? this.props.editThis():  null}

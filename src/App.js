@@ -15,7 +15,12 @@ class App extends Component {
       addRecipe: false, //recipe is added
       editForm: false, // render edit form when edit button is clicked
       recipes: [], //hold recipe collection
-      recipeHolder: [], //hold single recipe to render
+      id: "",
+      dish: "",
+      servings: "",
+      cooking_time: "",
+      ingredients: "",
+      directions: "", 
       search: "" //hold search value
     }
 
@@ -55,7 +60,6 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    console.log(this.state.recipeHolder);
     //set the local recipes that are stored
     localStorage.setItem('getRecipes', JSON.stringify(this.state.recipes));
     }
@@ -73,7 +77,12 @@ class App extends Component {
       var value = this.state.recipes.filter(item => item.dish == event.target.value);
       console.log(value)
       this.setState({
-          recipeHolder: [...value],
+          id: value[0].id,
+          dish: value[0].dish,
+          servings: value[0].servings,
+          cooking_time: value[0].cooking_time,
+          directions: value[0].directions,
+          ingredients: value[0].ingredients,
           initialRender: false,
           recipeRender: true,
           editForm: false
@@ -138,7 +147,7 @@ class App extends Component {
   editFunction(){
     return[
       <>
-      <EditForm value={this.state.recipeHolder} handleInputChange={this.handleInputChange} save={this.save}/>
+      <EditForm id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} handleInputChange={this.handleInputChange} save={this.save}/>
       </>
     ]
   }
@@ -150,12 +159,8 @@ class App extends Component {
     const name = target.name;
 
     this.setState({
-      recipeHolder: [{
         [name]: value
-      }]
     });
-
-    console.log(this.state.recipeHolder);
   }
 
   //save the editForm input values when "Save" button is clicked
@@ -164,9 +169,17 @@ class App extends Component {
     console.log("SAVE!")
     console.log(this.state.recipeHolder);
     //...recipe, ...this.state.recipeHolder}
+    let newRecipe = {
+      id: this.state.id,
+      dish: this.state.dish,
+      servings: this.state.servings,
+      cooking_time: this.state.cooking_time,
+      ingredients: this.state.ingredients,
+      directions: this.state.directions
+  }
     this.setState(prevState => ( {
       recipes: prevState.recipes.map(
-        recipe => (recipe.id !== this.state.recipeHolder[0].id) ? recipe : {...recipe, ...this.state.RecipeHolder}
+        recipe => (recipe.id !== this.state.id) ? recipe : {...recipe, ...newRecipe}
       ), 
       initialRender: false,
       addRecipe: false,
@@ -193,7 +206,7 @@ class App extends Component {
         </div>
       </div>,
       <div id="recipes-body">
-        <RenderRight initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} editForm={this.state.editForm} addRecipe={this.state.addRecipe} value={this.state.recipeHolder} resetStates={this.resetAll} editThis={this.editFunction} />
+        <RenderRight initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} editForm={this.state.editForm} addRecipe={this.state.addRecipe} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} resetStates={this.resetAll} editThis={this.editFunction} />
       </div> 
     ]
   }
