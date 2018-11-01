@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       initialRender: true, //what to render when app is first loaded
       recipeRender: false, //render recipe 
+      addRecipe: false, //recipe is added
       editForm: false, // render edit form when edit button is clicked
       recipes: [], //hold recipe collection
       recipeHolder: [], //hold single recipe to render
@@ -18,7 +19,10 @@ class App extends Component {
     }
 
     this.recipeBtn = this.recipeBtn.bind(this);
-    //onClick={this.add.bind(null, "Next Note")} goes in button Add
+    this.add = this.add.bind(this);
+    this.nextid = this.nextid.bind(this);
+    this.resetAll = this.resetAll.bind(this);
+    this.editFunction = this.editFunction.bind(this);
     //onChange={this.search} goes in input
   }
 
@@ -64,13 +68,73 @@ class App extends Component {
     //if recipe button is pressed, run this
   recipeBtn(event){
       var value = this.state.recipes.filter(item => item.dish == event.target.value);
-  
+      console.log(value)
       this.setState({
           recipeHolder: [...value],
           initialRender: false,
           recipeRender: true,
           editForm: false
         })
+  }
+
+  //function to add blank recipe card when button is clicked
+  add(text){
+    console.log(text);
+    var value = this.state.recipes;
+
+    //add recipe to recipes array
+    this.setState(prevState => ({
+      recipes: [
+        ...prevState.recipes,
+        {
+          id: this.nextid(), //create new ID by running this function
+          dish: text
+        }
+      ],
+  
+      initialRender: false,
+      recipeRender: false, 
+      addRecipe: true, 
+      editForm: false  
+    }))
+  }
+
+  //used to create new IDs for recipes
+   nextid(){
+    const idList = this.state.recipes.map(i => i.id);
+    var num = 0;
+
+    var returnID = function(){
+      var check = idList.indexOf(num);
+
+      if (check === -1){
+        return num;
+      } else {
+        num++;
+        console.log(num);
+        returnID();
+      }
+      return num;
+    }
+    
+    return returnID();
+    
+  }
+
+  //reset all checks for edit function
+  resetAll(){
+    this.setState({
+      initialRender: false,
+      recipeRender: false, 
+      addRecipe: false,
+      editForm: false
+    })
+  }
+
+  editFunction(){
+    return[
+      <p>WORKS!</p>
+    ]
   }
 
   render(){
@@ -81,14 +145,14 @@ class App extends Component {
         <div id="search">
             <h2>Dishes</h2>
             <input  />
-            <button >Add</button>
+            <button onClick={this.add.bind(null, "Next Note")}>Add</button>
         </div>
         <div id="results">
         {this.state.search == "" ? <LeftPaneButtons values={this.state.recipes} recipeBtns={this.recipeBtn} /> : <SearchResults /> }
         </div>
       </div>,
       <div id="recipes-body">
-        <RenderRight initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} editForm={this.state.editForm} value={this.state.recipeHolder}/>
+        <RenderRight initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} editForm={this.state.editForm} addRecipe={this.state.addRecipe} value={this.state.recipeHolder} resetStates={this.resetAll} editThis={this.editFunction} />
       </div> 
     ]
   }
