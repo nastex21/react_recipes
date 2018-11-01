@@ -7,7 +7,7 @@ constructor(props){
 
 render(){
     console.log("works!");
-    var item = this.props.value;
+    var item = this.props.value[0];
     console.log(item);
     return[
         <div id="header" className="formOutput">

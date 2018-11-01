@@ -15,7 +15,7 @@ class App extends Component {
       addRecipe: false, //recipe is added
       editForm: false, // render edit form when edit button is clicked
       recipes: [], //hold recipe collection
-      recipeHolder: "", //hold single recipe to render
+      recipeHolder: [], //hold single recipe to render
       search: "" //hold search value
     }
 
@@ -25,6 +25,7 @@ class App extends Component {
     this.resetAll = this.resetAll.bind(this);
     this.editFunction = this.editFunction.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.save = this.save.bind(this);
     //onChange={this.search} goes in input
   }
 
@@ -72,7 +73,7 @@ class App extends Component {
       var value = this.state.recipes.filter(item => item.dish == event.target.value);
       console.log(value)
       this.setState({
-          recipeHolder: {...value},
+          recipeHolder: [...value],
           initialRender: false,
           recipeRender: true,
           editForm: false
@@ -137,7 +138,7 @@ class App extends Component {
   editFunction(){
     return[
       <>
-      <EditForm value={this.state.recipeHolder} handleInputChange={this.handleInputChange}/>
+      <EditForm value={this.state.recipeHolder} handleInputChange={this.handleInputChange} save={this.save}/>
       </>
     ]
   }
@@ -149,9 +150,9 @@ class App extends Component {
     const name = target.name;
 
     this.setState({
-      recipeHolder: {
+      recipeHolder: [{
         [name]: value
-      }
+      }]
     });
 
     console.log(this.state.recipeHolder);
@@ -160,11 +161,12 @@ class App extends Component {
   //save the editForm input values when "Save" button is clicked
   save(e){
     e.preventDefault();
-    console.log("RECIPEHOLDER: " + this.state.recipeHolder);
-
+    console.log("SAVE!")
+    console.log(this.state.recipeHolder);
+    //...recipe, ...this.state.recipeHolder}
     this.setState(prevState => ( {
       recipes: prevState.recipes.map(
-        recipe => (recipe.id !== this.state.recipeHolder.id) ? recipe : {...recipe, ...this.state.recipeHolder}
+        recipe => (recipe.id !== this.state.recipeHolder[0].id) ? recipe : {...recipe, ...this.state.RecipeHolder}
       ), 
       initialRender: false,
       addRecipe: false,
@@ -177,6 +179,7 @@ class App extends Component {
 
   render(){
     console.log("YES")
+    console.log(this.state.recipes)
     console.log(this.state.recipeHolder)
    return [
       <div id="left-pane">
@@ -190,7 +193,7 @@ class App extends Component {
         </div>
       </div>,
       <div id="recipes-body">
-        <RenderRight initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} editForm={this.state.editForm} addRecipe={this.state.addRecipe} value={this.state.recipeHolder} resetStates={this.resetAll} editThis={this.editFunction} save={this.save} />
+        <RenderRight initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} editForm={this.state.editForm} addRecipe={this.state.addRecipe} value={this.state.recipeHolder} resetStates={this.resetAll} editThis={this.editFunction} />
       </div> 
     ]
   }

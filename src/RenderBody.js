@@ -21,6 +21,7 @@ initialRender(){
 
 renderRecipe(){
 var item = this.props.value[0];
+console.log(this.props)
     return[
                 <div id="dish" className="recipeOutput">
                     <h2>{item.dish}</h2>
