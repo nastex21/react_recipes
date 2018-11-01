@@ -12,7 +12,7 @@ class LeftPaneButtons extends Component {
         var elements = [];
         dishesValues.forEach((item, index) => {
             console.log(item);
-            elements.push(<div key={index} className="recipeNames"><input type="button" defaultValue={item.dish} onClick={this.props.changeButtons} /></div>)
+            elements.push(<div key={index} className="recipeNames"><input type="button" defaultValue={item.dish} onClick={this.props.recipeBtns} /></div>)
             
         })
         return elements;
