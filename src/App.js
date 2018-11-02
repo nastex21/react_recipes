@@ -76,6 +76,17 @@ class App extends Component {
 
     //if recipe button is pressed, run this
   recipeBtn(event){
+//NEED TO FIGURE OUT HOW NOT TO USE item.dish AND USE SOMETHING LIKE item.id
+//the remove function works great, how to use it in this case as well
+/*     remove(id){
+      this.setState(prevState => ({
+        recipes: prevState.recipes.filter(recipe => recipe.id !== this.state.id),
+          recipeRender: false, 
+          addRecipe: false, 
+          editForm: false,
+          initialRender: true,
+      }))
+    } */
       var value = this.state.recipes.filter(item => item.dish == event.target.value);
       console.log(value)
       this.setState({
@@ -96,26 +107,29 @@ class App extends Component {
   add(text){
     console.log(text);
 
+    console.log(this.state.addCounter)
 
     //add recipe to recipes array
+
     this.setState({
       recipes: [
         ...this.state.recipes,
         {
+          id: this.nextid(), //create new ID by running this function,
           dish: text,
           servings: "",
           cooking_time: "",
           ingredients: "",
           directions: "",
-          id: this.nextid() //create new ID by running this function
         }
       ],
       addRecipe: false,
       recipeRender: false,
       editForm: false,
-      initialRender: true
+      initialRender: true,
     })
-  }
+  } 
+  
 
   //used to create new IDs for recipes
    nextid(){

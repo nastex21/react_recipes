@@ -15,13 +15,13 @@ class RenderRight extends Component {
 
 initialRender(){
     return [
-        <p>This is a placeholder.</p>
+        <p key={guidGenerator}>This is a placeholder.</p>
     ]
 }
 
 renderRecipe(){
     return[
-                <div id="dish" className="recipeOutput">
+                <div id="recipeName" className="recipeOutput">
                     <h2>{this.props.dish}</h2>
                 </div>,
                 <div id="servings" className="recipeOutput">
@@ -44,7 +44,7 @@ renderRecipe(){
 
 renderAddedRecipe(){
 return [
-                <div id="dish" className="recipeOutput">
+                <div id="recipeName" className="recipeOutput">
                     <h2>Add Your Dish</h2>
                 </div>,
                 <div id="servings" className="recipeOutput">
