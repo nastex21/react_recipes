@@ -64,7 +64,6 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState){
     //set the local recipes that are stored
     localStorage.setItem('getRecipes', JSON.stringify(this.state.recipes));
-
     }
 
   //localSetState is ran when getData has actual data and used to populate the recipes array
@@ -97,6 +96,7 @@ class App extends Component {
   add(text){
     console.log(text);
 
+
     //add recipe to recipes array
     this.setState({
       recipes: [
@@ -110,25 +110,29 @@ class App extends Component {
           id: this.nextid() //create new ID by running this function
         }
       ],
-      initialRender: false,
+      addRecipe: false,
+      recipeRender: false,
       editForm: false,
-      recipeRender: true
+      initialRender: true
     })
   }
 
   //used to create new IDs for recipes
    nextid(){
     const idList = this.state.recipes.map(i => i.id);
+    console.log(idList);
     var num = 0;
 
     var returnID = function(){
       var check = idList.indexOf(num);
 
       if (check === -1){
+        console.log("this one, -1");
+        console.log("num: " + num)
         return num;
       } else {
         num++;
-        console.log(num);
+        console.log("num: " + num);
         returnID();
       }
       return num;
@@ -179,6 +183,7 @@ class App extends Component {
       ingredients: this.state.ingredients,
       directions: this.state.directions
   }
+  console.log(this.state.id)
     this.setState(prevState => ( {
       recipes: prevState.recipes.map(
         recipe => (recipe.id !== this.state.id) ? recipe : {...recipe, ...newRecipe}
@@ -199,7 +204,7 @@ remove(id){
       recipeRender: false, 
       addRecipe: false, 
       editForm: false,
-      initialRender: true
+      initialRender: true,
   }))
 }
 
