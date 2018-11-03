@@ -3,14 +3,29 @@ import React, { Component } from 'react';
 class SearchResults extends Component {
     constructor(props){
         super(props);
-        this.renderInitial = this.renderInitial.bind(this);
+        this.resultsSearch = this.resultsSearch.bind(this);
+        this.debouncedBuildResults = this.debouncedBuildResults.bind(this);
     }
 
     sendToBtns(event, id){
         this.props.recipeBtns(event, id);
     }
 
-    renderInitial(){
+    debouncedBuildResults(){
+
+        console.log("working")
+   /*  debounce(function(e) {
+        schResults.innerHTML = "";
+        if (e.target.value.length < 3) {
+            return;
+        }
+        for (var i = 0; i < SETTINGS.resultsLimit; i++) {
+            buildResults(e.target.value, data[i]);
+        }
+    }, 250); */
+}
+
+    resultsSearch(){
         var dishesValues = this.props.value;
         console.log(dishesValues);
        /*  var elements = [];
@@ -24,7 +39,7 @@ class SearchResults extends Component {
     }
 
     render(){
-        return this.renderInitial();
+        return this.resultsSearch();
     }
 }
 

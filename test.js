@@ -1,6 +1,6 @@
 var string = "banana";
 string = string.toLowerCase();
-var test = "ana"
+var test = "an"
 test = test.toLowerCase();
 
 for (var i = 0; i < string.length; i++){

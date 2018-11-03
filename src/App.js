@@ -17,13 +17,13 @@ class App extends Component {
       search: false, //boolean for search and how to render
       recipes: [], //hold recipe collection
       searchValue: "",
+      results: [], // used to hold results of search
       id: "",
       dish: "",
       servings: "",
       cooking_time: "",
       ingredients: "",
       directions: "", 
-      search: "" //hold search value
     }
 
     this.recipeBtn = this.recipeBtn.bind(this);
@@ -227,6 +227,39 @@ this.setState({
 })
 console.log(value);
 console.log(this.state.searchValue)
+
+function debounce(func, wait, immediate) {
+  var timeout;
+  return function() {
+      var context = this, args = arguments;
+      var later = function() {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+  };
+}
+
+var SETTINGS = {
+  resultsLimit: 20,
+};
+
+var debouncedBuildResults = debounce(function(e) {
+
+  //schResults.innerHTML = "";
+  if (e.target.value.length < 3) {
+      return;
+  }
+  for (var i = 0; i < SETTINGS.resultsLimit; i++) {
+      buildResults(e.target.value, data[i]);
+  }
+}, 250);
+
+debouncedBuildResults(event);
+
 }
 
   render(){
