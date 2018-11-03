@@ -76,10 +76,7 @@ class App extends Component {
 
     //if recipe button is pressed, run this
   recipeBtn(id, event){
-  console.log(event);
-  console.log(id)
-      var value = this.state.recipes.filter(item => item.dish == event.target.value);
-      console.log(value)
+      var value = this.state.recipes.filter(item => item.id == id);
       this.setState({
           id: value[0].id,
           dish: value[0].dish,
@@ -96,12 +93,8 @@ class App extends Component {
 
   //function to add blank recipe card when button is clicked
   add(text){
-    console.log(text);
-
-    console.log(this.state.addCounter)
-
+    
     //add recipe to recipes array
-
     this.setState({
       recipes: [
         ...this.state.recipes,
@@ -125,19 +118,15 @@ class App extends Component {
   //used to create new IDs for recipes
    nextid(){
     const idList = this.state.recipes.map(i => i.id);
-    console.log(idList);
     var num = 0;
 
     var returnID = function(){
       var check = idList.indexOf(num);
 
       if (check === -1){
-        console.log("this one, -1");
-        console.log("num: " + num)
         return num;
       } else {
         num++;
-        console.log("num: " + num);
         returnID();
       }
       return num;
@@ -188,7 +177,6 @@ class App extends Component {
       ingredients: this.state.ingredients,
       directions: this.state.directions
   }
-  console.log(this.state.id)
     this.setState(prevState => ( {
       recipes: prevState.recipes.map(
         recipe => (recipe.id !== this.state.id) ? recipe : {...recipe, ...newRecipe}
@@ -204,7 +192,6 @@ class App extends Component {
 
 //remove recipe 
 remove(id){
-  console.log(id);
   this.setState(prevState => ({
     recipes: prevState.recipes.filter(recipe => recipe.id !== this.state.id),
       recipeRender: false, 
