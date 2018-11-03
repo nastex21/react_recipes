@@ -14,8 +14,9 @@ class App extends Component {
       recipeRender: false, //render recipe 
       addRecipe: false, //recipe is added
       editForm: false, // render edit form when edit button is clicked
-      search: false,
+      search: false, //boolean for search and how to render
       recipes: [], //hold recipe collection
+      searchValue: "",
       id: "",
       dish: "",
       servings: "",
@@ -209,7 +210,7 @@ remove(id){
 
 //changes the state of search when triggered
 changeSearchState(event){
-if (this.state.search == ""){
+ if (this.state.search == ""){
   this.setState({
     recipeRender: false, 
     addRecipe: false, 
@@ -217,13 +218,15 @@ if (this.state.search == ""){
     initialRender: false,
     search: true
   })
-}
+} 
 
 const target = event.target;
 const value = target.value;
-
+this.setState({
+  searchValue: value
+})
 console.log(value);
-
+console.log(this.state.searchValue)
 }
 
   render(){
@@ -231,11 +234,11 @@ console.log(value);
       <div id="left-pane">
         <div id="search">
             <h2>Dishes</h2>
-            <input onChange={this.changeSearchState}  />
+            <input onChange={this.changeSearchState} />
             <button onClick={this.add.bind(null, "Add Your Dish")}>Add</button>
         </div>
         <div id="results">
-        {this.state.search == "" ? <LeftPaneButtons values={this.state.recipes} recipeBtns={this.recipeBtn} /> : <SearchResults /> }
+        {this.state.search == "" ? <LeftPaneButtons values={this.state.recipes} recipeBtns={this.recipeBtn} /> : <SearchResults value={this.state.searchValue} /> }
         </div>
       </div>,
       <div id="recipes-body">

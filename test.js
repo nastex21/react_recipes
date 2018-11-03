@@ -1,18 +1,13 @@
-var arr = [0, 1]
-var num = 0;
+var string = "banana";
+string = string.toLowerCase();
+var test = "ana"
+test = test.toLowerCase();
 
-var x = function () {
-  var check = arr.indexOf(num);
-  console.log(check);
-
-  if (check === -1){
-      return num
-  } else {
-      num++;
-      console.log(num);
-      x();
-  }
-  return num;
+for (var i = 0; i < string.length; i++){
+    for (var j = 0; j < test.length; j++){
+        if (test[j] == string[i]){
+            console.log(string);
+        } 
+    }
 }
 
-console.log(x());
