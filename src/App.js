@@ -4,6 +4,7 @@ import LeftPaneButtons from "./leftpaneButtons";
 import SearchResults from "./searchResults"; 
 import RenderRight from "./RenderBody"; 
 import EditForm from "./Editform";
+import Autosuggest from 'react-autosuggest';
 import { guidGenerator } from "./generateuniqkey";
 
 class App extends Component {
@@ -35,6 +36,7 @@ class App extends Component {
     this.save = this.save.bind(this);
     this.remove = this.remove.bind(this);
     this.changeSearchState = this.changeSearchState.bind(this);
+    this.getInfo = this.getInfo.bind(this);
   }
 
   componentWillMount(){
@@ -208,58 +210,37 @@ remove(id){
   }))
 }
 
+getInfo(){
+
+}
+
 //changes the state of search when triggered
-changeSearchState(event){
- if (this.state.search == ""){
+changeSearchState(){
+ if (this.search.value !== ""){
   this.setState({
     recipeRender: false, 
     addRecipe: false, 
     editForm: false,
     initialRender: false,
+    searchValue: this.search.value,
     search: true
-  })
-} 
-
-const target = event.target;
-const value = target.value;
-this.setState({
-  searchValue: value
+  }, () => {
+    if (this.state.searchValue && this.state.searchValue.length > 1) {
+      if (this.state.searchValue.length % 2 === 0) {
+        this.getInfo()
+      }
+    } else if (!this.state.searchValue) {
+    }
 })
-console.log(value);
-console.log(this.state.searchValue)
-
-function debounce(func, wait, immediate) {
-  var timeout;
-  return function() {
-      var context = this, args = arguments;
-      var later = function() {
-          timeout = null;
-          if (!immediate) func.apply(context, args);
-      };
-      var callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
-  };
+} else {
+  this.setState({
+    recipeRender: false, 
+    addRecipe: false, 
+    editForm: false,
+    initialRender: false,
+    search: false
+  })
 }
-
-var SETTINGS = {
-  resultsLimit: 20,
-};
-
-var debouncedBuildResults = debounce(function(e) {
-
-  //schResults.innerHTML = "";
-  if (e.target.value.length < 3) {
-      return;
-  }
-  for (var i = 0; i < SETTINGS.resultsLimit; i++) {
-      buildResults(e.target.value, data[i]);
-  }
-}, 250);
-
-debouncedBuildResults(event);
-
 }
 
   render(){
@@ -267,7 +248,7 @@ debouncedBuildResults(event);
       <div id="left-pane">
         <div id="search">
             <h2>Dishes</h2>
-            <input onChange={this.changeSearchState} />
+            <input ref={input => this.search = input} onChange={this.changeSearchState} />
             <button onClick={this.add.bind(null, "Add Your Dish")}>Add</button>
         </div>
         <div id="results">
