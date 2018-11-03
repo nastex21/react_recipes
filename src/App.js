@@ -14,6 +14,7 @@ class App extends Component {
       recipeRender: false, //render recipe 
       addRecipe: false, //recipe is added
       editForm: false, // render edit form when edit button is clicked
+      search: false,
       recipes: [], //hold recipe collection
       id: "",
       dish: "",
@@ -32,7 +33,7 @@ class App extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.save = this.save.bind(this);
     this.remove = this.remove.bind(this);
-    //onChange={this.search} goes in input
+    this.changeSearchState = this.changeSearchState.bind(this);
   }
 
   componentWillMount(){
@@ -87,13 +88,14 @@ class App extends Component {
           addRecipe: false,
           editForm: false,
           initialRender: false,
+          search: false,
           recipeRender: true
         })
   }
 
   //function to add blank recipe card when button is clicked
   add(text){
-    
+
     //add recipe to recipes array
     this.setState({
       recipes: [
@@ -110,6 +112,7 @@ class App extends Component {
       addRecipe: false,
       recipeRender: false,
       editForm: false,
+      search: false,
       initialRender: true,
     })
   } 
@@ -142,6 +145,7 @@ class App extends Component {
       initialRender: false,
       addRecipe: false,
       editForm: false,
+      search: false,
       recipeRender: false
     })
   }
@@ -155,7 +159,7 @@ class App extends Component {
     ]
   }
 
-  //handle input chnage from <Editform />
+  //handle input change from <Editform />
   handleInputChange(event){
     const target = event.target;
     const value = target.value;
@@ -184,6 +188,7 @@ class App extends Component {
       initialRender: false,
       addRecipe: false,
       editForm: false,
+      search: false,
       recipeRender: true
     } 
     ))  
@@ -197,8 +202,28 @@ remove(id){
       recipeRender: false, 
       addRecipe: false, 
       editForm: false,
+      search: false,
       initialRender: true,
   }))
+}
+
+//changes the state of search when triggered
+changeSearchState(event){
+if (this.state.search == ""){
+  this.setState({
+    recipeRender: false, 
+    addRecipe: false, 
+    editForm: false,
+    initialRender: false,
+    search: true
+  })
+}
+
+const target = event.target;
+const value = target.value;
+
+console.log(value);
+
 }
 
   render(){
@@ -206,7 +231,7 @@ remove(id){
       <div id="left-pane">
         <div id="search">
             <h2>Dishes</h2>
-            <input  />
+            <input onChange={this.changeSearchState}  />
             <button onClick={this.add.bind(null, "Add Your Dish")}>Add</button>
         </div>
         <div id="results">
@@ -221,4 +246,4 @@ remove(id){
   }
 }
 
-export default App;
+export default App; 

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class SearchResults extends Component {
 
     render(){
-        return null;
+        return console.log("yep")
     }
 }
 
