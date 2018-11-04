@@ -36,11 +36,7 @@ class App extends Component {
     this.save = this.save.bind(this);
     this.remove = this.remove.bind(this);
     this.changeSearchState = this.changeSearchState.bind(this);
-<<<<<<< HEAD
     this.changeBack = this.changeBack.bind(this);
-=======
-    this.getInfo = this.getInfo.bind(this);
->>>>>>> 0617d8d5e56977b56774c54f60a50a8d7bfab6db
   }
 
   componentWillMount(){
@@ -84,6 +80,7 @@ class App extends Component {
 
     //if recipe button is pressed, run this
   recipeBtn(id, event){
+    console.log('triggered')
       var value = this.state.recipes.filter(item => item.id == id);
       this.setState({
           id: value[0].id,
@@ -214,27 +211,16 @@ remove(id){
   }))
 }
 
-getInfo(){
-
-}
-
 //changes the state of search when triggered
 changeSearchState(){
-<<<<<<< HEAD
-=======
- if (this.search.value !== ""){
->>>>>>> 0617d8d5e56977b56774c54f60a50a8d7bfab6db
   this.setState({
     recipeRender: false, 
     addRecipe: false, 
     editForm: false,
     initialRender: false,
-    searchValue: this.search.value,
     search: true
-<<<<<<< HEAD
   })
 }
-
 //change back to recipe buttons when out of focus
 changeBack(){
   console.log("change back")
@@ -245,38 +231,18 @@ changeBack(){
     initialRender: true,
     search: false
   })
-=======
-  }, () => {
-    if (this.state.searchValue && this.state.searchValue.length > 1) {
-      if (this.state.searchValue.length % 2 === 0) {
-        this.getInfo()
-      }
-    } else if (!this.state.searchValue) {
-    }
-})
-} else {
-  this.setState({
-    recipeRender: false, 
-    addRecipe: false, 
-    editForm: false,
-    initialRender: false,
-    search: false
-  })
-}
->>>>>>> 0617d8d5e56977b56774c54f60a50a8d7bfab6db
-}
+  } 
 
+  
   render(){
     console.log(this.state.recipes);
    return [
       <div id="left-pane">
         <div id="search">
             <h2>Dishes</h2>
-            <input ref={input => this.search = input} onChange={this.changeSearchState} />
-            <button onClick={this.add.bind(null, "Add Your Dish")}>Add</button>
         </div>
         <div id="results">
-        <SearchResults value={this.state.recipes} input={this.state.searchValue} recipeBtn={this.recipeBtn} searchTrue={this.changeSearchState} renderNew={this.changeBack}/>
+        <SearchResults value={this.state.recipes} input={this.state.searchValue} recipeBtn={this.recipeBtn} searchTrue={this.changeSearchState} renderNew={this.changeBack}/> <button onClick={this.add.bind(null, "Add Your Dish")}>Add</button>
         {this.state.search == false ? <LeftPaneButtons values={this.state.recipes} recipeBtns={this.recipeBtn} /> : null}
         </div>
       </div>,
