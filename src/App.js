@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import LeftPaneButtons from "./leftpaneButtons"; 
-import SearchResults from "./searchResults"; 
+import SearchResults  from "./searchResults"; 
 import RenderRight from "./RenderBody"; 
 import EditForm from "./Editform";
-import Autosuggest from 'react-autosuggest';
 import { guidGenerator } from "./generateuniqkey";
 
 class App extends Component {
@@ -35,8 +34,9 @@ class App extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.save = this.save.bind(this);
     this.remove = this.remove.bind(this);
-    this.changeSearchState = this.changeSearchState.bind(this);
-    this.changeBack = this.changeBack.bind(this);
+    this.userSelection = this.userSelection.bind(this);
+    this.focus = this.focus.bind(this);
+    this.editFormTrue = this.editFormTrue.bind(this);
   }
 
   componentWillMount(){
@@ -82,7 +82,7 @@ class App extends Component {
   recipeBtn(id, event){
     console.log('triggered')
       var value = this.state.recipes.filter(item => item.id == id);
-      this.setState({
+        this.setState({
           id: value[0].id,
           dish: value[0].dish,
           servings: value[0].servings,
@@ -95,7 +95,7 @@ class App extends Component {
           search: false,
           recipeRender: true
         })
-  }
+      }
 
   //function to add blank recipe card when button is clicked
   add(text){
@@ -189,13 +189,15 @@ class App extends Component {
       recipes: prevState.recipes.map(
         recipe => (recipe.id !== this.state.id) ? recipe : {...recipe, ...newRecipe}
       ), 
+    } 
+    ))  
+    this.setState({
       initialRender: false,
       addRecipe: false,
       editForm: false,
       search: false,
       recipeRender: true
-    } 
-    ))  
+    })
 
 }
 
@@ -211,29 +213,48 @@ remove(id){
   }))
 }
 
-//changes the state of search when triggered
-changeSearchState(){
-  this.setState({
-    recipeRender: false, 
-    addRecipe: false, 
-    editForm: false,
-    initialRender: false,
-    search: true
-  })
-}
-//change back to recipe buttons when out of focus
-changeBack(){
-  console.log("change back")
-  this.setState({
-    recipeRender: false, 
-    addRecipe: false, 
-    editForm: false,
-    initialRender: true,
-    search: false
-  })
-  } 
+userSelection(label, value){
+  var data = this.state.recipes.filter(item => item.id == value);
+  console.log(data);
 
-  
+  if (label == data.id){
+    return null
+  } else {
+    this.setState({
+      id: data[0].id,
+      dish: data[0].dish,
+      servings: data[0].servings,
+      cooking_time: data[0].cooking_time,
+      ingredients: data[0].ingredients,
+      directions: data[0].directions
+    })
+  }
+  if(this.state.search == false){
+    this.setState({
+      search: true,
+    })
+  }
+}
+
+focus(){
+  console.log("focus");
+  if(this.state.search == false){
+    this.setState({
+      recipeRender: false, 
+      addRecipe: false, 
+      editForm: false,
+      search: false,
+      initialRender: false,
+    })
+}
+}
+
+editFormTrue(){
+    this.setState({
+      editForm: true
+    })
+}
+
   render(){
     console.log(this.state.recipes);
    return [
@@ -242,13 +263,12 @@ changeBack(){
             <h2>Dishes</h2>
         </div>
         <div id="results">
-        <SearchResults value={this.state.recipes} input={this.state.searchValue} recipeBtn={this.recipeBtn} searchTrue={this.changeSearchState} renderNew={this.changeBack}/> <button onClick={this.add.bind(null, "Add Your Dish")}>Add</button>
-        {this.state.search == false ? <LeftPaneButtons values={this.state.recipes} recipeBtns={this.recipeBtn} /> : null}
+        <SearchResults values={this.state.recipes} userSelection={this.userSelection} focus={this.focus} /> <button onClick={this.add.bind(null, "Add Your Dish")}>Add</button>
+        {this.state.search == false ? <LeftPaneButtons values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
         </div>
       </div>,
       <div id="recipes-body">
-        <RenderRight initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} editForm={this.state.editForm} addRecipe={this.state.addRecipe} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} resetStates={this.resetAll} editThis={this.editFunction} remove={this.remove} />
-        {this.state.editForm ? this.editFunction() : null}
+        {this.state.editForm ? this.editFunction() : <RenderRight initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} addRecipe={this.state.addRecipe} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} resetStates={this.resetAll} remove={this.remove} search={this.state.search} edit={this.editFormTrue} />}
       </div> 
     ]
   }
