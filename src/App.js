@@ -4,6 +4,7 @@ import LeftPaneButtons from "./leftpaneButtons";
 import SearchResults from "./searchResults"; 
 import RenderRight from "./RenderBody"; 
 import EditForm from "./Editform";
+import Autosuggest from 'react-autosuggest';
 import { guidGenerator } from "./generateuniqkey";
 
 class App extends Component {
@@ -35,7 +36,11 @@ class App extends Component {
     this.save = this.save.bind(this);
     this.remove = this.remove.bind(this);
     this.changeSearchState = this.changeSearchState.bind(this);
+<<<<<<< HEAD
     this.changeBack = this.changeBack.bind(this);
+=======
+    this.getInfo = this.getInfo.bind(this);
+>>>>>>> 0617d8d5e56977b56774c54f60a50a8d7bfab6db
   }
 
   componentWillMount(){
@@ -209,14 +214,24 @@ remove(id){
   }))
 }
 
+getInfo(){
+
+}
+
 //changes the state of search when triggered
 changeSearchState(){
+<<<<<<< HEAD
+=======
+ if (this.search.value !== ""){
+>>>>>>> 0617d8d5e56977b56774c54f60a50a8d7bfab6db
   this.setState({
     recipeRender: false, 
     addRecipe: false, 
     editForm: false,
     initialRender: false,
+    searchValue: this.search.value,
     search: true
+<<<<<<< HEAD
   })
 }
 
@@ -230,6 +245,25 @@ changeBack(){
     initialRender: true,
     search: false
   })
+=======
+  }, () => {
+    if (this.state.searchValue && this.state.searchValue.length > 1) {
+      if (this.state.searchValue.length % 2 === 0) {
+        this.getInfo()
+      }
+    } else if (!this.state.searchValue) {
+    }
+})
+} else {
+  this.setState({
+    recipeRender: false, 
+    addRecipe: false, 
+    editForm: false,
+    initialRender: false,
+    search: false
+  })
+}
+>>>>>>> 0617d8d5e56977b56774c54f60a50a8d7bfab6db
 }
 
   render(){
@@ -238,7 +272,7 @@ changeBack(){
       <div id="left-pane">
         <div id="search">
             <h2>Dishes</h2>
-            <input onChange={this.changeSearchState} />
+            <input ref={input => this.search = input} onChange={this.changeSearchState} />
             <button onClick={this.add.bind(null, "Add Your Dish")}>Add</button>
         </div>
         <div id="results">
