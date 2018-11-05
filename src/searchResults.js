@@ -5,19 +5,27 @@ class SearchResults extends Component {
     constructor(props){
         super(props);
         this.state = {
-            recipes: []
+            recipes: [],
+            recipe:  []
         }
     }
 
-componentDidMount(){
+componentDidUpdate(prevState){
     var buildObject = this.props.values.map(recipe => ({
         label: recipe.dish,
         value: recipe.id
     }))
-
+    console.log(prevState.values.length)
+    console.log(this.state.recipes.length)
+  if(prevState.values.length !== this.state.recipes.length && this.state.recipes.length !== 0){
+    this.setState({
+        recipe: [...this.props.values]
+    })  
+  } else if (this.state.recipes.length == 0) {
     this.setState({
         recipes: [...buildObject]
     })  
+  }
 }
 
 render(){

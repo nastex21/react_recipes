@@ -16,7 +16,6 @@ class App extends Component {
       editForm: false, // render edit form when edit button is clicked
       search: false, //boolean for search and how to render
       recipes: [], //hold recipe collection
-      searchValue: "",
       results: [], // used to hold results of search
       id: "",
       dish: "",
@@ -213,9 +212,9 @@ remove(id){
   }))
 }
 
+//when user selects an option from the drop down suggestion menu, this gets triggered. It updates and renders the recipe they selected.
 userSelection(label, value){
   var data = this.state.recipes.filter(item => item.id == value);
-  console.log(data);
 
   if (label == data.id){
     return null
@@ -236,8 +235,8 @@ userSelection(label, value){
   }
 }
 
+//when user selects the input, this gets triggered. 
 focus(){
-  console.log("focus");
   if(this.state.search == false){
     this.setState({
       recipeRender: false, 
@@ -249,6 +248,7 @@ focus(){
 }
 }
 
+//sets the editForm state to true
 editFormTrue(){
     this.setState({
       editForm: true
