@@ -33,7 +33,7 @@ render(){
     return(
         <div className="app">
           <div className="container">
-            <Select options={ this.state.recipes }  onChange={opt => this.props.userSelection(opt.label, opt.value)} onFocus={this.props.focus} />
+            <Select options={ this.state.recipes }  onChange={opt => this.props.userSelection(opt.label, opt.value)} onFocus={this.props.focus} onBlur={this.props.isFocused} blurInputOnSelect={true} />
           </div>
         </div>
           )

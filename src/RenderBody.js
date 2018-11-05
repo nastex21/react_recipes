@@ -63,7 +63,6 @@ return [
 }
 
 render(){
-    console.log(this.props.search)
     return (
         <>
         {this.props.initialRender == true ? this.initialRender() : this.props.recipeRender == true ? this.renderRecipe() : this.props.addRecipe == true ? this.renderAddedRecipe() : this.props.search == true ? this.renderRecipe() : null}
