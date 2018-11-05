@@ -36,6 +36,7 @@ class App extends Component {
     this.userSelection = this.userSelection.bind(this);
     this.focus = this.focus.bind(this);
     this.editFormTrue = this.editFormTrue.bind(this);
+    this.searchValues = this.searchValues.bind(this);
   }
 
   componentWillMount(){
@@ -119,7 +120,6 @@ class App extends Component {
       initialRender: true,
     })
   } 
-  
 
   //used to create new IDs for recipes
    nextid(){
@@ -197,7 +197,6 @@ class App extends Component {
       search: false,
       recipeRender: true
     })
-
 }
 
 //remove recipe 
@@ -237,7 +236,9 @@ userSelection(label, value){
 
 //when user selects the input, this gets triggered. 
 focus(){
-  if(this.state.search == false){
+  console.log('focus')
+  if(this.state.editForm == true){
+    console.log("edit: true")
     this.setState({
       recipeRender: false, 
       addRecipe: false, 
@@ -245,9 +246,17 @@ focus(){
       search: false,
       initialRender: false,
     })
+  }else if(this.state.editForm == false){
+    console.log("edit: false")
+    this.setState({
+      recipeRender: false, 
+      addRecipe: false, 
+      editForm: false,
+      search: false,
+      initialRender: false,
+    })
+  }
 }
-}
-
 
 //sets the editForm state to true
 editFormTrue(){
@@ -256,15 +265,19 @@ editFormTrue(){
     })
 }
 
+//values for drop down select input
+searchValues(){
+  return this.state.recipes.map(item => ({ label: item.dish, value: item.id }));
+}
+
   render(){
-    console.log(this.state.recipes);
    return [
       <div id="left-pane">
         <div id="search">
             <h2>Dishes</h2>
         </div>
         <div id="results">
-        <SearchResults values={this.state.recipes} userSelection={this.userSelection} focus={this.focus}  /> <button onClick={this.add.bind(null, "Add Your Dish")}>Add</button>
+        <SearchResults values={this.searchValues()} userSelection={this.userSelection} focus={this.focus}  /> <button onClick={this.add.bind(null, "Add Your Dish")}>Add</button>
         {this.state.search == false ? <LeftPaneButtons values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
         </div>
       </div>,
