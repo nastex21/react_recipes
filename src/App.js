@@ -215,13 +215,16 @@ remove(id){
 }
 
 //when user selects an option from the drop down suggestion menu, this gets triggered. It updates and renders the recipe they selected.
-userSelection(label, value){
+userSelection(label, value, stateClear){
   var data = this.state.recipes.filter(item => item.id == value);
 
-  if (label == data.id){
-    return null
-  } else {
-    this.setState({
+/*   const value = datValue === null ? '' : datValue
+      this.setState({ value }); */
+  const labelFix = label === null ? '' : label;
+  console.log(stateClear);
+  console.log(labelFix)
+  console.log(data[0].dish)
+      this.setState({
       id: data[0].id,
       dish: data[0].dish,
       servings: data[0].servings,
@@ -229,8 +232,9 @@ userSelection(label, value){
       ingredients: data[0].ingredients,
       directions: data[0].directions
     })
-  }
+  
   if(this.state.search == false){
+    console.log("237")
     this.setState({
       search: true,
     })
