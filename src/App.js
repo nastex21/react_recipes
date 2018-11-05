@@ -4,6 +4,7 @@ import LeftPaneButtons from "./leftpaneButtons";
 import SearchResults  from "./searchResults"; 
 import RenderRight from "./RenderBody"; 
 import EditForm from "./Editform";
+import { FaPlus } from 'react-icons/fa';
 
 var myuniqueidcounter = 0;
 function uniqueId() {
@@ -218,18 +219,14 @@ remove(id){
 userSelection(sentValue){
 
 var value;
-console.log(sentValue)
   if (sentValue === null){
    value = ''
   } else {
     value = this.state.recipes.filter(item => item.id === sentValue.value);
-    console.log(value);
   }
 
 
 if (value !== ''){
-  console.log(value);
-  console.log("true")
   this.setState({
     id: value[0].id,
     dish: value[0].dish,
@@ -239,7 +236,6 @@ if (value !== ''){
     directions: value[0].directions
 })
 } else {
-  console.log("else")
   this.setState({
     id: '',
     dish: '',
@@ -259,7 +255,6 @@ if (value !== ''){
 
 //when user selects the input, this gets triggered. 
 focus(){
-  console.log("focus called")
   if(this.state.editForm === true){
     this.setState({
       recipeRender: false, 
@@ -288,7 +283,6 @@ editFormTrue(){
 
 //values for drop down select input
 searchValues(){
-  console.log("this one")
   //const value = chosenValue === null ? '' : chosenValue.value this.setState({ value });
   return this.state.recipes.map(item => ({ label: item.dish === null ? '' : item.dish, value: item.id }));
 }
@@ -300,7 +294,7 @@ searchValues(){
             <h2>Dishes</h2>
         </div>
         <div id="results">
-        <SearchResults values={this.searchValues()} userSelection={this.userSelection} focus={this.focus}  /> <button onClick={this.add.bind(null, "Add Your Dish")}>Add</button>
+        <SearchResults values={this.searchValues()} userSelection={this.userSelection} focus={this.focus}  /> <button onClick={this.add.bind(null, "Add Your Dish")}><FaPlus /></button>
         {this.state.search === false ? <LeftPaneButtons  values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
         </div>
       </div>,

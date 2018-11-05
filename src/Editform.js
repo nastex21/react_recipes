@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FaSave } from 'react-icons/fa';
 
 class EditForm extends Component {
 
@@ -25,7 +26,7 @@ render(){
                             <span>Directions: </span><textarea  rows="4" cols="50" name="directions" onChange={this.props.handleInputChange} defaultValue={this.props.directions} /><br />
                         </div>
                         <div  id="buttons" className="recipeOutput">
-                            <button id="save">SAVE</button>
+                            <button id="save"><FaSave /></button>
                         </div> 
                     </form>
                 </div>
