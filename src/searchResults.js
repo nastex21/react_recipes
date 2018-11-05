@@ -4,25 +4,25 @@ import Select from 'react-select';
     //opt => this.props.userSelection(opt.label, opt.value)
   type State = {
       isClearable: boolean,
-      blurInputOnSelect: boolean
+      blurInputOnSelect: boolean,
   };
 
   export default class SearchResults extends Component<*, State> {
     state = {
           isClearable: true,
-          blurInputOnSelect: true
+          blurInputOnSelect: true,
       };
  
   render(){
   const {
     isClearable,
-    blurInputOnSelect
+    blurInputOnSelect,
   } = this.state;
-  console.log(this.props.values)
+
     return(
         <div className="app">
           <div className="container">
-            <Select options={this.props.values} isClearable={isClearable} onFocus={this.props.focus} onChange={opt => this.props.userSelection(opt.label, opt.value, isClearable)} onBlur={this.props.isFocused} blurInputOnSelect={blurInputOnSelect} />
+            <Select options={this.props.values} isClearable={isClearable} onChange={this.props.userSelection} onFocus={this.props.focus}   onBlur={this.props.isFocused} blurInputOnSelect={blurInputOnSelect}/>
           </div>
         </div>
           )

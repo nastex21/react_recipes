@@ -84,7 +84,7 @@ class App extends Component {
 
     //if recipe button is pressed, run this
   recipeBtn(id, event){
-      var value = this.state.recipes.filter(item => item.id == id);
+      var value = this.state.recipes.filter(item => item.id === id);
         this.setState({
           id: value[0].id,
           dish: value[0].dish,
@@ -215,35 +215,52 @@ remove(id){
 }
 
 //when user selects an option from the drop down suggestion menu, this gets triggered. It updates and renders the recipe they selected.
-userSelection(label, value, stateClear){
-  var data = this.state.recipes.filter(item => item.id == value);
+userSelection(sentValue){
 
-/*   const value = datValue === null ? '' : datValue
-      this.setState({ value }); */
-  const labelFix = label === null ? '' : label;
-  console.log(stateClear);
-  console.log(labelFix)
-  console.log(data[0].dish)
-      this.setState({
-      id: data[0].id,
-      dish: data[0].dish,
-      servings: data[0].servings,
-      cooking_time: data[0].cooking_time,
-      ingredients: data[0].ingredients,
-      directions: data[0].directions
-    })
-  
-  if(this.state.search == false){
-    console.log("237")
+var value;
+console.log(sentValue)
+  if (sentValue === null){
+   value = ''
+  } else {
+    value = this.state.recipes.filter(item => item.id === sentValue.value);
+    console.log(value);
+  }
+
+
+if (value !== ''){
+  console.log(value);
+  console.log("true")
+  this.setState({
+    id: value[0].id,
+    dish: value[0].dish,
+    servings: value[0].servings,
+    cooking_time: value[0].cooking_time,
+    ingredients: value[0].ingredients,
+    directions: value[0].directions
+})
+} else {
+  console.log("else")
+  this.setState({
+    id: '',
+    dish: '',
+    servings: '',
+    cooking_time: '',
+    ingredients: '',
+    directions: ''
+})
+}
+      
+  if(this.state.search === false){
     this.setState({
       search: true,
     })
-  }
+  } 
 }
 
 //when user selects the input, this gets triggered. 
 focus(){
-  if(this.state.editForm == true){
+  console.log("focus called")
+  if(this.state.editForm === true){
     this.setState({
       recipeRender: false, 
       addRecipe: false, 
@@ -251,7 +268,7 @@ focus(){
       search: false,
       initialRender: false,
     })
-  }else if(this.state.editForm == false){
+  }else if(this.state.editForm === false){
     this.setState({
       recipeRender: false, 
       addRecipe: false, 
@@ -271,7 +288,9 @@ editFormTrue(){
 
 //values for drop down select input
 searchValues(){
-  return this.state.recipes.map(item => ({ label: item.dish, value: item.id }));
+  console.log("this one")
+  //const value = chosenValue === null ? '' : chosenValue.value this.setState({ value });
+  return this.state.recipes.map(item => ({ label: item.dish === null ? '' : item.dish, value: item.id }));
 }
 
   render(){
@@ -282,7 +301,7 @@ searchValues(){
         </div>
         <div id="results">
         <SearchResults values={this.searchValues()} userSelection={this.userSelection} focus={this.focus}  /> <button onClick={this.add.bind(null, "Add Your Dish")}>Add</button>
-        {this.state.search == false ? <LeftPaneButtons  values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
+        {this.state.search === false ? <LeftPaneButtons  values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
         </div>
       </div>,
       <div key={this.state.servings[0] !== "" ? this.state.servings[0] + this.state.id : this.state.id} id="recipes-body">
