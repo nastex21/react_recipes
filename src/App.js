@@ -4,7 +4,11 @@ import LeftPaneButtons from "./leftpaneButtons";
 import SearchResults  from "./searchResults"; 
 import RenderRight from "./RenderBody"; 
 import EditForm from "./Editform";
-import { guidGenerator } from "./generateuniqkey";
+
+var myuniqueidcounter = 0;
+function uniqueId() {
+  return myuniqueidcounter++;
+}
 
 class App extends Component {
   constructor(props){
@@ -80,7 +84,6 @@ class App extends Component {
 
     //if recipe button is pressed, run this
   recipeBtn(id, event){
-    console.log('triggered')
       var value = this.state.recipes.filter(item => item.id == id);
         this.setState({
           id: value[0].id,
@@ -155,11 +158,11 @@ class App extends Component {
 
   //run the EditForm componet when triggered
   editFunction(){
-    return[
-      <>
-      <EditForm id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} handleInputChange={this.handleInputChange} save={this.save} />
-      </>
-    ]
+    return(
+      <div key={this.state.dish[0] + this.state.id}>
+        <EditForm key={this.state.dish[1] + this.state.id} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} handleInputChange={this.handleInputChange} save={this.save} />
+      </div>
+    )
   }
 
   //handle input change from <Editform />
@@ -236,9 +239,7 @@ userSelection(label, value){
 
 //when user selects the input, this gets triggered. 
 focus(){
-  console.log('focus')
   if(this.state.editForm == true){
-    console.log("edit: true")
     this.setState({
       recipeRender: false, 
       addRecipe: false, 
@@ -247,7 +248,6 @@ focus(){
       initialRender: false,
     })
   }else if(this.state.editForm == false){
-    console.log("edit: false")
     this.setState({
       recipeRender: false, 
       addRecipe: false, 
@@ -278,11 +278,11 @@ searchValues(){
         </div>
         <div id="results">
         <SearchResults values={this.searchValues()} userSelection={this.userSelection} focus={this.focus}  /> <button onClick={this.add.bind(null, "Add Your Dish")}>Add</button>
-        {this.state.search == false ? <LeftPaneButtons values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
+        {this.state.search == false ? <LeftPaneButtons  values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
         </div>
       </div>,
-      <div id="recipes-body">
-        {this.state.editForm ? this.editFunction() : <RenderRight initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} addRecipe={this.state.addRecipe} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} resetStates={this.resetAll} remove={this.remove} search={this.state.search} edit={this.editFormTrue} />}
+      <div key={this.state.servings[0] !== "" ? this.state.servings[0] + this.state.id : this.state.id} id="recipes-body">
+        {this.state.editForm ? this.editFunction() : <RenderRight key={uniqueId()} initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} addRecipe={this.state.addRecipe} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} resetStates={this.resetAll} remove={this.remove} search={this.state.search} edit={this.editFormTrue} />}
       </div> 
     ]
   }

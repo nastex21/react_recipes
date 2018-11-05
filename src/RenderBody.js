@@ -12,28 +12,28 @@ class RenderRight extends Component {
 
 initialRender(){
     return [
-        <p key={guidGenerator}>This is a placeholder.</p>
+        <p key={guidGenerator()}>This is a placeholder.</p>
     ]
 }
 
 renderRecipe(){
     return[
-                <div id="recipeName" className="recipeOutput">
+                <div key={this.props.id} id="recipeName" className="recipeOutput">
                     <h2>{this.props.dish}</h2>
                 </div>,
-                <div id="servings" className="recipeOutput">
+                <div key={this.props.id + 1}  id="servings" className="recipeOutput">
                     <p>Servings: {this.props.servings}</p>
                 </div>,
-                <div id="cooking_time" className="recipeOutput">
+                <div key={this.props.id + 2} id="cooking_time" className="recipeOutput">
                     <p>Cooking Time: {this.props.cooking_time}</p>
                 </div>, 
-                <div id="ingredients" className="recipeOutput">
+                <div key={this.props.id + 3} id="ingredients" className="recipeOutput">
                     <p>Ingredients: {this.props.ingredients}</p>
                 </div>,
-                <div id="directions" className="recipeOutput">
+                <div key={this.props.id + 4} id="directions" className="recipeOutput">
                     <p>Directions: {this.props.directions}</p>
                 </div>,
-                <div id="buttons" className="recipeOutput">
+                <div key={this.props.id + 5} id="buttons" className="recipeOutput">
                     <button onClick={this.props.edit} id="edit">Edit</button><button onClick={this.props.remove} id="remove">Remove</button>
                 </div>
     ]
