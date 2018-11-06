@@ -294,6 +294,7 @@ searchValues(){
       <div id="left-pane">
         <div id="search">
             <h2>Dishes</h2>
+            <hr className="dishHR hrStyle" />
         </div>
         <div id="results">
         <SearchResults values={this.searchValues()} userSelection={this.userSelection} focus={this.focus}  /> <button onClick={this.add.bind(null, "Add Your Dish")}>Add Recipe <FaPlus /></button>

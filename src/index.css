@@ -12,8 +12,6 @@ body {
 
 
 #root{
-    width: 100%;
-    height: 100%;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: .2fr .8fr;
@@ -26,4 +24,21 @@ body {
 
 #recipes-body{
     grid-area: recipes;
+}
+
+
+@media only screen and (min-width: 900px) {
+#root{
+    width: 600px;
+    height: 700px;
+    border: 2px solid black;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+
 }

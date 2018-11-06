@@ -1,0 +1,94 @@
+#directions, #ingredients{
+    white-space: pre-wrap;
+}
+
+
+@media only screen and (min-width: 900px) {
+    #recipes-body{
+        display: grid;
+        grid-template-rows: 100px 600px;
+        grid-template-areas: "recipeName" "recipeInfo";
+    }
+    
+    #recipeName{
+        grid-area: recipeName;
+    }
+    
+    .recipeInfo{
+        grid-area: recipeInfo;
+        display: grid;
+        grid-template-rows: 80px 80px 195px 195px 50px;
+        grid-template-areas: "servings"
+        "cooking_time"
+        "ingredients"
+        "directions"
+        "buttons";
+    }
+    
+    #servings{
+        grid-area: servings;
+        display: grid;
+        grid-template-columns: 20% 80%;
+        grid-template-areas: "label value" 
+    }
+
+    .servings{
+        grid-area: label;
+    }
+
+    .sevingsValue{
+        grid-area: value;
+    }
+    
+    #cooking_time{
+        grid-area: cooking_time;
+        display: grid;
+        grid-template-columns: 20% 80%;
+        grid-template-areas: "cooking ctValue" 
+    }
+
+    .cooking{
+        grid-area: cooking
+    }
+
+    .ctValue{
+        grid-area: ctValue
+    }
+    
+    #ingredients{
+        grid-area: ingredients;
+        display: grid;
+        grid-template-columns: 20% 80%;
+        grid-template-areas: "ingreds ingredsValue" 
+    }
+
+    .ingredients{
+        grid-area: ingreds
+    }
+
+    .ingredsValue{
+        grid-area: ingredsValue
+    }
+    
+    #directions{
+        grid-area: directions;
+        display: grid;
+        grid-template-columns: 20% 80%;
+        grid-template-areas: "direct directValue" 
+    }
+
+    .directions{
+        grid-area: direct
+    }
+
+    .directValue{
+        grid-area: directValue
+    }
+    
+    #buttons{
+        grid-area: buttons;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-areas: "direct directValue" 
+    }
+}

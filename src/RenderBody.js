@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "./RenderBody.css";
 import { guidGenerator } from "./generateuniqkey";
 import { FaEdit, FaRegTrashAlt} from 'react-icons/fa';
 
@@ -20,24 +21,29 @@ initialRender(){
 
 renderRecipe(){
     return[
+                <>
                 <div key={this.props.id} id="recipeName" className="recipeOutput">
                     <h2>{this.props.dish}</h2>
-                </div>,
+                    <hr className="DishNameHR hrStyle" />
+                </div>
+                <div className="recipeInfo">
                 <div key={this.props.id + 1}  id="servings" className="recipeOutput">
-                    <p>Servings: {this.props.servings}</p>
-                </div>,
+                    <span className="servingsLine servings label">Servings: </span><span className="servingsLine servingsValue value">{this.props.servings}</span>
+                </div>
                 <div key={this.props.id + 2} id="cooking_time" className="recipeOutput">
-                    <p>Cooking Time: {this.props.cooking_time}</p>
-                </div>, 
+                    <span className="ctLine cooking label">Cooking Time: </span><span className="ctLine ctValue value"> {this.props.cooking_time}</span>
+                </div> 
                 <div key={this.props.id + 3} id="ingredients" className="recipeOutput">
-                    <p>Ingredients: {this.props.ingredients}</p>
-                </div>,
+                    <span className="ingredsLine ingredients label">Ingredients: </span><span className="ingredsLine ingredsValue value"> {this.props.ingredients}</span>
+                </div>
                 <div key={this.props.id + 4} id="directions" className="recipeOutput">
-                    <p>Directions: {this.props.directions}</p>
-                </div>,
+                    <span className="directLine directions label">Directions: </span><span className="directLine directValue value"> {this.props.directions}</span>
+                </div>
                 <div key={this.props.id + 5} id="buttons" className="recipeOutput">
                     <button onClick={this.props.edit} id="edit"><FaEdit /></button><button onClick={this.props.remove} id="remove"><FaRegTrashAlt /></button>
                 </div>
+                </div>
+                </>
     ]
 }
 
@@ -47,16 +53,16 @@ return [
                     <h2>Add Your Dish</h2>
                 </div>,
                 <div id="servings" className="recipeOutput">
-                    <p>Servings: </p>
+                    <span className="label servingsLine">Servings: </span>
                 </div>,
                 <div id="cooking_time" className="recipeOutput">
-                    <p>Cooking Time:</p>
-                </div>, 
+                    <span className="label ctLine">Cooking Time: </span>
+                </div>,
                 <div id="ingredients" className="recipeOutput">
-                    <p>Ingredients: </p>
+                    <span className="label ingredsLine">Ingredients: </span>
                 </div>,
                 <div id="directions" className="recipeOutput">
-                    <p>Directions: </p>
+                    <span className="label directLine">Directions: </span>
                 </div>,
                 <div id="buttons" className="recipeOutput">
                     <button onClick={this.props.edit} id="edit"><FaEdit /></button><button onClick={this.props.remove} id="remove"><FaRegTrashAlt /></button>
