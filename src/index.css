@@ -20,7 +20,7 @@ body {
     right: 0;
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: .2fr .8fr;
+    grid-template-columns: .25fr .75fr;
     grid-template-areas: "left-pane recipes"
 }
 
@@ -35,8 +35,8 @@ body {
 
 @media only screen and (min-height: 600px) {
 #root{
-    width: 600px;
-    height: 500px;
+    width: 800px;
+    height: 550px;
     border: 2px solid black;
 }
 }

@@ -11,6 +11,10 @@
     grid-area: recipeName;
 }
 
+.recipeNames > button {
+    width: 100%;
+}
+
 .recipeInfo{
     grid-area: recipeInfo;
     display: grid;
@@ -88,11 +92,11 @@
         background-color: blue;
     }
     #recipes-body{
-        grid-template-rows: 100px 400px;
+        grid-template-rows: 100px 450px;
     }
     
     .recipeInfo{
-        grid-template-rows: 50px 50px 135px 135px 30px;
+        grid-template-rows: 60px 60px 150px 150px 30px;
     }
     
     #servings{
