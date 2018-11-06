@@ -12,6 +12,12 @@ body {
 
 
 #root{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: .2fr .8fr;
@@ -27,18 +33,18 @@ body {
 }
 
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-height: 600px) {
 #root{
     width: 600px;
-    height: 700px;
+    height: 500px;
     border: 2px solid black;
-    position: absolute;
-    margin: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+}
 }
 
-
+@media only screen and (min-height: 1080px ){
+    #root{
+        width: 800px;
+        height: 900px;
+        border: 2px solid black;
+    }
 }
