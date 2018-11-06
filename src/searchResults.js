@@ -22,7 +22,7 @@ import Select from 'react-select';
     return(
         <div className="app">
           <div className="container">
-            <Select options={this.props.values} isClearable={isClearable} onChange={this.props.userSelection} onFocus={this.props.focus}   onBlur={this.props.isFocused} blurInputOnSelect={blurInputOnSelect}/>
+            <Select options={this.props.values} isClearable={isClearable} onChange={this.props.userSelection} onFocus={this.props.focus} onBlur={this.props.isFocused} blurInputOnSelect={blurInputOnSelect}/>
           </div>
         </div>
           )

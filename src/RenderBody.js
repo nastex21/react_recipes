@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { guidGenerator } from "./generateuniqkey";
-import { FaEdit, FaTrash} from 'react-icons/fa';
+import { FaEdit, FaRegTrashAlt} from 'react-icons/fa';
 
 
 class RenderRight extends Component {
@@ -36,7 +36,7 @@ renderRecipe(){
                     <p>Directions: {this.props.directions}</p>
                 </div>,
                 <div key={this.props.id + 5} id="buttons" className="recipeOutput">
-                    <button onClick={this.props.edit} id="edit"><FaEdit /></button><button onClick={this.props.remove} id="remove"><FaTrash /></button>
+                    <button onClick={this.props.edit} id="edit"><FaEdit /></button><button onClick={this.props.remove} id="remove"><FaRegTrashAlt /></button>
                 </div>
     ]
 }
@@ -59,7 +59,7 @@ return [
                     <p>Directions: </p>
                 </div>,
                 <div id="buttons" className="recipeOutput">
-                    <button onClick={this.props.edit} id="edit"><FaEdit /></button><button onClick={this.props.remove} id="remove"><FaTrash /></button>
+                    <button onClick={this.props.edit} id="edit"><FaEdit /></button><button onClick={this.props.remove} id="remove"><FaRegTrashAlt /></button>
                 </div>
 ]
 }

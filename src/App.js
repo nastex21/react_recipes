@@ -296,7 +296,7 @@ searchValues(){
             <h2>Dishes</h2>
         </div>
         <div id="results">
-        <SearchResults values={this.searchValues()} userSelection={this.userSelection} focus={this.focus}  /> <button onClick={this.add.bind(null, "Add Your Dish")}><FaPlus /></button>
+        <SearchResults values={this.searchValues()} userSelection={this.userSelection} focus={this.focus}  /> <button onClick={this.add.bind(null, "Add Your Dish")}>Add Recipe <FaPlus /></button>
         {this.state.search === false ? <LeftPaneButtons  values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
         </div>
       </div>,
