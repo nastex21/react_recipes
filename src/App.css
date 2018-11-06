@@ -1,10 +1,11 @@
-#recipes-body {
+
+/* #recipes-body {
     background-color: blue;
-}
+} */
 
 #left-pane {
     float: left;
-    background-color: red;
+    /* background-color: red; */
     display: grid;
     grid-template-rows: .2fr .8fr;
     grid-template-columns: 1fr;
@@ -19,3 +20,4 @@
 #results{
     grid-area: results;
 }
+

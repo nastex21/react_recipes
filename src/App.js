@@ -235,6 +235,8 @@ if (value !== ''){
     ingredients: value[0].ingredients,
     directions: value[0].directions
 })
+/* } else if (){
+ */
 } else {
   this.setState({
     id: '',
