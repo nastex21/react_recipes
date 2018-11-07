@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FaCaretRight } from "react-icons/fa"
+import "./leftPane.css";
 
 class LeftPaneButtons extends Component {
     constructor(props){
@@ -15,7 +15,7 @@ class LeftPaneButtons extends Component {
         var dishesValues = this.props.values;
         var elements = [];
         dishesValues.forEach((item, index) => { 
-            elements.push(<div key={item.id + item.dish[0]} className="recipeNames"><button className="recipeBtn" key={index + item.dish[0]} type="button" defaultValue={item.dish}  onClick={this.sendToBtns.bind(this, item.id)}><span id="dishText">{item.dish}</span><FaCaretRight className="carretIco" /></button></div>)
+            elements.push(<div key={item.id + item.dish[0]} className="recipeNames"><button className="recipeBtn" key={index + item.dish[0]} type="button" defaultValue={item.dish}  onClick={this.sendToBtns.bind(this, item.id)}><p id="textContainer"><span id="dishText">{item.dish}</span></p></button></div>)
         })
         return elements;
     }

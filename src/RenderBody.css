@@ -87,6 +87,23 @@
     grid-template-areas: "direct directValue" 
 }
 
+#search{
+    position: relative;
+}
+
+#search > button {
+    position: absolute;
+    right: 0;
+}
+
+#search > span {
+    text-align: center;
+}
+
+#results{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 @media only screen and (min-height: 600px) {
     body{
         background-color: blue;

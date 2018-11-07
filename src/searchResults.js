@@ -20,10 +20,8 @@ import Select from 'react-select';
   } = this.state;
 
     return(
-        <div className="app">
-          <div className="container">
+        <div className="searchInput">
             <Select options={this.props.values} isClearable={isClearable} onChange={this.props.userSelection} onFocus={this.props.focus} onBlur={this.props.isFocused} blurInputOnSelect={blurInputOnSelect}/>
-          </div>
         </div>
           )
 }

@@ -1,0 +1,66 @@
+h2 {
+    text-align: center;
+}
+
+#left-pane {
+    float: left;
+    border-right: 5px dashed black;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "search"
+    "results"
+    "addBtn";
+}
+
+#search{
+    grid-area: search;
+}
+
+#results{
+    grid-area: results;
+}
+
+hr {
+    width: 95%;
+}
+
+#addDiv{
+    grid-area: addBtn;
+    position: relative; 
+    width: 100%;
+}
+
+.recipeBtn{
+    position: relative;
+    white-space: normal;
+    text-overflow: ellipsis;
+}
+
+#dishText{
+    overflow: hidden;
+}
+
+.carretIco{
+    position: absolute;
+    right: 0;
+}
+
+.addBtn{
+    position: absolute;
+}
+
+@media only screen and (min-height: 600px) {
+    #left-pane {
+        grid-template-rows: 100px 420px 30px;
+    }
+
+    .addBtn {
+        height: 30px;
+        right: 50px;
+        width: 50%;
+    }
+
+    .recipeNames {
+        margin-top: 5px;
+    }
+}
