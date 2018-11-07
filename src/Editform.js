@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { FaSave } from 'react-icons/fa';
+import { FaSave, FaTimesCircle } from 'react-icons/fa';
 
 class EditForm extends Component {
+
+cancelBtn(event, id){
+        this.props.cancel(event, id);
+    }
 
 render(){
     return[
@@ -27,6 +31,7 @@ render(){
                         </div>
                         <div  id="buttons" className="recipeOutput">
                             <button id="save"><FaSave /></button>
+                            <button id="cancel" type="button" onClick={this.cancelBtn.bind(this, this.props.id)}><FaTimesCircle /> </button>
                         </div> 
                     </form>
                 </div>

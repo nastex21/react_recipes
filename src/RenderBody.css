@@ -104,6 +104,7 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
+
 @media only screen and (min-height: 600px) {
     body{
         background-color: blue;

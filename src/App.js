@@ -4,7 +4,7 @@ import LeftPaneButtons from "./leftpaneButtons";
 import SearchResults  from "./searchResults"; 
 import RenderRight from "./RenderBody"; 
 import EditForm from "./Editform";
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaTimesCircle, FaHome } from 'react-icons/fa';
 
 var myuniqueidcounter = 0;
 function uniqueId() {
@@ -42,6 +42,8 @@ class App extends Component {
     this.focus = this.focus.bind(this);
     this.editFormTrue = this.editFormTrue.bind(this);
     this.searchValues = this.searchValues.bind(this);
+    this.home = this.home.bind(this);
+    this.cancel = this.cancel.bind(this);
   }
 
   componentWillMount(){
@@ -161,7 +163,7 @@ class App extends Component {
   editFunction(){
     return(
       <div key={this.state.dish[0] + this.state.id}>
-        <EditForm key={this.state.dish[1] + this.state.id} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} handleInputChange={this.handleInputChange} save={this.save} />
+        <EditForm key={this.state.dish[1] + this.state.id} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} handleInputChange={this.handleInputChange} save={this.save} cancel={this.cancel}/>
       </div>
     )
   }
@@ -190,17 +192,15 @@ class App extends Component {
   }
     this.setState(prevState => ( {
       recipes: prevState.recipes.map(
-        recipe => (recipe.id !== this.state.id) ? recipe : {...recipe, ...newRecipe}
-      ), 
-    } 
-    ))  
-    this.setState({
+        recipe => (recipe.id !== this.state.id) ? recipe : {...recipe, ...newRecipe}),
       initialRender: false,
       addRecipe: false,
       editForm: false,
       search: false,
       recipeRender: true
-    })
+    } 
+    ))  
+
 }
 
 //remove recipe 
@@ -289,6 +289,36 @@ searchValues(){
   return this.state.recipes.map(item => ({ label: item.dish === null ? '' : item.dish, value: item.id }));
 }
 
+//method to basically reset the app
+home(){
+this.setState({
+      addRecipe: false,
+      editForm: false,
+      search: false,
+      recipeRender: false,
+      initialRender: true
+})
+}
+
+//method to cancel out of the edit method process
+cancel(id, event){
+  var recipeObj = this.state.recipes.filter((recipe) => recipe.id === id);
+  event.preventDefault();
+  this.setState(({
+    id: recipeObj[0].id,
+    dish: recipeObj[0].dish,
+    servings: recipeObj[0].servings,
+    cooking_time: recipeObj[0].cooking_time,
+    ingredients: recipeObj[0].ingredients,
+    directions: recipeObj[0].directions,
+    editForm: false,
+    search: false,
+    initialRender: false,
+    addRecipe: false,
+    recipeRender: true
+  }))  
+}
+
   render(){
    return [
       <div id="left-pane">
@@ -301,7 +331,8 @@ searchValues(){
             {this.state.search === false ? <LeftPaneButtons  values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
         </div>
         <div id="addDiv">
-           <button class="addBtn" onClick={this.add.bind(null, "Add Your Dish")}><FaPlus className="plusIcon" /></button>
+           <button className="homeCancel"><FaHome onClick={this.home} /></button>
+           <button className="addBtn" onClick={this.add.bind(null, "Add Your Dish")}><FaPlus className="plusIcon" /></button>
         </div>
       </div>,
       <div key={this.state.servings[0] !== "" ? this.state.servings[0] + this.state.id : this.state.id} id="recipes-body">
