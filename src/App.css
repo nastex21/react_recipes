@@ -26,8 +26,11 @@ hr {
     grid-area: results;
 }
 
-/* .recipeNames > button > svg {
+.recipeBtn{
     position: relative;
-    right: -15px;
-} */
+}
 
+.carretIco{
+    position: absolute;
+    right: 0;
+}

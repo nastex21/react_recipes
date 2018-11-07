@@ -293,11 +293,12 @@ searchValues(){
    return [
       <div id="left-pane">
         <div id="search">
-            <h2>Dishes</h2>
+            <span>Dishes</span>
+            <button onClick={this.add.bind(null, "Add Your Dish")}><FaPlus className="plusIcon" /></button>
             <hr className="dishHR hrStyle" />
         </div>
         <div id="results">
-        <SearchResults values={this.searchValues()} userSelection={this.userSelection} focus={this.focus}  /> <button onClick={this.add.bind(null, "Add Your Dish")}><FaPlus className="plusIcon" /></button>
+        <SearchResults values={this.searchValues()} userSelection={this.userSelection} focus={this.focus}  /> 
         {this.state.search === false ? <LeftPaneButtons  values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
         </div>
       </div>,
