@@ -4,11 +4,7 @@ import SearchResults  from "./searchResults";
 import RenderRight from "./RenderBody"; 
 import EditForm from "./Editform";
 import { FaPlus, FaHome } from 'react-icons/fa';
-
-var myuniqueidcounter = 0;
-function uniqueId() {
-  return myuniqueidcounter++;
-}
+import v4 from 'uuid';
 
 class App extends Component {
   constructor(props){
@@ -43,6 +39,7 @@ class App extends Component {
     this.searchValues = this.searchValues.bind(this);
     this.home = this.home.bind(this);
     this.cancel = this.cancel.bind(this);
+    this.helpIdGenerator = this.helpIdGenerator.bind(this);
   }
 
   componentWillMount(){
@@ -75,6 +72,11 @@ class App extends Component {
     //set the local recipes that are stored
     localStorage.setItem('getRecipes', JSON.stringify(this.state.recipes));
     }
+
+  
+  helpIdGenerator(){
+    return v4()
+  }
 
   //localSetState is ran when getData has actual data and used to populate the recipes array
   localSetState(){
@@ -161,8 +163,8 @@ class App extends Component {
   //run the EditForm componet when triggered
   editFunction(){
     return[
-      <div className="editForm">
-        <EditForm key={this.state.dish[1] + this.state.id} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} handleInputChange={this.handleInputChange} save={this.save} cancel={this.cancel}/>
+      <div key={this.helpIdGenerator()} className="editForm">
+        <EditForm key={this.helpIdGenerator()} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} handleInputChange={this.handleInputChange} save={this.save} cancel={this.cancel}/>
       </div>
     ]
   }
@@ -319,25 +321,27 @@ cancel(id, event){
 
   render(){
    return [
-     <div id="headerTitle">
-       <h1>Recipe Box</h1>
+     <div key={this.helpIdGenerator()} id="headerTitle">
+       <h1 key={this.helpIdGenerator()} >Recipe Box</h1>
      </div>,
-     <div id="appBox">
-      <div id="left-pane">
-        <div id="search">
-            <h2 id="headerContainer"><span>Dishes</span></h2>
-            <hr className="dishHR hrStyle" />
+     <div id="appBox" key={this.helpIdGenerator()} >
+      <div id="left-pane" key={this.helpIdGenerator()} >
+        <div id="search" key={this.helpIdGenerator()} >
+            <h2 id="headerContainer" key={this.helpIdGenerator()} ><span key={this.helpIdGenerator()} >Dishes</span></h2>
+            <hr className="dishHR hrStyle" key={this.helpIdGenerator()}  />
         </div>
-        <div id="results">
-            <SearchResults values={this.searchValues()} userSelection={this.userSelection} focus={this.focus}  /> 
-            {this.state.search === false ? <LeftPaneButtons  values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
+        <div id="results" key={this.helpIdGenerator()} >
+            <SearchResults key={this.helpIdGenerator()}  values={this.searchValues()} userSelection={this.userSelection} focus={this.focus}  /> 
+            {this.state.search === false ? <LeftPaneButtons key={this.helpIdGenerator()}  values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
         </div>
-        <div id="addDiv">
-           <button className="homeCancel" onClick={this.home} ><FaHome /></button>
-           <button className="addBtn" onClick={this.add.bind(null, "Add Your Dish")}><FaPlus className="plusIcon" /></button>
+        <div id="addDiv" key={this.helpIdGenerator()} >
+           <button className="homeCancel" key={this.helpIdGenerator()} onClick={this.home} ><FaHome key={this.helpIdGenerator()}  /></button>
+           <button className="addBtn" key={this.helpIdGenerator()} onClick={this.add.bind(null, "Add Your Dish")}><FaPlus className="plusIcon" key={this.helpIdGenerator()}  /></button>
         </div>
       </div>
-        {this.state.editForm ? this.editFunction() : <div key={this.state.servings[0] !== "" ? this.state.servings[0] + this.state.id : this.state.id} id="recipes-body"><RenderRight key={uniqueId()} initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} addRecipe={this.state.addRecipe} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} resetStates={this.resetAll} remove={this.remove} search={this.state.search} edit={this.editFormTrue} /></div>}
+        {this.state.editForm ? this.editFunction() : <div key={this.helpIdGenerator()} id="recipes-body">
+        <RenderRight key={this.helpIdGenerator()} initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} addRecipe={this.state.addRecipe} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} resetStates={this.resetAll} remove={this.remove} search={this.state.search} edit={this.editFormTrue} />
+        </div>}
         </div>
      
     ]
