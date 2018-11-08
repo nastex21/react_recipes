@@ -5,7 +5,7 @@ html, body {
 }
 
 body {
-    background-color:#60605D;;
+    background-color:#60605D;
     margin: 0 auto;
     padding: 0;
     font-family: 'Crimson Text', serif
@@ -17,58 +17,95 @@ body {
     text-align: center;
 }
 
-h4{
-    text-align: center;
-    /* position: absolute; */
-    width: 100%;
-}
-
 #root{
     position: absolute;
     height: 100%;
     width: 100%;
-}    
-
-
-#headerTitle{
-    position: relative;
-    width: 100%;
-    height: 10%;
-}
-
-#appBox{
-    position: relative;
-    width: 100%;
-    height: 80%;
-    border: 2px solid black;
-    background-color: #E2E2DE;
-    margin: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: .25fr .75fr;
-    grid-template-areas: "left-pane recipes"
-}
+}   
 
 #headerTitle{
     color: #960015;
     font-family: 'Courgette', cursive;
     width: 100%;
     text-align: center;
+    width: 100%;
 }
 
-#left-pane{
-    grid-area: left-pane;
+#appBox{
+    border: 2px solid black;
+    background-color: #E2E2DE;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: 100%;
+    grid-template-areas: "left-pane recipes";
 }
 
 #recipes-body{
     grid-area: recipes;
     position: relative;
+} 
+
+#left-pane{
+    grid-area: left-pane;
 }
 
+hr {
+    border: solid 3px #960015;
+    width: 95%;
+}
+
+button {
+    cursor: pointer;
+    font-family: 'Crimson Text', serif;
+} 
+
+@media only screen and (max-width: 768px) {
+#headerTitle{
+    position: relative;
+    height: 8%;
+}
+
+#appBox{
+    position: relative;
+    width: 99%;
+    height: 85%;
+}
+
+button{
+    font-size: 3.5vw;
+}
+
+hr {
+    display: none;
+}
+
+h4{
+    text-align: center;
+    position: absolute; 
+    width: 100%;
+    top: 20%;
+}
+
+}
+
+
+/* 
+
+
+
+#appBox{
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+   
+}
+
+
+
+ */
+ 
 /* @media only screen and (min-width: 768px) {
     
     /* #headerTitle{

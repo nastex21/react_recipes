@@ -23,7 +23,7 @@ initialRender(){
 renderRecipe(){
     return[ 
                 <>
-                <div key={this.props.id} id="recipeName" className="recipeOutput">
+                <div key={this.props.id} id="recipeName">
                     <h2>{this.props.dish}</h2>
                     <hr className="DishNameHR hrStyle" />
                 </div>
@@ -41,7 +41,7 @@ renderRecipe(){
                         <span className="directLine directions label">Directions: </span><span className="directLine directValue value"> {this.props.directions}</span>
                     </div>
                 </div>
-                <div key={this.props.id + 5} id="buttons" className="recipeOutput">
+                <div key={this.props.id + 5} id="buttons">
                     <button onClick={this.props.edit} id="edit"><FaEdit /></button><button onClick={this.props.remove} id="remove"><FaRegTrashAlt /></button>
                 </div>
                 </>
@@ -68,7 +68,7 @@ return [
                         <span className="label directLine">Directions: </span>
                     </div>
                 </div>
-                <div id="buttons" className="recipeOutput">
+                <div id="buttons">
                     <button onClick={this.props.edit} id="edit"><FaEdit /></button><button onClick={this.props.remove} id="remove"><FaRegTrashAlt /></button>
                 </div>
                 </>

@@ -1,14 +1,13 @@
 #left-pane {
-    float: left;
+    height: 100%;
     border-right: 5px double black; 
     display: grid;
-    grid-template-columns: 1fr;
     grid-template-areas: "search"
     "results"
     "addBtn";
 }
 
-#search{
+#search {
     background-color: #2F3233;
     grid-area: search;
 }
@@ -17,18 +16,16 @@
     grid-area: results;
 }
 
-
 #addDiv{
     grid-area: addBtn;
     position: relative; 
-    width: 100%;
 }
 
 .recipeBtn{
-    position: relative;
+    margin-top: 5px;
     white-space: normal;
     text-overflow: ellipsis;
-    border: solid 3px #960015;
+    border: solid 1px #960015;
     background-color: #2F3233;
     color: #B4BD89;
 }
@@ -36,18 +33,51 @@
 .recipeBtn > p {
     display: inline;
 }
+
 #dishText{
     overflow: hidden;
 }
 
 .addBtn, .homeCancel{
-    position: absolute;
+    position: relative;
     font-size: 1em;
 }
 
 .searchInput {
     color: black;
 }
+
+
+
+@media only screen and (max-width: 768px) {
+#left-pane{
+    grid-template-rows: 10% 85% 5%;
+}
+
+#addDiv{
+    width: 100%;
+}
+
+.recipeBtn{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.addBtn, .homeCancel{
+    height: 100%;
+    width: 50%;
+}
+
+}
+
+
+/* 
+
+
+
+ */
 
 /* @media only screen and (min-width: 500px){
     #left-pane {

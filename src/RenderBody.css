@@ -28,17 +28,18 @@
 
 .label {
     font-family: 'Courgette', cursive;
+    color: #960015;
 }
 
 .value{
-    font-size: 1em;
+     display: inline-block;
 }
-
 #servings{
     grid-area: servings;
     display: grid;
     grid-template-areas: "label value" 
 }
+
 
 .servings{
     grid-area: label;
@@ -50,9 +51,76 @@
 
 #cooking_time{
     grid-area: cooking_time;
-    display: grid;
-    grid-template-areas: "cooking ctValue" 
+/*     display: grid;
+    grid-template-areas: "cooking ctValue"  */
 }
+
+#ingredients{
+    grid-area: ingredients;
+/*     display: grid;
+    grid-template-areas: "ingreds ingredsValue"  */
+}
+
+#directions{
+    grid-area: directions;
+/*     display: grid;
+    grid-template-areas: "direct directValue"  */
+}
+
+#buttons{
+    display: grid;
+    grid-template-areas: "direct directValue" 
+}
+
+#search > span {
+    text-align: center;
+}
+
+#results{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#edit, #remove {
+    font-size: 1em;
+}
+
+
+@media only screen and (max-width: 768px) {
+#recipes-body{
+    grid-template-rows: 10% 85% 5%;
+}
+
+
+.recipeInfo{
+    grid-template-rows: 5% 5% auto auto;
+}
+
+.label{
+    font-size: 3.5vw;
+    padding-left: 5px;
+}
+
+.value{
+    font-size: 1em;
+    padding-left: 20px;
+}
+
+#servings{
+    padding-top: 5px;
+    grid-template-columns: 20% 80%;
+}
+
+.recipeOutput{
+    margin-top: 10px;
+}
+
+
+
+}
+
+/* 
+
 
 .cooking{
     grid-area: cooking
@@ -62,11 +130,7 @@
     grid-area: ctValue
 }
 
-#ingredients{
-    grid-area: ingredients;
-    display: grid;
-    grid-template-areas: "ingreds ingredsValue" 
-}
+
 
 .ingredients{
     grid-area: ingreds
@@ -76,11 +140,7 @@
     grid-area: ingredsValue
 }
 
-#directions{
-    grid-area: directions;
-    display: grid;
-    grid-template-areas: "direct directValue" 
-}
+
 
 .directions{
     grid-area: direct
@@ -91,8 +151,7 @@
 }
 
 #buttons{
-    display: grid;
-    grid-template-areas: "direct directValue" 
+
 }
 
 #search{
@@ -116,7 +175,7 @@
 #edit, #remove {
     font-size: 1em;
 }
-
+ */
 /* @media only screen and (min-width: 769px) {
     #recipes-body{
         grid-template-rows: 80px 390px 30px;
