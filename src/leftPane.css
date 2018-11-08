@@ -47,10 +47,43 @@
 
 .searchInput {
     color: black;
-    width: 95%;
 }
 
-@media only screen and (min-height: 600px) {
+/* @media only screen and (min-width: 500px){
+    #left-pane {
+        grid-template-rows: 80px 390px 30px;
+    }
+
+    .addBtn {
+        height: 30px;
+        width: 35%;
+        right: 0;
+    }
+
+    .homeCancel {
+        height: 30px;
+        width: 35%;
+    }
+
+    .recipeNames {
+        position: relative;
+        margin-top: 10px;
+    }
+
+    .recipeBtn{
+        position: relative;
+        height: 50px;
+        width: 80%;
+        left: 20px;
+    }
+
+    .searchInput{
+        width: 100%;
+    }
+
+}
+
+@media only screen and (min-width: 800px) {
     #left-pane {
         grid-template-rows: 100px 420px 30px;
     }
@@ -77,4 +110,42 @@
         width: 80%;
         left: 20px;
     }
+
+    .searchInput{
+        width: 95%;
+    }
 }
+
+@media only screen and (min-width: 1080px){
+    #left-pane {
+        grid-template-rows: 100px 420px 30px;
+    }
+
+    .addBtn {
+        height: 30px;
+        width: 35%;
+        right: 0;
+    }
+
+    .homeCancel {
+        height: 30px;
+        width: 35%;
+    }
+
+    .recipeNames {
+        position: relative;
+        margin-top: 10px;
+    }
+
+    .recipeBtn{
+        position: relative;
+        height: 50px;
+        width: 80%;
+        left: 20px;
+    }
+
+    .searchInput{
+        width: 95%;
+    }
+
+} */

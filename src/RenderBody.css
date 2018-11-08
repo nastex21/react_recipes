@@ -27,17 +27,14 @@
 }
 
 .label {
-    padding-left: 10px;
     font-family: 'Courgette', cursive;
 }
 
 .value{
-    padding-left: 30px;
     font-size: 1em;
 }
 
 #servings{
-    padding-top: 10px;
     grid-area: servings;
     display: grid;
     grid-template-areas: "label value" 
@@ -120,9 +117,9 @@
     font-size: 1em;
 }
 
-@media only screen and (min-height: 600px) {
+/* @media only screen and (min-width: 769px) {
     #recipes-body{
-        grid-template-rows: 100px 420px 30px;
+        grid-template-rows: 80px 390px 30px;
     }
     
     .recipeInfo{
@@ -130,6 +127,7 @@
     }
     
     #servings{
+        padding-top: 10px;
         grid-template-columns: 20% 80%;
     }
     
@@ -150,23 +148,28 @@
     }
 
     .label{
+        padding-left: 10px;
         font-size: 1.2em;
     }
+
+    .value{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
 }
 
-@media only screen and (min-height: 1080px ){
-    body{
-        background-color:red;
-    }
+@media only screen and (min-width: 800px) {
     #recipes-body{
-        grid-template-rows: 100px 500px;
+        grid-template-rows: 100px 420px 30px;
     }
     
     .recipeInfo{
-        grid-template-rows: 80px 80px 195px 195px 50px;
+        grid-template-rows: 60px 60px auto auto;
     }
     
     #servings{
+        padding-top: 10px;
         grid-template-columns: 20% 80%;
     }
     
@@ -186,4 +189,60 @@
         grid-template-columns: 50% 50%;
     }
 
+    .label{
+        padding-left: 10px;
+        font-size: 1.2em;
+    }
+
+    .value{
+        padding-left: 30px;
+        padding-right: 30px;
+        
+    }
 }
+
+@media only screen and (min-width: 1080px ){
+    body{
+        background-color:red;
+    }
+    #recipes-body{
+        grid-template-rows: 100px 420px 30px;
+    }
+    
+    .recipeInfo{
+        grid-template-rows: 60px 60px auto auto;
+    }
+    
+    #servings{
+        padding-top: 10px;
+        grid-template-columns: 20% 80%;
+    }
+    
+    #cooking_time{
+        grid-template-columns: 20% 80%;
+    }
+    
+    #ingredients{
+        grid-template-columns: 20% 80%;
+    }
+    
+    #directions{
+        grid-template-columns: 20% 80%;
+    }
+
+    #buttons{
+        grid-template-columns: 50% 50%;
+    }
+
+    .label{
+        padding-left: 10px;
+        font-size: 1.2em;
+    }
+
+    .value{
+        padding-left: 30px;
+        padding-right: 30px;
+        
+    }
+
+} */

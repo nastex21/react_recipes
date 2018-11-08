@@ -4,7 +4,7 @@ import LeftPaneButtons from "./leftpaneButtons";
 import SearchResults  from "./searchResults"; 
 import RenderRight from "./RenderBody"; 
 import EditForm from "./Editform";
-import { FaPlus, FaTimesCircle, FaHome } from 'react-icons/fa';
+import { FaPlus, FaHome } from 'react-icons/fa';
 
 var myuniqueidcounter = 0;
 function uniqueId() {
