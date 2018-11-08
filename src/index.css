@@ -86,6 +86,11 @@ h4{
     top: 20%;
 }
 
+textarea{
+    position: relative;
+    width: 97%;
+}
+
 }
 
 

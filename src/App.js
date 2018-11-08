@@ -161,11 +161,11 @@ class App extends Component {
 
   //run the EditForm componet when triggered
   editFunction(){
-    return(
-      <div key={this.state.dish[0] + this.state.id}>
+    return[
+      <div className="editForm">
         <EditForm key={this.state.dish[1] + this.state.id} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} handleInputChange={this.handleInputChange} save={this.save} cancel={this.cancel}/>
       </div>
-    )
+    ]
   }
 
   //handle input change from <Editform />
@@ -337,11 +337,10 @@ cancel(id, event){
            <button className="homeCancel" onClick={this.home} ><FaHome /></button>
            <button className="addBtn" onClick={this.add.bind(null, "Add Your Dish")}><FaPlus className="plusIcon" /></button>
         </div>
-      </div>,
-      <div key={this.state.servings[0] !== "" ? this.state.servings[0] + this.state.id : this.state.id} id="recipes-body">
-        {this.state.editForm ? this.editFunction() : <RenderRight key={uniqueId()} initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} addRecipe={this.state.addRecipe} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} resetStates={this.resetAll} remove={this.remove} search={this.state.search} edit={this.editFormTrue} />}
       </div>
-      </div> 
+        {this.state.editForm ? this.editFunction() : <div key={this.state.servings[0] !== "" ? this.state.servings[0] + this.state.id : this.state.id} id="recipes-body"><RenderRight key={uniqueId()} initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} addRecipe={this.state.addRecipe} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} resetStates={this.resetAll} remove={this.remove} search={this.state.search} edit={this.editFormTrue} /></div>}
+        </div>
+     
     ]
   }
 }

@@ -163,18 +163,7 @@
     right: 0;
 }
 
-#search > span {
-    text-align: center;
-}
 
-#results{
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-#edit, #remove {
-    font-size: 1em;
-}
  */
 /* @media only screen and (min-width: 769px) {
     #recipes-body{

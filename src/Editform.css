@@ -1,0 +1,66 @@
+.editForm{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "formOutput" "form"   
+}
+
+.formOutput{
+    grid-area: formOutput;
+}
+
+#form{
+    grid-area: form;
+}
+
+#form > form{
+    height: 100%;
+    display: grid;
+    grid-template-areas: "formHeading" "formServings" "formCooking_time" "formIngredients" "formDirections" "formButtons"
+}
+
+#header > h2{
+    text-align: center;
+}
+
+#formHeading{
+    grid-area: formHeading
+}
+
+#formServings{
+    grid-area: formServings
+}
+
+#formCooking_time{
+    grid-area: formCooking_time;
+}
+
+#formIngredients{
+    grid-area: formIngredients
+}
+
+#formDirections{
+    grid-area: formDirections
+}
+
+#formButtons {
+    grid-area: formButtons
+}
+
+#form > form > #buttons{
+
+}
+
+@media only screen and (max-width: 768px) {
+.editForm{
+    grid-template-rows: 10% 90%;
+}
+
+#form > form {
+    grid-template-rows: 10% 10% 10% 30% 35% 5%;
+}
+
+#save, #cancel{
+    width: 50%;
+    height: 100%;
+}
+} 
