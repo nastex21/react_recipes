@@ -72,61 +72,36 @@
 
 }
 
-
-/* 
-
-
-
- */
-
-/* @media only screen and (min-width: 500px){
-    #left-pane {
-        grid-template-rows: 80px 390px 30px;
-    }
-
-    .addBtn {
-        height: 30px;
-        width: 35%;
-        right: 0;
-    }
-
-    .homeCancel {
-        height: 30px;
-        width: 35%;
-    }
-
-    .recipeNames {
-        position: relative;
-        margin-top: 10px;
-    }
-
-    .recipeBtn{
-        position: relative;
-        height: 50px;
-        width: 80%;
-        left: 20px;
-    }
-
-    .searchInput{
-        width: 100%;
-    }
-
+@media only screen and (min-width: 769px){
+#left-pane{
+    grid-template-rows: 20% 75% 5%;
 }
 
-@media only screen and (min-width: 800px) {
+.recipeBtn{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.addBtn, .homeCancel{
+    height: 100%;
+    width: 50%;
+}
+}
+
+@media only screen and (min-width: 1000px){
     #left-pane {
-        grid-template-rows: 100px 420px 30px;
+        grid-template-rows: 100px 470px 30px;
     }
 
     .addBtn {
-        height: 30px;
-        width: 35%;
         right: 0;
     }
 
-    .homeCancel {
+    .homeCancel, .addBtn {
         height: 30px;
-        width: 35%;
+        width: 50%;
     }
 
     .recipeNames {
@@ -139,43 +114,10 @@
         height: 50px;
         width: 80%;
         left: 20px;
+        font-size: .5vw;
     }
 
     .searchInput{
         width: 95%;
     }
 }
-
-@media only screen and (min-width: 1080px){
-    #left-pane {
-        grid-template-rows: 100px 420px 30px;
-    }
-
-    .addBtn {
-        height: 30px;
-        width: 35%;
-        right: 0;
-    }
-
-    .homeCancel {
-        height: 30px;
-        width: 35%;
-    }
-
-    .recipeNames {
-        position: relative;
-        margin-top: 10px;
-    }
-
-    .recipeBtn{
-        position: relative;
-        height: 50px;
-        width: 80%;
-        left: 20px;
-    }
-
-    .searchInput{
-        width: 95%;
-    }
-
-} */

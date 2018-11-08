@@ -1,28 +1,29 @@
-#directions, #ingredients{
+#directions,
+#ingredients {
     white-space: pre-wrap;
 }
 
-#recipes-body{
+#recipes-body {
     display: grid;
-    grid-template-areas: "recipeName" "recipeInfo" "recipeOutput";
+    grid-template-areas: "recipeName""recipeInfo""recipeOutput";
 }
 
-#recipeName{
+#recipeName {
     grid-area: recipeName;
     background-color: #2F3233;
 }
 
-.recipeInfo{
+.recipeInfo {
     overflow: auto;
     grid-area: recipeInfo;
     display: grid;
     grid-template-areas: "servings"
-    "cooking_time"
-    "ingredients"
-    "directions"
+        "cooking_time"
+        "ingredients"
+        "directions"
 }
 
-.recipeOutput{
+.recipeOutput {
     grid-area: recipeOutput;
 }
 
@@ -31,143 +32,141 @@
     color: #960015;
 }
 
-.value{
-     display: inline-block;
+.servings {
+    width: 20%;
 }
-#servings{
+
+.value {
+    width: 80%;
+}
+
+#servings {
     grid-area: servings;
-    display: grid;
-    grid-template-areas: "label value" 
+
 }
 
 
-.servings{
-    grid-area: label;
-}
-
-.sevingsValue{
-    grid-area: value;
-}
-
-#cooking_time{
+#cooking_time {
     grid-area: cooking_time;
-/*     display: grid;
+    /*     display: grid;
     grid-template-areas: "cooking ctValue"  */
 }
 
-#ingredients{
+#ingredients {
     grid-area: ingredients;
-/*     display: grid;
+    /*     display: grid;
     grid-template-areas: "ingreds ingredsValue"  */
 }
 
-#directions{
+#directions {
     grid-area: directions;
-/*     display: grid;
+    /*     display: grid;
     grid-template-areas: "direct directValue"  */
 }
 
-#buttons{
+#buttons {
     display: grid;
-    grid-template-areas: "direct directValue" 
+    grid-template-areas: "direct directValue"
 }
 
-#search > span {
+#search>span {
     text-align: center;
 }
 
-#results{
+#results {
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-#edit, #remove {
+#edit,
+#remove {
     font-size: 1em;
 }
 
 
 @media only screen and (max-width: 768px) {
-#recipes-body{
-    grid-template-rows: 10% 85% 5%;
-}
+    #recipes-body {
+        grid-template-rows: 10% 85% 5%;
+    }
 
 
-.recipeInfo{
-    grid-template-rows: 5% 5% auto auto;
-}
+    .recipeInfo {
+        grid-template-rows: 5% 5% auto auto;
+    }
 
-.label{
-    font-size: 3.5vw;
-    padding-left: 5px;
-}
+    .label {
+        display: inline-block;
+        width: 30%;
+        text-align: left;
+        font-size: 3.5vw;
+        padding-left: 5px;
+    }
 
-.value{
-    font-size: 1em;
-    padding-left: 20px;
-}
+    .value {
+        position: relative;
+        display: inline;
+        text-align: left;
+        font-size: 1em;
+    }
 
-#servings{
-    padding-top: 5px;
-    grid-template-columns: 20% 80%;
-}
+    #servings {
+        padding-top: 5px;
+        grid-template-columns: 20% 80%;
+    }
 
-.recipeOutput{
-    margin-top: 10px;
-}
+    .recipeOutput {
+        margin-top: 10px;
+    }
 
-
-
-}
-
-/* 
-
-
-.cooking{
-    grid-area: cooking
-}
-
-.ctValue{
-    grid-area: ctValue
-}
-
-
-
-.ingredients{
-    grid-area: ingreds
-}
-
-.ingredsValue{
-    grid-area: ingredsValue
-}
-
-
-
-.directions{
-    grid-area: direct
-}
-
-.directValue{
-    grid-area: directValue
-}
-
-#buttons{
 
 }
 
-#search{
-    position: relative;
+@media only screen and (min-width: 768px) {
+    #recipes-body {
+        grid-template-rows: 20% 75% 5%;
+    }
+
+    .recipeInfo {
+        grid-template-rows: 5% 5% auto auto;
+    }
+
+    .label {
+        display: inline-block;
+        width: 20%;
+        text-align: left;
+        font-size: 1.5vw;
+        padding-left: 10px;
+    }
+
+    .value {
+        position: relative;
+        display: inline;
+        text-align: left;
+        font-size: 1em;
+        padding-left: 10px;
+    }
+
+    #servings {
+        position: relative;
+        width: 100%;
+    }
+
+    #edit,
+    #remove {
+        font-size: 1em;
+        height: 90%;
+    }
+
+    .servings {
+        width: 20%;
+    }
+
+
 }
 
-#search > button {
-    position: absolute;
-    right: 0;
-}
-
-
- */
-/* @media only screen and (min-width: 769px) {
+@media only screen and (min-width: 1000px) {
     #recipes-body{
-        grid-template-rows: 80px 390px 30px;
+        grid-template-rows: 100px 470px 30px;
     }
     
     .recipeInfo{
@@ -202,95 +201,12 @@
 
     .value{
         padding-left: 30px;
-        padding-right: 30px;
+        padding-right: 30px;   
     }
 
-}
-
-@media only screen and (min-width: 800px) {
-    #recipes-body{
-        grid-template-rows: 100px 420px 30px;
-    }
-    
-    .recipeInfo{
-        grid-template-rows: 60px 60px auto auto;
-    }
-    
-    #servings{
-        padding-top: 10px;
-        grid-template-columns: 20% 80%;
-    }
-    
-    #cooking_time{
-        grid-template-columns: 20% 80%;
-    }
-    
-    #ingredients{
-        grid-template-columns: 20% 80%;
-    }
-    
-    #directions{
-        grid-template-columns: 20% 80%;
-    }
-
-    #buttons{
-        grid-template-columns: 50% 50%;
-    }
-
-    .label{
-        padding-left: 10px;
-        font-size: 1.2em;
-    }
-
-    .value{
-        padding-left: 30px;
-        padding-right: 30px;
-        
+    #edit,
+    #remove {
+        font-size: 1em;
+        height: 100%;
     }
 }
-
-@media only screen and (min-width: 1080px ){
-    body{
-        background-color:red;
-    }
-    #recipes-body{
-        grid-template-rows: 100px 420px 30px;
-    }
-    
-    .recipeInfo{
-        grid-template-rows: 60px 60px auto auto;
-    }
-    
-    #servings{
-        padding-top: 10px;
-        grid-template-columns: 20% 80%;
-    }
-    
-    #cooking_time{
-        grid-template-columns: 20% 80%;
-    }
-    
-    #ingredients{
-        grid-template-columns: 20% 80%;
-    }
-    
-    #directions{
-        grid-template-columns: 20% 80%;
-    }
-
-    #buttons{
-        grid-template-columns: 50% 50%;
-    }
-
-    .label{
-        padding-left: 10px;
-        font-size: 1.2em;
-    }
-
-    .value{
-        padding-left: 30px;
-        padding-right: 30px;
-        
-    }
-
-} */

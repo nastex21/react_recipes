@@ -1,51 +1,50 @@
-html, body {
+html,
+body {
     margin: 0;
     width: 100%;
     height: 100%;
 }
 
 body {
-    background-color:#60605D;
+    background-color: #60605D;
     margin: 0 auto;
     padding: 0;
     font-family: 'Crimson Text', serif
-  }
+}
 
-  h2 {
+h2 {
     font-family: 'Crimson Text', serif;
     color: #B4BD89;
     text-align: center;
 }
 
-#root{
+#root {
     position: absolute;
     height: 100%;
     width: 100%;
-}   
+}
 
-#headerTitle{
+#headerTitle {
     color: #960015;
     font-family: 'Courgette', cursive;
     width: 100%;
     text-align: center;
-    width: 100%;
 }
 
-#appBox{
+#appBox {
     border: 2px solid black;
     background-color: #E2E2DE;
     display: grid;
-    grid-template-columns: 25% 75%;
     grid-template-rows: 100%;
     grid-template-areas: "left-pane recipes";
 }
 
-#recipes-body{
+#recipes-body {
     grid-area: recipes;
     position: relative;
-} 
+}
 
-#left-pane{
+#left-pane {
     grid-area: left-pane;
 }
 
@@ -57,115 +56,102 @@ hr {
 button {
     cursor: pointer;
     font-family: 'Crimson Text', serif;
-} 
+}
 
 @media only screen and (max-width: 768px) {
-#headerTitle{
-    position: relative;
-    height: 8%;
-}
-
-#appBox{
-    position: relative;
-    width: 99%;
-    height: 85%;
-}
-
-button{
-    font-size: 3.5vw;
-}
-
-hr {
-    display: none;
-}
-
-h4{
-    text-align: center;
-    position: absolute; 
-    width: 100%;
-    top: 20%;
-}
-
-textarea{
-    position: relative;
-    width: 97%;
-}
-
-}
-
-
-/* 
-
-
-
-#appBox{
-    margin: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-   
-}
-
-
-
- */
- 
-/* @media only screen and (min-width: 768px) {
-    
-    /* #headerTitle{
-        position: absolute;
-    }
-    #appBox{
-        width: 900px;
-        height: 500px;
-        top: 80px;
-        border: 2px solid black;
-    }
-    
-    h4{
-        top: 238px;
-    } */
-/* 
-    #root{
-        position: absolute;
-        height: 100%;
-        width: 100%;
-    }    
-
-    #appBox{
+    #headerTitle {
         position: relative;
-        width: 100%;
-        height: 80%;
-        border: 2px solid black;
+        height: 8%;
     }
-    #headerTitle{
+
+    #appBox {
         position: relative;
+        width: 99%;
+        height: 85%;
+        grid-template-columns: 25% 75%;
+    }
+
+    button {
+        font-size: 3.5vw;
+    }
+
+    hr {
+        display: none;
+    }
+
+    h4 {
+        text-align: center;
+        position: absolute;
         width: 100%;
+        top: 20%;
+    }
+
+    textarea {
+        position: relative;
+        width: 97%;
+    }
+
+}
+
+
+
+@media only screen and (min-width: 768px) {
+
+    #headerTitle {
+        position: relative;
         height: 10%;
     }
 
+    #appBox {
+        position: relative;
+        margin: auto;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 60%;
+        height: 80%;
+        border: 2px solid black;
+        grid-template-columns: 20% 80%;
+    }
+
+    button {
+        font-size: 1.5vw;
+        text-align: center;
+        width: 100%;
+        height: 50px;
+    }
 }
 
 
-@media only screen and (min-width: 1080px ){
-    #appBox{
-        width: 800px;
-        height: 900px;
-        border: 2px solid black;
-    }
-
-    #headerTitle{
+@media only screen and (min-width: 1000px) {
+    #headerTitle {
         position: absolute;
         top: 100px;
     }
- #appBox{
+
+    #appBox {
+        position: absolute;
+        margin: auto;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        top: 0;
         width: 900px;
-        height: 550px;
+        height: 600px;
         border: 2px solid black;
+        grid-template-columns: 150px 750px;
     }
-    
-    h4{
-        top: 238px;
+
+    h4 {
+        position: absolute;
+        right: 125px;
+        top: 150px;
     }
-}  */
+
+    button {
+        font-size: 1vw;
+        text-align: center;
+        width: 100%;
+        height: 50px;
+    }
+}

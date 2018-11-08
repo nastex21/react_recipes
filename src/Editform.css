@@ -46,10 +46,6 @@
     grid-area: formButtons
 }
 
-#form > form > #buttons{
-
-}
-
 @media only screen and (max-width: 768px) {
 .editForm{
     grid-template-rows: 10% 90%;
@@ -63,4 +59,42 @@
     width: 50%;
     height: 100%;
 }
-} 
+}
+
+@media only screen and (min-width: 768px){
+    .editForm{
+        grid-template-rows: 10% 90%;
+    }
+    
+    #form > form {
+        grid-template-rows: 10% 10% 10% 30% 35% 5%;
+    }
+
+    textarea {
+        height: 70%;
+    }
+    
+    #save, #cancel{
+        width: 50%;
+        height: 100%;
+    }
+}
+
+@media only screen and (min-width: 1000px){
+    .editForm{
+        grid-template-rows: 100px 500px;
+    }
+    
+    #form > form {
+        grid-template-rows: 50px 50px 50px 160px 160px 30px;
+    }
+
+    textarea {
+        height: 70%;
+    }
+    
+    #save, #cancel{
+        width: 50%;
+        height: 100%;
+    }
+}

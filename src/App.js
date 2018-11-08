@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import LeftPaneButtons from "./leftpaneButtons"; 
 import SearchResults  from "./searchResults"; 
 import RenderRight from "./RenderBody"; 
