@@ -1,2 +1,10 @@
+hr {
+    border: solid 3px #960015;
+    width: 95%;
+}
 
-
+button {
+    cursor: pointer;
+    font-family: 'Crimson Text', serif;
+    font-size: 1.3em;
+}

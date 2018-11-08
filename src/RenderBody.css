@@ -4,28 +4,40 @@
 
 #recipes-body{
     display: grid;
-    grid-template-areas: "recipeName" "recipeInfo";
+    grid-template-areas: "recipeName" "recipeInfo" "recipeOutput";
 }
 
 #recipeName{
     grid-area: recipeName;
-}
-
-.recipeNames > button {
-    width: 100%;
+    background-color: #2F3233;
 }
 
 .recipeInfo{
+    overflow: auto;
     grid-area: recipeInfo;
     display: grid;
     grid-template-areas: "servings"
     "cooking_time"
     "ingredients"
     "directions"
-    "buttons";
+}
+
+.recipeOutput{
+    grid-area: recipeOutput;
+}
+
+.label {
+    padding-left: 10px;
+    font-family: 'Courgette', cursive;
+}
+
+.value{
+    padding-left: 30px;
+    font-size: 1em;
 }
 
 #servings{
+    padding-top: 10px;
     grid-area: servings;
     display: grid;
     grid-template-areas: "label value" 
@@ -82,7 +94,6 @@
 }
 
 #buttons{
-    grid-area: buttons;
     display: grid;
     grid-template-areas: "direct directValue" 
 }
@@ -105,16 +116,17 @@
     overflow-x: hidden;
 }
 
+#edit, #remove {
+    font-size: 1em;
+}
+
 @media only screen and (min-height: 600px) {
-    body{
-        background-color: blue;
-    }
     #recipes-body{
-        grid-template-rows: 100px 450px;
+        grid-template-rows: 100px 420px 30px;
     }
     
     .recipeInfo{
-        grid-template-rows: 60px 60px 150px 150px 30px;
+        grid-template-rows: 60px 60px auto auto;
     }
     
     #servings{
@@ -135,6 +147,10 @@
 
     #buttons{
         grid-template-columns: 50% 50%;
+    }
+
+    .label{
+        font-size: 1.2em;
     }
 }
 

@@ -1,10 +1,6 @@
-h2 {
-    text-align: center;
-}
-
 #left-pane {
     float: left;
-    border-right: 5px dashed black;
+    border-right: 5px double black; 
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas: "search"
@@ -13,6 +9,7 @@ h2 {
 }
 
 #search{
+    background-color: #2F3233;
     grid-area: search;
 }
 
@@ -20,9 +17,6 @@ h2 {
     grid-area: results;
 }
 
-hr {
-    width: 95%;
-}
 
 #addDiv{
     grid-area: addBtn;
@@ -34,14 +28,26 @@ hr {
     position: relative;
     white-space: normal;
     text-overflow: ellipsis;
+    border: solid 3px #960015;
+    background-color: #2F3233;
+    color: #B4BD89;
 }
 
+.recipeBtn > p {
+    display: inline;
+}
 #dishText{
     overflow: hidden;
 }
 
 .addBtn, .homeCancel{
     position: absolute;
+    font-size: 1em;
+}
+
+.searchInput {
+    color: black;
+    width: 95%;
 }
 
 @media only screen and (min-height: 600px) {
@@ -61,6 +67,14 @@ hr {
     }
 
     .recipeNames {
-        margin-top: 5px;
+        position: relative;
+        margin-top: 10px;
+    }
+
+    .recipeBtn{
+        position: relative;
+        height: 50px;
+        width: 80%;
+        left: 20px;
     }
 }

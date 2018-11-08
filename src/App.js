@@ -55,16 +55,16 @@ class App extends Component {
       id: 0,
       dish: "Hamburger",
       servings: 4,
-      cooking_time: "10 minutes",
-      ingredients: "Bread, ground beef, lettuce, tomatoes and condiments",
-      directions: "Toast bread, grill meat, cut up lettuce and tomotoes"
+      cooking_time: "20 minutes",
+      ingredients: "1 1/2 pounds ground beef; 2 Tablespoons BBQ sauce; 1 teaspoon kosher salt; 1/2 teaspoon pepper; 1/2 teaspoon garlic powder; 4 hamburger buns",
+      directions: "1) Preheat the grill to medium high. 2) Combine the ground beef, BBQ sauce, salt, garlic powder, and pepper in a medium-sized bowl. Mix just until combined with your hands and shape into 4 patties about 3/4-inch thick. Make a well in your patties with your thumb to prevent from bulging. 3) Place burgers on the grill and cook 4 to 5 minutes. Flip and then cook an additional 4-5 minutes, or until juices run clear. Top with cheese slices, if desired. Grill until cheese has melted and turn off the heat. 4) Serve hamburgers on buns with your favorite toppings. "
     },
     { id: 1,
-      dish: "Pizza",
-      servings: 4,
-      cooking_time: "30 minutes",
-      ingredients: "Flour, tomato sauce, pepperoni, cheese",
-      directions: "Make crust, add tomato sauce and pepperoni and cheese"
+      dish: "Pepperoni Pizza",
+      servings: 6,
+      cooking_time: "20 minutes",
+      ingredients:"1 can (8 oz each) Hunt's Tomato Sauce-No Salt Added; 1/4 cup grated Parmesan cheese; 1/4 teaspoon dried oregano; 1 prebaked thin pizza crust (12-inch); 1 cup shredded part-skim mozzarella cheese; 1/3 cup sliced pepperoni",
+       directions: "1) Preheat oven to 450°F. Combine tomato sauce, Parmesan cheese and oregano in small bowl; spread tomato sauce evenly over crust. Sprinkle pizza with mozzarella cheese; top with pepperoni. 2) Place on ungreased pizza pan. Bake 12 to 15 minutes or until edges of crust are browned lightly and cheese melts. Cut pizza into 6 slices."
     }
   ]
     //if getData is empty then run the initialArr variable to fill it or run the fuction localState if it's not null
@@ -285,7 +285,6 @@ editFormTrue(){
 
 //values for drop down select input
 searchValues(){
-  //const value = chosenValue === null ? '' : chosenValue.value this.setState({ value });
   return this.state.recipes.map(item => ({ label: item.dish === null ? '' : item.dish, value: item.id }));
 }
 
@@ -321,6 +320,10 @@ cancel(id, event){
 
   render(){
    return [
+     <div id="headerTitle">
+       <h1>Recipe Box</h1>
+     </div>,
+     <div id="appBox">
       <div id="left-pane">
         <div id="search">
             <h2 id="headerContainer"><span>Dishes</span></h2>
@@ -331,12 +334,13 @@ cancel(id, event){
             {this.state.search === false ? <LeftPaneButtons  values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
         </div>
         <div id="addDiv">
-           <button className="homeCancel"><FaHome onClick={this.home} /></button>
+           <button className="homeCancel" onClick={this.home} ><FaHome /></button>
            <button className="addBtn" onClick={this.add.bind(null, "Add Your Dish")}><FaPlus className="plusIcon" /></button>
         </div>
       </div>,
       <div key={this.state.servings[0] !== "" ? this.state.servings[0] + this.state.id : this.state.id} id="recipes-body">
         {this.state.editForm ? this.editFunction() : <RenderRight key={uniqueId()} initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} addRecipe={this.state.addRecipe} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} resetStates={this.resetAll} remove={this.remove} search={this.state.search} edit={this.editFormTrue} />}
+      </div>
       </div> 
     ]
   }
