@@ -225,7 +225,15 @@ var value;
   }
 
 
-if (value !== ''){
+if (value.length === 0){
+  this.setState({
+    recipeRender: false, 
+    addRecipe: false, 
+    editForm: false,
+    search: false,
+    initialRender: true
+  })
+} else {
   this.setState({
     id: value[0].id,
     dish: value[0].dish,
@@ -233,17 +241,6 @@ if (value !== ''){
     cooking_time: value[0].cooking_time,
     ingredients: value[0].ingredients,
     directions: value[0].directions
-})
-/* } else if (){
- */
-} else {
-  this.setState({
-    id: '',
-    dish: '',
-    servings: '',
-    cooking_time: '',
-    ingredients: '',
-    directions: ''
 })
 }
       
@@ -262,7 +259,7 @@ focus(){
       addRecipe: false, 
       editForm: false,
       search: false,
-      initialRender: false,
+      initialRender: false
     })
   }else if(this.state.editForm === false){
     this.setState({
@@ -270,7 +267,7 @@ focus(){
       addRecipe: false, 
       editForm: false,
       search: false,
-      initialRender: false,
+      initialRender: false
     })
   }
 }
