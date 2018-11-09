@@ -30,24 +30,24 @@ renderRecipe(){
             <div key={this.helpIdGenerator()} id="recipeContainer">
                 <div key={this.helpIdGenerator()} id="recipeName">
                     <h2 key={this.helpIdGenerator()}>{this.props.dish}</h2>
-                    <hr key={this.helpIdGenerator()} className="DishNameHR hrStyle" />
+                    <hr className="DishNameHR hrStyle" />
                 </div>
                 <div key={this.helpIdGenerator()} className="recipeInfo">
                     <div key={this.helpIdGenerator()}  id="servings" className="recipeOutput">
-                       <span key={this.helpIdGenerator()} className="servingsLine servings label">Servings: </span><span key={this.helpIdGenerator()} className="servingsLine servingsValue value">{this.props.servings}</span>
+                       <span className="servingsLine servings label">Servings: </span><span className="servingsLine servingsValue value">{this.props.servings}</span>
                     </div>
                     <div key={this.helpIdGenerator()} id="cooking_time" className="recipeOutput">
-                         <span key={this.helpIdGenerator()} className="ctLine cooking label">Cooking Time: </span><span key={this.helpIdGenerator()} className="ctLine ctValue value"> {this.props.cooking_time}</span>
+                         <span className="ctLine cooking label">Cooking Time: </span><span className="ctLine ctValue value"> {this.props.cooking_time}</span>
                     </div> 
                      <div key={this.helpIdGenerator()} id="ingredients" className="recipeOutput">
-                        <span key={this.helpIdGenerator()} className="ingredsLine ingredients label">Ingredients: </span><span key={this.helpIdGenerator()} className="ingredsLine ingredsValue value"> {this.props.ingredients}</span>
+                        <span className="ingredsLine ingredients label">Ingredients: </span><span className="ingredsLine ingredsValue value"> {this.props.ingredients}</span>
                     </div>
                      <div key={this.helpIdGenerator()} id="directions" className="recipeOutput">
-                        <span key={this.helpIdGenerator()} className="directLine directions label">Directions: </span><span key={this.helpIdGenerator()} className="directLine directValue value"> {this.props.directions}</span>
+                        <span className="directLine directions label">Directions: </span><span className="directLine directValue value"> {this.props.directions}</span>
                     </div>
                 </div>
                 <div key={this.helpIdGenerator()} id="buttons">
-                    <button key={this.helpIdGenerator()} onClick={this.props.edit} id="edit"><FaEdit key={this.helpIdGenerator()} /></button><button key={this.helpIdGenerator()} onClick={this.props.remove} id="remove"><FaRegTrashAlt key={this.helpIdGenerator()} /></button>
+                    <button onClick={this.props.edit} id="edit"><FaEdit /></button><button onClick={this.props.remove} id="remove"><FaRegTrashAlt /></button>
                 </div>
             </div>
     ]
@@ -61,20 +61,20 @@ return [
                 </div>
                 <div key={this.helpIdGenerator()} className="recipeInfo">
                     <div key={this.helpIdGenerator()} id="servings" className="recipeOutput">
-                        <span key={this.helpIdGenerator()} className="label servingsLine">Servings: </span>
+                        <span className="label servingsLine">Servings: </span>
                     </div>
                     <div key={this.helpIdGenerator()} id="cooking_time" className="recipeOutput">
-                        <span key={this.helpIdGenerator()} className="label ctLine">Cooking Time: </span>
+                        <span className="label ctLine">Cooking Time: </span>
                     </div>
                     <div key={this.helpIdGenerator()} id="ingredients" className="recipeOutput">
-                        <span key={this.helpIdGenerator()} className="label ingredsLine">Ingredients: </span>
+                        <span className="label ingredsLine">Ingredients: </span>
                     </div>
                     <div key={this.helpIdGenerator()} id="directions" className="recipeOutput">
-                        <span key={this.helpIdGenerator()} className="label directLine">Directions: </span>
+                        <span className="label directLine">Directions: </span>
                     </div>
                 </div>
                 <div key={this.helpIdGenerator()} id="buttons">
-                    <button key={this.helpIdGenerator()} onClick={this.props.edit} id="edit"><FaEdit key={this.helpIdGenerator()} /></button><button key={this.helpIdGenerator()} onClick={this.props.remove} id="remove"><FaRegTrashAlt key={this.helpIdGenerator()} /></button>
+                    <button onClick={this.props.edit} id="edit"><FaEdit /></button><button onClick={this.props.remove} id="remove"><FaRegTrashAlt /></button>
                 </div>
                 </div>
 ]
