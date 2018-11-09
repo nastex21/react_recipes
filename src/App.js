@@ -226,8 +226,15 @@ var value;
     value = this.state.recipes.filter(item => item.id === sentValue.value);
   }
 
-
-if (value !== ''){
+if (value.length === 0){
+  this.setState({
+    recipeRender: false, 
+    addRecipe: false, 
+    editForm: false,
+    search: false,
+    initialRender: true
+  })
+} else {
   this.setState({
     id: value[0].id,
     dish: value[0].dish,
@@ -235,17 +242,6 @@ if (value !== ''){
     cooking_time: value[0].cooking_time,
     ingredients: value[0].ingredients,
     directions: value[0].directions
-})
-/* } else if (){
- */
-} else {
-  this.setState({
-    id: '',
-    dish: '',
-    servings: '',
-    cooking_time: '',
-    ingredients: '',
-    directions: ''
 })
 }
       
@@ -264,7 +260,7 @@ focus(){
       addRecipe: false, 
       editForm: false,
       search: false,
-      initialRender: false,
+      initialRender: false
     })
   }else if(this.state.editForm === false){
     this.setState({
@@ -272,7 +268,7 @@ focus(){
       addRecipe: false, 
       editForm: false,
       search: false,
-      initialRender: false,
+      initialRender: false
     })
   }
 }
@@ -324,15 +320,15 @@ cancel(id, event){
      <div key={this.helpIdGenerator()} id="headerTitle">
        <h1 key={this.helpIdGenerator()} >Recipe Box</h1>
      </div>,
-     <div id="appBox" key={this.helpIdGenerator()} >
-      <div id="left-pane" key={this.helpIdGenerator()} >
+     <div key={23423 + this.state.id + this.state.servings} id="appBox" >
+      <div id="left-pane" key={this.state.id + this.state.servings + 7}>
         <div id="search" key={this.helpIdGenerator()} >
             <h2 id="headerContainer" key={this.helpIdGenerator()} ><span key={this.helpIdGenerator()} >Dishes</span></h2>
             <hr className="dishHR hrStyle" key={this.helpIdGenerator()}  />
         </div>
-        <div id="results" key={this.helpIdGenerator()} >
-            <SearchResults key={this.helpIdGenerator()}  values={this.searchValues()} userSelection={this.userSelection} focus={this.focus}  /> 
-            {this.state.search === false ? <LeftPaneButtons key={this.helpIdGenerator()}  values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
+        <div key={this.state.id + this.state.servings + 9}  id="results">
+            <SearchResults key={this.state.id + this.state.servings + 8}  values={this.searchValues()} userSelection={this.userSelection} focus={this.focus}  /> 
+            {this.state.search === false ? <LeftPaneButtons key={this.helpIdGenerator()} values={this.state.recipes} recipeBtns={this.recipeBtn}/> : null}
         </div>
         <div id="addDiv" key={this.helpIdGenerator()} >
            <button className="homeCancel" key={this.helpIdGenerator()} onClick={this.home} ><FaHome key={this.helpIdGenerator()}  /></button>

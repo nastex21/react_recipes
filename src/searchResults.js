@@ -27,7 +27,7 @@ import v4 from 'uuid';
 
     return(
         <div className="searchInput">
-            <Select key={this.helpIdGenerator()} options={this.props.values} isClearable={isClearable} onChange={this.props.userSelection} onFocus={this.props.focus} onBlur={this.props.isFocused} blurInputOnSelect={blurInputOnSelect}/>
+            <Select options={this.props.values} isClearable={isClearable} onChange={this.props.userSelection} onFocus={this.props.focus} onBlur={this.props.isFocused} blurInputOnSelect={blurInputOnSelect}/>
         </div>
           )
 }

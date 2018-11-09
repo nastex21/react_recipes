@@ -27,7 +27,7 @@ initialRender(){
 
 renderRecipe(){
     return[ 
-                <div key={this.helpIdGenerator()}>
+            <div key={this.helpIdGenerator()} id="recipeContainer">
                 <div key={this.helpIdGenerator()} id="recipeName">
                     <h2 key={this.helpIdGenerator()}>{this.props.dish}</h2>
                     <hr key={this.helpIdGenerator()} className="DishNameHR hrStyle" />
@@ -49,13 +49,13 @@ renderRecipe(){
                 <div key={this.helpIdGenerator()} id="buttons">
                     <button key={this.helpIdGenerator()} onClick={this.props.edit} id="edit"><FaEdit key={this.helpIdGenerator()} /></button><button key={this.helpIdGenerator()} onClick={this.props.remove} id="remove"><FaRegTrashAlt key={this.helpIdGenerator()} /></button>
                 </div>
-                </div>
+            </div>
     ]
 }
 
 renderAddedRecipe(){
 return [
-                <div key={this.helpIdGenerator()}> 
+                <div key={this.helpIdGenerator()} id="addContainer"> 
                 <div key={this.helpIdGenerator()} id="recipeName" className="recipeOutput">
                     <h2 key={this.helpIdGenerator()}>Add Your Dish</h2>
                 </div>
@@ -82,9 +82,9 @@ return [
 
 render(){
     return (
-        <div key={this.helpIdGenerator()}>
+        <>
         {this.props.initialRender === true ? this.initialRender() : this.props.recipeRender === true ? this.renderRecipe() : this.props.addRecipe === true ? this.renderAddedRecipe() : this.props.search === true ? this.renderRecipe() : null}
-        </div>
+        </>
     )
 }
 }
