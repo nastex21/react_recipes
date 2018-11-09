@@ -168,6 +168,9 @@
         width: 20%;
     }
 
+    .recipeBtn{
+        font-size: .8em;
+    }
 
 }
 
@@ -217,5 +220,9 @@
     #remove {
         font-size: 1em;
         height: 100%;
+    }
+
+    .recipeBtn{
+        font-size: 1em;
     }
 }
