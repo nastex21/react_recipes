@@ -10,10 +10,10 @@ cancelBtn(event, id){
 
 render(){
     return[
-        <div id="header" className="formOutput">
+                <div key={this.props.id} id="header" className="formOutput">
                     <h2>{this.props.dish}</h2>
                 </div>,
-                <div id="form" onSubmit={this.props.save}>
+                <div key={this.props.id + this.props.dish[0]} id="form" onSubmit={this.props.save}>
                     <form >
                         <div id="formHeading" className="formOutput">
                              <span>Name: </span><input type="text" name="dish" onChange={this.props.handleInputChange} defaultValue={this.props.dish} /><br />
@@ -27,7 +27,7 @@ render(){
                         <div  id="formIngredients" className="formOutput">
                             <span>Ingredients: </span><textarea  rows="4" cols="50" name="ingredients" onChange={this.props.handleInputChange} defaultValue={this.props.ingredients} /><br />
                         </div>
-                        <div  id="formDirections" className="formOutput">
+                        <div id="formDirections" className="formOutput">
                             <span>Directions: </span><textarea  rows="4" cols="50" name="directions" onChange={this.props.handleInputChange} defaultValue={this.props.directions} /><br />
                         </div>
                         <div  id="formButtons" className="formOutput">

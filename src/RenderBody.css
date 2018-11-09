@@ -3,7 +3,9 @@
     white-space: pre-wrap;
 }
 
-#recipes-body {
+#recipeContainer {
+    width: 100%;
+    height: 100%;
     display: grid;
     grid-template-areas: "recipeName""recipeInfo""recipeOutput";
 }
@@ -45,17 +47,26 @@
 
 }
 
+
 #cooking_time {
     grid-area: cooking_time;
+    /*     display: grid;
+    grid-template-areas: "cooking ctValue"  */
 }
 
 #ingredients {
+    display: inherit;
     grid-area: ingredients;
+    /*     display: grid;
+    grid-template-areas: "ingreds ingredsValue"  */
 }
 
 #directions {
+    display: inherit;
     overflow-x: hidden;
     grid-area: directions;
+    /*     display: grid;
+    grid-template-areas: "direct directValue"  */
 }
 
 #buttons {
@@ -79,8 +90,10 @@
 
 
 @media only screen and (max-width: 768px) {
-    #recipes-body {
+    #recipeContainer {
         grid-template-rows: 10% 85% 5%;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
 
@@ -111,13 +124,14 @@
     .recipeOutput {
         margin-top: 10px;
     }
-
-
+    
 }
 
 @media only screen and (min-width: 768px) {
-    #recipes-body {
+    #recipeContainer {
         grid-template-rows: 20% 75% 5%;
+        overflow-y: auto;
+          overflow-x: hidden;
     }
 
     .recipeInfo {
@@ -155,18 +169,19 @@
         width: 20%;
     }
 
+    .recipeBtn{
+        font-size: .8em;
+    }
 
 }
 
 @media only screen and (min-width: 1000px) {
-    #recipes-body{
+    #recipeContainer{
         grid-template-rows: 100px 470px 30px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
     
-    .recipeBtn{
-        font-size: 1em;
-    }
-
     .recipeInfo{
         grid-template-rows: 60px 60px auto auto;
     }
@@ -206,5 +221,9 @@
     #remove {
         font-size: 1em;
         height: 100%;
+    }
+
+    .recipeBtn{
+        font-size: 1em;
     }
 }

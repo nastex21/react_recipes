@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./RenderBody.css";
-import { guidGenerator } from "./generateuniqkey";
 import { FaEdit, FaRegTrashAlt} from 'react-icons/fa';
+import v4 from 'uuid';
 
 
 class RenderRight extends Component {
@@ -11,48 +11,53 @@ class RenderRight extends Component {
         this.initialRender = this.initialRender.bind(this);
         this.renderRecipe = this.renderRecipe.bind(this);
         this.renderAddedRecipe = this.renderAddedRecipe.bind(this);
+        this.helpIdGenerator = this.helpIdGenerator.bind(this);
     }
+
+    helpIdGenerator(){
+        return v4()
+      }
 
 initialRender(){
     return [
-        <h2 key={guidGenerator()} id="welcomeText">Welcome to your own personal recipe box!</h2>,
-        <h4 key={guidGenerator()} id="">Add, delete, edit and store all your favorite recipes! So go on ahead and try it out!</h4>
+        <h2 id="welcomeText" key={this.helpIdGenerator()}>Welcome to your own personal recipe box!</h2>,
+        <h4 id="infoText" key={this.helpIdGenerator()}>Add, delete, edit and store all your favorite recipes! So go on ahead and try it out!</h4>
     ]
 }
 
 renderRecipe(){
     return[ 
-                <>
-                <div key={this.props.id} id="recipeName">
-                    <h2>{this.props.dish}</h2>
+            <div key={this.props.id[0] + this.props.id} id="recipeContainer">
+                <div id="recipeName">
+                    <h2 key={this.helpIdGenerator()}>{this.props.dish}</h2>
                     <hr className="DishNameHR hrStyle" />
                 </div>
                 <div className="recipeInfo">
-                    <div key={this.props.id + 1}  id="servings" className="recipeOutput">
+                    <div  id="servings" className="recipeOutput">
                        <span className="servingsLine servings label">Servings: </span><span className="servingsLine servingsValue value">{this.props.servings}</span>
                     </div>
-                    <div key={this.props.id + 2} id="cooking_time" className="recipeOutput">
+                    <div id="cooking_time" className="recipeOutput">
                          <span className="ctLine cooking label">Cooking Time: </span><span className="ctLine ctValue value"> {this.props.cooking_time}</span>
                     </div> 
-                     <div key={this.props.id + 3} id="ingredients" className="recipeOutput">
+                     <div id="ingredients" className="recipeOutput">
                         <span className="ingredsLine ingredients label">Ingredients: </span><span className="ingredsLine ingredsValue value"> {this.props.ingredients}</span>
                     </div>
-                     <div key={this.props.id + 4} id="directions" className="recipeOutput">
+                     <div id="directions" className="recipeOutput">
                         <span className="directLine directions label">Directions: </span><span className="directLine directValue value"> {this.props.directions}</span>
                     </div>
                 </div>
-                <div key={this.props.id + 5} id="buttons">
+                <div id="buttons">
                     <button onClick={this.props.edit} id="edit"><FaEdit /></button><button onClick={this.props.remove} id="remove"><FaRegTrashAlt /></button>
                 </div>
-                </>
+            </div>
     ]
 }
 
 renderAddedRecipe(){
 return [
-                <>
+                <div id="addContainer"> 
                 <div id="recipeName" className="recipeOutput">
-                    <h2>Add Your Dish</h2>
+                    <h2 key={this.helpIdGenerator()}>Add Your Dish</h2>
                 </div>
                 <div className="recipeInfo">
                     <div id="servings" className="recipeOutput">
@@ -71,7 +76,7 @@ return [
                 <div id="buttons">
                     <button onClick={this.props.edit} id="edit"><FaEdit /></button><button onClick={this.props.remove} id="remove"><FaRegTrashAlt /></button>
                 </div>
-                </>
+                </div>
 ]
 }
 
