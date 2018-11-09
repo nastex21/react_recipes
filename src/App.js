@@ -317,7 +317,7 @@ cancel(id, event){
      </div>,
      <div id="appBox" key={this.state.id + this.state.dish[0]}>
       <div id="left-pane">
-        <div>
+        <div className="catDish">
             <h2 id="headerContainer"><span>Dishes</span></h2>
             <hr className="dishHR hrStyle" />
         </div>
@@ -327,7 +327,7 @@ cancel(id, event){
         </div>
         <div id="addDiv">
            <button className="homeCancel" onClick={this.home} ><FaHome /></button>
-           <button className="addBtn" onClick={this.add.bind(null, "Add Your Dish")}><FaPlus className="plusIcon" /></button>
+           <button className="addBtn" onClick={this.add.bind(null, "Edit Your Dish")}><FaPlus className="plusIcon" /></button>
         </div>
       </div>
         {this.state.editForm ? this.editFunction() : <div key={v4()} id="recipes-body"><RenderRight initialRender={this.state.initialRender} recipeRender={this.state.recipeRender} addRecipe={this.state.addRecipe} id={this.state.id} dish={this.state.dish} servings={this.state.servings} cooking_time={this.state.cooking_time} ingredients={this.state.ingredients} directions={this.state.directions} resetStates={this.resetAll} remove={this.remove} search={this.state.search} edit={this.editFormTrue} /></div>}
