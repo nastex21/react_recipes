@@ -45,23 +45,17 @@
 
 }
 
-
 #cooking_time {
     grid-area: cooking_time;
-    /*     display: grid;
-    grid-template-areas: "cooking ctValue"  */
 }
 
 #ingredients {
     grid-area: ingredients;
-    /*     display: grid;
-    grid-template-areas: "ingreds ingredsValue"  */
 }
 
 #directions {
+    overflow-x: hidden;
     grid-area: directions;
-    /*     display: grid;
-    grid-template-areas: "direct directValue"  */
 }
 
 #buttons {
@@ -169,6 +163,10 @@
         grid-template-rows: 100px 470px 30px;
     }
     
+    .recipeBtn{
+        font-size: 1em;
+    }
+
     .recipeInfo{
         grid-template-rows: 60px 60px auto auto;
     }
