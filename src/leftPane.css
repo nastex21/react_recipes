@@ -10,6 +10,7 @@
 .catDish{
     background-color: #2F3233;
 }
+
 #search {
     background-color: #2F3233;
     grid-area: search;
@@ -75,7 +76,7 @@
 
 }
 
-@media only screen and (max-width: 999px){
+@media only screen and (min-width: 769px){
 #left-pane{
     grid-template-rows: 20% 75% 5%;
 }
@@ -86,27 +87,6 @@
     width: 100%;
     margin-top: 5px;
 }
-
-.recipeNames {
-    position: relative;
-    margin-top: 10px;
-}
-
-.recipeBtn{
-    position: relative;
-    height: 50px;
-    width: 80%;
-    left: 20px;
-    font-size: 1em;
-}
-
-.recipeBtn:hover {background-color: #000000}
-
-.recipeBtn:active {
-    background-color: #000;
-    box-shadow: 0 2px #666;
-    transform: translateY(2px);
-  }
 
 .addBtn, .homeCancel{
     height: 100%;
@@ -141,8 +121,6 @@
         font-size: 1em;
     }
 
-    .recipeBtn:hover {background-color: #000000}
-
     .recipeBtn:active {
         background-color: #000;
         box-shadow: 0 2px #666;
@@ -150,6 +128,6 @@
       }
 
     .searchInput{
-        width: 100%;
+        width: 95%;
     }
 }
